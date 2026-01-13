@@ -1,12 +1,12 @@
 import { Character } from '@/types/character';
-import frontellaAvatar from '@/assets/frontella-avatar.png';
 
 interface HeaderSectionProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
+  avatarSrc?: string;
 }
 
-export const HeaderSection = ({ character, setCharacter }: HeaderSectionProps) => {
+export const HeaderSection = ({ character, setCharacter, avatarSrc }: HeaderSectionProps) => {
   const updateField = <K extends keyof Character>(field: K, value: Character[K]) => {
     setCharacter(prev => ({ ...prev, [field]: value }));
   };
@@ -17,11 +17,17 @@ export const HeaderSection = ({ character, setCharacter }: HeaderSectionProps) =
         {/* Avatar */}
         <div className="flex-shrink-0">
           <div className="avatar-frame w-40 h-40 mx-auto lg:mx-0">
-            <img 
-              src={frontellaAvatar} 
-              alt={character.name}
-              className="w-full h-full object-cover rounded-sm"
-            />
+            {avatarSrc ? (
+              <img 
+                src={avatarSrc} 
+                alt={character.name}
+                className="w-full h-full object-cover rounded-sm"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-4xl bg-muted/50 rounded-sm">
+                🧙
+              </div>
+            )}
           </div>
         </div>
 
