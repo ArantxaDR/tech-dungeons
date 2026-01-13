@@ -9,12 +9,14 @@ const CONDITION_ICONS: Record<string, string> = {
   INSPIRADA: '✨',
   DESMORALIZADA: '😔',
   AGOTADA: '💤',
+  ENVENENADA: '☠️',
 };
 
 const CONDITION_COLORS: Record<string, string> = {
   INSPIRADA: 'border-secondary bg-secondary/20 text-secondary',
   DESMORALIZADA: 'border-destructive bg-destructive/20 text-destructive',
   AGOTADA: 'border-accent bg-accent/20 text-accent-foreground',
+  ENVENENADA: 'border-purple-500 bg-purple-500/20 text-purple-400',
 };
 
 export const ConditionsSection = ({ character, setCharacter }: ConditionsSectionProps) => {

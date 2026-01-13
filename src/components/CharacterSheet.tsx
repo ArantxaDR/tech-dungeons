@@ -4,31 +4,41 @@ import { AbilitiesSection } from './AbilitiesSection';
 import { SkillsSection } from './SkillsSection';
 import { ConditionsSection } from './ConditionsSection';
 import { TextBlock } from './TextBlock';
+import { CharacterNav } from './CharacterNav';
 
 interface CharacterSheetProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
+  avatarSrc?: string;
 }
 
-export const CharacterSheet = ({ character, setCharacter }: CharacterSheetProps) => {
+export const CharacterSheet = ({ character, setCharacter, avatarSrc }: CharacterSheetProps) => {
   const updateTextField = (field: keyof Character) => (value: string) => {
     setCharacter(prev => ({ ...prev, [field]: value }));
   };
 
+  // Determine quest subtitle based on character class
+  const questSubtitle = character.className.toLowerCase().includes('bárbar') 
+    ? 'Backend Developer Quest' 
+    : 'Frontend Developer Quest';
+
   return (
     <div className="max-w-6xl mx-auto p-4 space-y-6">
+      {/* Character Navigation */}
+      <CharacterNav />
+      
       {/* Title */}
-      <header className="text-center py-6">
+      <header className="text-center py-4">
         <h1 className="font-pixel text-xl md:text-2xl text-primary text-glow-primary mb-2">
           HOJA DE PERSONAJE
         </h1>
         <p className="text-secondary text-glow-secondary">
-          Frontend Developer Quest
+          {questSubtitle}
         </p>
       </header>
 
       {/* Header Section */}
-      <HeaderSection character={character} setCharacter={setCharacter} />
+      <HeaderSection character={character} setCharacter={setCharacter} avatarSrc={avatarSrc} />
 
       {/* Main Grid */}
       <div className="grid lg:grid-cols-2 gap-6">

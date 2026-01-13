@@ -16,7 +16,7 @@ export interface Skill {
   expertise: boolean;
 }
 
-export type ConditionName = 'INSPIRADA' | 'DESMORALIZADA' | 'AGOTADA';
+export type ConditionName = 'INSPIRADA' | 'DESMORALIZADA' | 'AGOTADA' | 'ENVENENADA';
 
 export interface Condition {
   name: ConditionName;
@@ -64,7 +64,7 @@ export const calculateSkillTotal = (
   return total;
 };
 
-export const getDefaultCharacter = (): Character => ({
+export const getDefaultFrontella = (): Character => ({
   name: "Frontella Brillopíxel",
   race: "Elfa",
   className: "Pícara (Rogue)",
@@ -148,3 +148,95 @@ No necesitas dormir. En lugar de eso, meditas profundamente 4 horas (equivalente
 - Monitor ultrawide de visión ampliada`,
   notes: '',
 });
+
+export const getDefaultBitgrun = (): Character => ({
+  name: "Bitgrun MartilloAPI",
+  race: "Enana",
+  className: "Bárbara (Barbarian)",
+  level: 1,
+  background: "Guardiana de sistemas legacy",
+  alignment: "Neutral buena",
+  xp: 0,
+  hp: 14,
+  hitDie: "d12",
+  armorClass: 14,
+  initiative: 1,
+  proficiencyBonus: 2,
+  speed: 25,
+  abilities: [
+    { name: 'FUE', score: 15, modifier: 2, savingThrowProficient: true },
+    { name: 'DES', score: 12, modifier: 1, savingThrowProficient: false },
+    { name: 'CON', score: 14, modifier: 2, savingThrowProficient: true },
+    { name: 'INT', score: 10, modifier: 0, savingThrowProficient: false },
+    { name: 'SAB', score: 8, modifier: -1, savingThrowProficient: false },
+    { name: 'CAR', score: 13, modifier: 1, savingThrowProficient: false },
+  ],
+  skills: [
+    { id: 'atletismo', name: 'Atletismo', ability: 'FUE', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'investigacion', name: 'Investigación', ability: 'INT', baseModifier: 0, proficient: true, expertise: false },
+    { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: -1, proficient: false, expertise: false },
+    { id: 'intimidacion', name: 'Intimidación', ability: 'CAR', baseModifier: 1, proficient: true, expertise: false },
+    { id: 'supervivencia', name: 'Supervivencia', ability: 'SAB', baseModifier: -1, proficient: true, expertise: false },
+    { id: 'persuasion', name: 'Persuasión', ability: 'CAR', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 0, proficient: false, expertise: false },
+    { id: 'naturaleza', name: 'Naturaleza', ability: 'INT', baseModifier: 0, proficient: false, expertise: false },
+    { id: 'perspicacia', name: 'Perspicacia', ability: 'SAB', baseModifier: -1, proficient: false, expertise: false },
+    { id: 'medicina', name: 'Medicina', ability: 'SAB', baseModifier: -1, proficient: false, expertise: false },
+  ],
+  conditions: [
+    { name: 'INSPIRADA', active: false, description: '+2 a tiradas técnicas (debug, diseño de API) tras resolver un bug difícil' },
+    { name: 'DESMORALIZADA', active: false, description: '−2 en motivación tras varios incidentes seguidos sin reconocimiento' },
+    { name: 'AGOTADA', active: false, description: '−2 en concentración tras muchas guardias/on-call seguidas' },
+    { name: 'ENVENENADA', active: false, description: '−2 a comunicación y trabajo en equipo en entornos tóxicos' },
+  ],
+  classFeatures: `🔥 RABIA (RAGE)
+Cuando entras en modo resolución de incidentes, ganas ventaja en tiradas de FUE (trabajo duro) y resistencia al daño emocional del legacy. 2 usos por descanso largo.
+
+🛡️ DEFENSA SIN ARMADURA
+Tu resiliencia personal te da AC = 10 + DES + CON cuando no llevas armadura pesada. La experiencia te ha curtido.
+
+⚔️ ATAQUE FURIOSO
+Durante la Rabia, puedes hacer un ataque adicional como acción bonus si usas el modificador de FUE.`,
+  racialTraits: `⛏️ RESISTENCIA ENANA
+Tienes ventaja en tiradas de salvación contra veneno y resistencia al daño por veneno. Los entornos tóxicos no te afectan tanto.
+
+🏔️ ROBUSTEZ
+Tu velocidad no se reduce por llevar armadura pesada. Puedes cargar con cualquier peso de responsabilidades.
+
+🔧 AFINIDAD CON HERRAMIENTAS
+Competencia con herramientas de artesano. Entiendes la estructura interna de cualquier sistema.
+
+🦶 VELOCIDAD 25
+Los enanos se mueven a 25 pies, pero llegan seguros. Prefieren la estabilidad a la velocidad.`,
+  proficiencies: `🗡️ ARMAS: Armas simples, armas marciales, martillos de guerra, hachas
+
+🛡️ ARMADURAS: Armaduras ligeras, medianas, escudos
+
+🔧 HERRAMIENTAS: 
+- APIs y bases de datos
+- Scripts de automatización
+- CLIs y terminales
+- Sistemas de monitorización
+
+🌐 IDIOMAS: 
+- Común (Español)
+- Enano (SQL)
+- Lenguaje de sistemas (Bash/Shell)`,
+  equipment: `📦 EQUIPO INICIAL:
+- Armadura de cuero reforzada (AC 13 + DES)
+- Martillo-servidor (1d10 contundente)
+- 2 Hachas de mano (backup scripts)
+- Pack de explorador de sistemas
+
+💻 EQUIPO TECH:
+- Consola de terminal legendaria
+- Scripts de migración +3
+- Repositorio de servicios backend
+- Documentación de endpoints sagrada
+- Grafana Dashboard de vigilancia
+- PagerDuty de alertas críticas`,
+  notes: '',
+});
+
+// Alias for backward compatibility
+export const getDefaultCharacter = getDefaultFrontella;
