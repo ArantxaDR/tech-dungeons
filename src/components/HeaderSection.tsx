@@ -39,62 +39,74 @@ export const HeaderSection = ({ character, setCharacter }: HeaderSectionProps) =
           </div>
 
           {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase">Raza</label>
+              <label htmlFor="char-race" className="text-xs text-muted-foreground uppercase">Raza</label>
               <input
+                id="char-race"
                 type="text"
                 value={character.race}
                 onChange={(e) => updateField('race', e.target.value)}
                 className="pixel-input w-full"
+                aria-label="Raza del personaje"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase">Clase</label>
+              <label htmlFor="char-class" className="text-xs text-muted-foreground uppercase">Clase</label>
               <input
+                id="char-class"
                 type="text"
                 value={character.className}
                 onChange={(e) => updateField('className', e.target.value)}
                 className="pixel-input w-full"
+                aria-label="Clase del personaje"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase">Nivel</label>
+              <label htmlFor="char-level" className="text-xs text-muted-foreground uppercase">Nivel</label>
               <input
+                id="char-level"
                 type="number"
                 min={1}
                 max={20}
                 value={character.level}
                 onChange={(e) => updateField('level', parseInt(e.target.value) || 1)}
                 className="pixel-input w-full"
+                aria-label="Nivel del personaje"
               />
             </div>
-            <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase">Trasfondo</label>
+            <div className="space-y-1 col-span-2 md:col-span-2">
+              <label htmlFor="char-background" className="text-xs text-muted-foreground uppercase">Trasfondo</label>
               <input
+                id="char-background"
                 type="text"
                 value={character.background}
                 onChange={(e) => updateField('background', e.target.value)}
                 className="pixel-input w-full"
+                aria-label="Trasfondo del personaje"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase">Alineamiento</label>
+              <label htmlFor="char-alignment" className="text-xs text-muted-foreground uppercase">Alineamiento</label>
               <input
+                id="char-alignment"
                 type="text"
                 value={character.alignment}
                 onChange={(e) => updateField('alignment', e.target.value)}
                 className="pixel-input w-full"
+                aria-label="Alineamiento del personaje"
               />
             </div>
             <div className="space-y-1">
-              <label className="text-xs text-muted-foreground uppercase">XP</label>
+              <label htmlFor="char-xp" className="text-xs text-muted-foreground uppercase">XP</label>
               <input
+                id="char-xp"
                 type="number"
                 min={0}
                 value={character.xp}
                 onChange={(e) => updateField('xp', parseInt(e.target.value) || 0)}
                 className="pixel-input w-full"
+                aria-label="Puntos de experiencia"
               />
             </div>
           </div>
