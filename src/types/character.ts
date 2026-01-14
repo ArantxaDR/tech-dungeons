@@ -238,5 +238,89 @@ Los enanos se mueven a 25 pies, pero llegan seguros. Prefieren la estabilidad a 
   notes: '',
 });
 
+export const getDefaultPixaria = (): Character => ({
+  name: "Pixaria Interfacea",
+  race: "Semielfa",
+  className: "Hechicera (Sorcerer)",
+  level: 1,
+  background: "Diseñadora de experiencias",
+  alignment: "Caótica buena",
+  xp: 0,
+  hp: 8,
+  hitDie: "d6",
+  armorClass: 12,
+  initiative: 1,
+  proficiencyBonus: 2,
+  speed: 30,
+  abilities: [
+    { name: 'FUE', score: 8, modifier: -1, savingThrowProficient: false },
+    { name: 'DES', score: 13, modifier: 1, savingThrowProficient: false },
+    { name: 'CON', score: 10, modifier: 0, savingThrowProficient: false },
+    { name: 'INT', score: 12, modifier: 1, savingThrowProficient: false },
+    { name: 'SAB', score: 14, modifier: 2, savingThrowProficient: true },
+    { name: 'CAR', score: 15, modifier: 2, savingThrowProficient: true },
+  ],
+  skills: [
+    { id: 'performance', name: 'Performance', ability: 'CAR', baseModifier: 2, proficient: true, expertise: true },
+    { id: 'persuasion', name: 'Persuasión', ability: 'CAR', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'perspicacia', name: 'Perspicacia', ability: 'SAB', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'investigacion', name: 'Investigación', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'intimidacion', name: 'Intimidación', ability: 'CAR', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'engano', name: 'Engaño', ability: 'CAR', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'atletismo', name: 'Atletismo', ability: 'FUE', baseModifier: -1, proficient: false, expertise: false },
+    { id: 'acrobacias', name: 'Acrobacias', ability: 'DES', baseModifier: 1, proficient: false, expertise: false },
+  ],
+  conditions: [
+    { name: 'INSPIRADA', active: false, description: '+2 al defender diseños y presentar prototipos tras un buen test con usuarias' },
+    { name: 'DESMORALIZADA', active: false, description: '−2 en tiradas sociales tras varias rondas de "hazlo más bonito" sin feedback útil' },
+    { name: 'AGOTADA', active: false, description: '−2 en concentración cuando encadena muchas iteraciones urgentes' },
+    { name: 'ENVENENADA', active: false, description: '−2 a decisiones de diseño cuando casi no tiene acceso a usuarias ni datos' },
+  ],
+  classFeatures: `✨ MAGIA DE PROTOTIPO
+Convierte ideas en pantallas rápidamente. Puedes materializar wireframes y mockups con un gesto.
+
+🔮 HECHIZOS DE USABILIDAD
+Dominas tests de usuario, entrevistas y sesiones de feedback. Cada hechizo revela verdades sobre la experiencia.
+
+🌀 HECHIZOS DE ILUSIÓN
+Creas wireframes, mockups y prototipos interactivos que parecen productos reales antes de escribir una línea de código.`,
+  racialTraits: `🧬 HERENCIA MIXTA (SEMIELFA)
+Versátil y empática. Buen equilibrio entre análisis y trato con personas.
+
+🌉 CONEXIÓN UNIVERSAL
+Facilidad para conectar con perfiles técnicos y no técnicos por igual.
+
+👁️ VISIÓN EN LA OSCURIDAD
+Puedes ver en luz tenue a 60 pies. Útil para detectar problemas de contraste y accesibilidad.
+
+💬 IDIOMAS EXTRA
+Conoces un idioma adicional de tu elección.`,
+  proficiencies: `🎨 HERRAMIENTAS:
+- Figma y herramientas de prototipado
+- Sistemas de diseño y librerías de componentes
+- Herramientas de investigación UX
+
+🌐 IDIOMAS: 
+- Común (Español)
+- Élfico (principios de diseño)
+- Jerga UX/UI y términos de producto`,
+  equipment: `📦 EQUIPO INICIAL:
+- Ropa cómoda de trabajo (AC 10 + DES)
+- Portátil encantado
+- Tablet para dibujar bocetos
+- Cuaderno de ideas
+
+💻 EQUIPO TECH:
+- Biblioteca de componentes
+- Sistema de diseño compartido
+- Plantillas de tests de usuario
+- Colección de patrones de interacción
+- Suscripción a Figma Premium
+- Libros de Nielsen Norman Group`,
+  notes: '',
+});
+
 // Alias for backward compatibility
 export const getDefaultCharacter = getDefaultFrontella;

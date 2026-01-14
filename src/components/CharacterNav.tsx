@@ -1,8 +1,9 @@
 import { Link, useLocation } from 'react-router-dom';
 
 const characters = [
-  { path: '/', name: 'Frontella', icon: '🧝‍♀️', subtitle: 'Frontend' },
+  { path: '/frontella', name: 'Frontella', icon: '🧝‍♀️', subtitle: 'Frontend' },
   { path: '/bitgrun', name: 'Bitgrun', icon: '⛏️', subtitle: 'Backend' },
+  { path: '/pixaria', name: 'Pixaria', icon: '✨', subtitle: 'UX/UI' },
 ];
 
 export const CharacterNav = () => {
