@@ -322,5 +322,94 @@ Conoces un idioma adicional de tu elección.`,
   notes: '',
 });
 
+export const getDefaultStackia = (): Character => ({
+  name: "Stackia Caminacódigo",
+  race: "Mediana (Halfling)",
+  className: "Exploradora (Ranger)",
+  level: 1,
+  background: "Exploradora del stack",
+  alignment: "Neutral buena",
+  xp: 0,
+  hp: 11,
+  hitDie: "d10",
+  armorClass: 14,
+  initiative: 2,
+  proficiencyBonus: 2,
+  speed: 25,
+  abilities: [
+    { name: 'FUE', score: 13, modifier: 1, savingThrowProficient: true },
+    { name: 'DES', score: 14, modifier: 2, savingThrowProficient: true },
+    { name: 'CON', score: 12, modifier: 1, savingThrowProficient: false },
+    { name: 'INT', score: 15, modifier: 2, savingThrowProficient: false },
+    { name: 'SAB', score: 10, modifier: 0, savingThrowProficient: false },
+    { name: 'CAR', score: 8, modifier: -1, savingThrowProficient: false },
+  ],
+  skills: [
+    { id: 'supervivencia', name: 'Supervivencia', ability: 'SAB', baseModifier: 0, proficient: true, expertise: false },
+    { id: 'investigacion', name: 'Investigación', ability: 'INT', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'naturaleza', name: 'Naturaleza', ability: 'INT', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: 0, proficient: true, expertise: false },
+    { id: 'perspicacia', name: 'Perspicacia', ability: 'SAB', baseModifier: 0, proficient: true, expertise: false },
+    { id: 'atletismo', name: 'Atletismo', ability: 'FUE', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'sigilo', name: 'Sigilo', ability: 'DES', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'acrobacias', name: 'Acrobacias', ability: 'DES', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'medicina', name: 'Medicina', ability: 'SAB', baseModifier: 0, proficient: false, expertise: false },
+  ],
+  conditions: [
+    { name: 'INSPIRADA', active: false, description: '+2 al explicar arquitectura y decisiones técnicas tras completar una feature end-to-end' },
+    { name: 'DESMORALIZADA', active: false, description: '−2 al profundizar en un tema cuando siente que tiene demasiados frentes abiertos' },
+    { name: 'AGOTADA', active: false, description: '−2 a concentración tras mucho context switching entre frontend, backend y devops' },
+  ],
+  classFeatures: `🗺️ EXPLORADORA DEL STACK
+Entiende desde la base de datos hasta la UI. Puede navegar cualquier capa de la arquitectura.
+
+🔍 RASTREADORA DE BUGS
+Sigue el rastro de logs y errores a través de todo el sistema. Ventaja en tiradas de debugging.
+
+📐 MAPAS DE ARQUITECTURA
+Dibuja cómo encajan todas las piezas. Puede visualizar dependencias y flujos de datos.`,
+  racialTraits: `🍀 SUERTE MEDIANA
+Cuando sacas un 1 en un d20, puedes volver a tirar y usar el nuevo resultado. Los deploys fallidos a veces se arreglan solos.
+
+🏃 AGILIDAD MEDIANA
+Puedes moverte a través del espacio de criaturas más grandes. Te cuelas por todos los rincones del stack.
+
+⚡ VALIENTE
+Tienes ventaja en tiradas contra miedo. Los deadlines imposibles no te asustan.
+
+🦶 VELOCIDAD 25
+Los medianos se mueven a 25 pies. Pequeña pero constante.`,
+  proficiencies: `🌐 DESARROLLO:
+- Frontend y backend web
+- APIs REST y GraphQL
+- Bases de datos SQL y NoSQL
+
+🔧 HERRAMIENTAS: 
+- Terminal y línea de comandos
+- Navegador y DevTools
+- Cliente de base de datos
+- Herramientas de logs y monitorización
+
+🌍 IDIOMAS: 
+- Común (Español)
+- Mediano (JavaScript/TypeScript)
+- Lengua de sistemas (Python/Node)`,
+  equipment: `📦 EQUIPO INICIAL:
+- Armadura de cuero reforzada (AC 12 + DES)
+- Arco corto + 20 flechas
+- 2 Espadas cortas
+- Pack de explorador
+
+💻 EQUIPO TECH:
+- Portátil todoterreno
+- Mochila llena de cables y adaptadores
+- Diagrama de arquitectura enrollado
+- Scripts de deploy automatizados
+- Acceso a múltiples entornos (dev, staging, prod)
+- Terminal con aliases personalizados`,
+  notes: '',
+});
+
 // Alias for backward compatibility
 export const getDefaultCharacter = getDefaultFrontella;
