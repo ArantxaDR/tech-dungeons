@@ -15,8 +15,8 @@ const characters = [
     name: 'Bitgrun MartilloAPI', 
     icon: '⛏️', 
     role: 'Backend Developer',
-    class: 'Bárbaro',
-    description: 'Forjador de APIs robustas y bases de datos inquebrantables. Su furia escala con los requests.'
+    class: 'Bárbara',
+    description: 'Forjadora de APIs robustas y bases de datos inquebrantables. Su furia escala con los requests.'
   },
   { 
     path: '/pixaria', 
@@ -25,6 +25,14 @@ const characters = [
     role: 'UX/UI Designer',
     class: 'Hechicera (Sorcerer)',
     description: 'Maestra del prototipado y la usabilidad. Convierte ideas en interfaces mágicas.'
+  },
+  { 
+    path: '/stackia', 
+    name: 'Stackia Caminacódigo', 
+    icon: '🏹', 
+    role: 'Full-Stack Developer',
+    class: 'Exploradora (Ranger)',
+    description: 'Navegante del stack completo. Rastrea bugs desde la UI hasta la base de datos.'
   },
 ];
 
@@ -43,7 +51,7 @@ const Index = () => {
           <div className="flex justify-center gap-4 flex-wrap">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Users className="w-4 h-4" />
-              <span>3 Personajes</span>
+              <span>4 Personajes</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Scroll className="w-4 h-4" />
@@ -63,7 +71,7 @@ const Index = () => {
           Elige tu personaje
         </h2>
         
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {characters.map((char) => (
             <Link
               key={char.path}
