@@ -411,5 +411,90 @@ Los medianos se mueven a 25 pies. Pequeña pero constante.`,
   notes: '',
 });
 
+export const getDefaultBugaria = (): Character => ({
+  name: "Bugaria OjoFino",
+  race: "Humana",
+  className: "Monja (Monk)",
+  level: 1,
+  background: "Guardiana de la calidad",
+  alignment: "Legal buena",
+  xp: 0,
+  hp: 9,
+  hitDie: "d8",
+  armorClass: 15,
+  initiative: 2,
+  proficiencyBonus: 2,
+  speed: 30,
+  abilities: [
+    { name: 'FUE', score: 10, modifier: 0, savingThrowProficient: true },
+    { name: 'DES', score: 15, modifier: 2, savingThrowProficient: true },
+    { name: 'CON', score: 12, modifier: 1, savingThrowProficient: false },
+    { name: 'INT', score: 13, modifier: 1, savingThrowProficient: false },
+    { name: 'SAB', score: 14, modifier: 2, savingThrowProficient: false },
+    { name: 'CAR', score: 8, modifier: -1, savingThrowProficient: false },
+  ],
+  skills: [
+    { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: 2, proficient: true, expertise: true },
+    { id: 'perspicacia', name: 'Perspicacia', ability: 'SAB', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'acrobacias', name: 'Acrobacias', ability: 'DES', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'investigacion', name: 'Investigación', ability: 'INT', baseModifier: 1, proficient: true, expertise: false },
+    { id: 'atletismo', name: 'Atletismo', ability: 'FUE', baseModifier: 0, proficient: false, expertise: false },
+    { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'persuasion', name: 'Persuasión', ability: 'CAR', baseModifier: -1, proficient: false, expertise: false },
+    { id: 'sigilo', name: 'Sigilo', ability: 'DES', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'medicina', name: 'Medicina', ability: 'SAB', baseModifier: 2, proficient: false, expertise: false },
+    { id: 'intimidacion', name: 'Intimidación', ability: 'CAR', baseModifier: -1, proficient: false, expertise: false },
+  ],
+  conditions: [
+    { name: 'INSPIRADA', active: false, description: '+2 a encontrar bugs críticos cuando su feedback es escuchado y valorado' },
+    { name: 'DESMORALIZADA', active: false, description: '−2 a motivación cuando su rol se percibe como "solo hacer clics"' },
+    { name: 'AGOTADA', active: false, description: '−2 a concentración cuando siempre llega tarde al proceso (testing al final)' },
+  ],
+  classFeatures: `🧘 DISCIPLINA DEL MONJE
+Rutinas de regresión y checks repetitivos sin perder foco. La constancia es tu mayor virtud.
+
+👊 GOLPES PRECISOS
+Tests que van directo al punto. Cada caso de prueba es un ataque certero al código.
+
+🏃 MOVIMIENTO SIN ARMADURA
+Se adapta rápido a nuevos entornos, dispositivos, navegadores. AC = 10 + DES + SAB.`,
+  racialTraits: `🧬 VERSATILIDAD HUMANA
+Capaz de aprender lo que haga falta para asegurar calidad. +1 a dos características de tu elección.
+
+📚 HABILIDAD EXTRA
+Los humanos ganan una habilidad adicional de su elección. Flexibilidad para especializarse.
+
+🦶 VELOCIDAD 30
+Ritmo estándar. Ni demasiado rápido ni demasiado lento.`,
+  proficiencies: `🔧 HERRAMIENTAS DE TESTING:
+- Testing manual y exploratorio
+- Suites de pruebas automatizadas
+- Herramientas de reporte de bugs
+
+📋 METODOLOGÍAS:
+- Casos de prueba y checklists
+- Testing de regresión
+- Pruebas de aceptación
+
+🌐 IDIOMAS: 
+- Común (Español)
+- Lenguaje de testing (Gherkin/BDD)
+- Jerga de calidad (ISTQB)`,
+  equipment: `📦 EQUIPO INICIAL:
+- Túnica de monje (AC 10 + DES + SAB)
+- Bastón de combate (1d6/1d8 contundente)
+- 10 Dardos de precisión
+- Pack de explorador
+
+💻 EQUIPO TECH:
+- Tablero de pruebas Kanban
+- Lista de casos de test exhaustiva
+- Herramientas de reporte (Jira, Linear)
+- Checklist de regresión sagrada
+- Dispositivos de prueba variados
+- Extensiones de accesibilidad`,
+  notes: '',
+});
+
 // Alias for backward compatibility
 export const getDefaultCharacter = getDefaultFrontella;

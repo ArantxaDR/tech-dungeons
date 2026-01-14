@@ -34,6 +34,14 @@ const characters = [
     class: 'Exploradora (Ranger)',
     description: 'Navegante del stack completo. Rastrea bugs desde la UI hasta la base de datos.'
   },
+  { 
+    path: '/bugaria', 
+    name: 'Bugaria OjoFino', 
+    icon: '🔍', 
+    role: 'QA / Test Engineer',
+    class: 'Monja (Monk)',
+    description: 'Guardiana de la calidad. Encuentra bugs con precisión monástica y disciplina inquebrantable.'
+  },
 ];
 
 const Index = () => {
@@ -51,7 +59,7 @@ const Index = () => {
           <div className="flex justify-center gap-4 flex-wrap">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Users className="w-4 h-4" />
-              <span>4 Personajes</span>
+              <span>5 Personajes</span>
             </div>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Scroll className="w-4 h-4" />

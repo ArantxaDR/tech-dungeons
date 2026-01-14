@@ -5,6 +5,7 @@ const characters = [
   { path: '/bitgrun', name: 'Bitgrun', icon: '⛏️', subtitle: 'Backend' },
   { path: '/pixaria', name: 'Pixaria', icon: '✨', subtitle: 'UX/UI' },
   { path: '/stackia', name: 'Stackia', icon: '🏹', subtitle: 'Full-Stack' },
+  { path: '/bugaria', name: 'Bugaria', icon: '🔍', subtitle: 'QA' },
 ];
 
 export const CharacterNav = () => {
