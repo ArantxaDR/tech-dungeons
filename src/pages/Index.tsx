@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Users, Scroll, Sparkles } from 'lucide-react';
+import { Users, Scroll, Sparkles, PlusCircle } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const characters = [
   { 
@@ -75,9 +76,17 @@ const Index = () => {
 
       {/* Characters Grid */}
       <main className="max-w-6xl mx-auto py-12 px-4">
-        <h2 className="text-2xl font-bold text-center mb-8 text-foreground">
-          Elige tu personaje
-        </h2>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+          <h2 className="text-2xl font-bold text-foreground">
+            Elige tu personaje
+          </h2>
+          <Button asChild>
+            <Link to="/crear-personaje">
+              <PlusCircle className="w-4 h-4 mr-2" />
+              Crear personaje
+            </Link>
+          </Button>
+        </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {characters.map((char) => (
