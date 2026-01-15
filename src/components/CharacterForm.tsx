@@ -35,26 +35,47 @@ export const CharacterForm = ({ character, setCharacter, onReset }: CharacterFor
     setCharacter(prev => ({ ...prev, name: e.target.value }));
   };
 
+  const applyPreset = (className: string, keepFields: Partial<Character & { role: string; imageDataUrl?: string }>) => {
+    const baseClassName = className.split(' ')[0] as ClassName;
+    const preset = findPresetByClass(baseClassName);
+    
+    if (preset) {
+      setCharacter(prev => ({
+        ...preset.preset,
+        name: keepFields.name ?? (prev.name || 'Nueva Aventurera'),
+        role: keepFields.role ?? prev.role,
+        race: keepFields.race ?? preset.preset.race,
+        imageDataUrl: keepFields.imageDataUrl ?? prev.imageDataUrl,
+      }));
+    }
+  };
+
   const handleRoleChange = (value: RoleName) => {
     setCharacter(prev => ({ ...prev, role: value }));
   };
 
   const handleClassChange = (value: ClassName) => {
     const classInfo = CLASSES.find(c => c.value === value);
-    setCharacter(prev => ({ 
-      ...prev, 
-      className: classInfo?.label || value,
-      role: classInfo?.suggestedRole || prev.role 
-    }));
+    const newClassName = classInfo?.label || value;
+    const newRole = classInfo?.suggestedRole || character.role;
+    
+    applyPreset(newClassName, {
+      name: character.name,
+      role: newRole,
+      imageDataUrl: character.imageDataUrl,
+    });
   };
 
   const handleRaceChange = (value: RaceName) => {
     const raceInfo = RACES.find(r => r.value === value);
-    setCharacter(prev => ({ 
-      ...prev, 
-      race: raceInfo?.label || value,
-      speed: raceInfo?.speed || 30
-    }));
+    const newRace = raceInfo?.label || value;
+    
+    applyPreset(character.className, {
+      name: character.name,
+      role: character.role,
+      race: newRace,
+      imageDataUrl: character.imageDataUrl,
+    });
   };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,33 +90,12 @@ export const CharacterForm = ({ character, setCharacter, onReset }: CharacterFor
   };
 
   const handleAutoComplete = () => {
-    // Find the base class name without the parenthetical
-    const baseClassName = character.className.split(' ')[0] as ClassName;
-    const preset = findPresetByClass(baseClassName);
-    
-    if (preset) {
-      setCharacter(prev => ({
-        ...preset.preset,
-        name: prev.name || 'Nueva Aventurera',
-        role: prev.role,
-        imageDataUrl: prev.imageDataUrl,
-      }));
-    } else {
-      // If no exact preset, just use a default based on class
-      const classInfo = CLASSES.find(c => character.className.includes(c.value));
-      if (classInfo) {
-        const anyPreset = findPresetByClass(classInfo.value);
-        if (anyPreset) {
-          setCharacter(prev => ({
-            ...anyPreset.preset,
-            name: prev.name || 'Nueva Aventurera',
-            race: prev.race || anyPreset.preset.race,
-            role: prev.role,
-            imageDataUrl: prev.imageDataUrl,
-          }));
-        }
-      }
-    }
+    applyPreset(character.className, {
+      name: character.name,
+      role: character.role,
+      race: character.race,
+      imageDataUrl: character.imageDataUrl,
+    });
   };
 
   const handleSave = () => {
