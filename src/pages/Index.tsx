@@ -8,6 +8,7 @@ import bitgrunAvatar from '@/assets/bitgrun-avatar.png';
 import pixariaAvatar from '@/assets/pixaria-avatar.png';
 import stackiaAvatar from '@/assets/stackia-avatar.png';
 import bugariaAvatar from '@/assets/bugaria-avatar.png';
+import appliaAvatar from '@/assets/applia-avatar.png';
 
 const characters = [
   { 
@@ -65,6 +66,17 @@ const characters = [
     accentColor: 'from-amber-500/20 to-yellow-500/20',
     borderColor: 'hover:border-amber-500'
   },
+  { 
+    path: '/applia', 
+    name: 'Applia Pantallatáctil', 
+    icon: '📱',
+    avatar: appliaAvatar,
+    role: 'Mobile Developer',
+    class: 'Exploradora (Ranger)',
+    description: 'Exploradora de ecosistemas móviles. Domina iOS, Android y frameworks cross-platform.',
+    accentColor: 'from-lime-500/20 to-green-500/20',
+    borderColor: 'hover:border-lime-500'
+  },
 ];
 
 const Index = () => {
@@ -105,7 +117,7 @@ const Index = () => {
           <div className="flex justify-center gap-6 flex-wrap mb-10">
             <div className="flex items-center gap-2 px-4 py-2 bg-card/50 border border-muted rounded-lg">
               <Users className="w-5 h-5 text-primary" />
-              <span className="text-sm font-medium">5 Heroínas</span>
+              <span className="text-sm font-medium">6 Heroínas</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 bg-card/50 border border-muted rounded-lg">
               <Scroll className="w-5 h-5 text-secondary" />

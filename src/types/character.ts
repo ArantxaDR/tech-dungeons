@@ -496,5 +496,94 @@ Ritmo estándar. Ni demasiado rápido ni demasiado lento.`,
   notes: '',
 });
 
+export const getDefaultApplia = (): Character => ({
+  name: "Applia Pantallatáctil",
+  race: "Mediana (Halfling)",
+  className: "Exploradora (Ranger)",
+  level: 1,
+  background: "Exploradora de ecosistemas móviles",
+  alignment: "Caótica buena",
+  xp: 0,
+  hp: 12,
+  hitDie: "d10",
+  armorClass: 14,
+  initiative: 2,
+  proficiencyBonus: 2,
+  speed: 25,
+  abilities: [
+    { name: 'FUE', score: 10, modifier: 0, savingThrowProficient: false },
+    { name: 'DES', score: 15, modifier: 2, savingThrowProficient: true },
+    { name: 'CON', score: 14, modifier: 2, savingThrowProficient: true },
+    { name: 'INT', score: 13, modifier: 1, savingThrowProficient: false },
+    { name: 'SAB', score: 12, modifier: 1, savingThrowProficient: false },
+    { name: 'CAR', score: 8, modifier: -1, savingThrowProficient: false },
+  ],
+  skills: [
+    { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: 1, proficient: true, expertise: false },
+    { id: 'investigacion', name: 'Investigación', ability: 'INT', baseModifier: 1, proficient: true, expertise: false },
+    { id: 'acrobacias', name: 'Acrobacias', ability: 'DES', baseModifier: 2, proficient: true, expertise: false },
+    { id: 'supervivencia', name: 'Supervivencia', ability: 'SAB', baseModifier: 1, proficient: true, expertise: false },
+    { id: 'sigilo', name: 'Sigilo', ability: 'DES', baseModifier: 2, proficient: true, expertise: true },
+    { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'persuasion', name: 'Persuasión', ability: 'CAR', baseModifier: -1, proficient: false, expertise: false },
+    { id: 'perspicacia', name: 'Perspicacia', ability: 'SAB', baseModifier: 1, proficient: false, expertise: false },
+    { id: 'atletismo', name: 'Atletismo', ability: 'FUE', baseModifier: 0, proficient: false, expertise: false },
+    { id: 'naturaleza', name: 'Naturaleza', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+  ],
+  conditions: [
+    { name: 'INSPIRADA', active: false, description: '+2 en tiradas técnicas (logs, rendimiento) tras un release estable con buenas reseñas' },
+    { name: 'DESMORALIZADA', active: false, description: '−2 en tiradas sociales cuando recibe muchas issues por decisiones fuera de su control (negocio, marketing)' },
+    { name: 'AGOTADA', active: false, description: '−2 en concentración tras demasiados hotfixes y builds urgentes' },
+  ],
+  classFeatures: `📱 EXPLORADORA DE PLATAFORMAS MÓVILES
+Conoce iOS, Android y/o frameworks cross-platform. Domina los ecosistemas nativos y sus peculiaridades.
+
+🐛 RASTREADORA DE BUGS
+Sigue pistas en logs, crash reports y analíticas. Encuentra el origen de cualquier crash.
+
+👆 GUÍA DEL USUARIO
+Piensa en contexto real: batería baja, mala conectividad, uso con una mano, interrupciones constantes.`,
+  racialTraits: `🍀 SUERTE MEDIANA
+Cuando sacas un 1 en un d20, puedes volver a tirar. Los builds fallidos a veces se arreglan en el segundo intento.
+
+🏃 AGILIDAD MEDIANA
+Puedes moverte entre espacios reducidos. Te adaptas a pantallas pequeñas y dispositivos raros.
+
+⚡ VALIENTE
+Tienes ventaja contra miedo. Los rechazos en App Store no te asustan.
+
+🦶 VELOCIDAD 25
+Pequeña pero constante. El desarrollo mobile requiere paciencia.`,
+  proficiencies: `📱 LENGUAJES/FRAMEWORKS MOBILE:
+- Kotlin, Swift
+- Flutter, React Native
+- Jetpack Compose, SwiftUI
+
+🔧 HERRAMIENTAS: 
+- IDEs (Android Studio, Xcode)
+- Emuladores y device farms
+- CI/CD móvil (Fastlane, Bitrise)
+- Analíticas y Crashlytics
+
+🌐 IDIOMAS: 
+- Común (Español)
+- Mediano (Dart/Kotlin)
+- Lengua de stores (App Store Connect, Play Console)`,
+  equipment: `📦 EQUIPO INICIAL:
+- Armadura ligera de cuero (AC 12 + DES)
+- Arco corto + 20 flechas
+- 2 Dagas de debugging
+- Pack de explorador móvil
+
+💻 EQUIPO TECH:
+- Portátil con emuladores
+- 2-3 dispositivos físicos de prueba
+- Cables y power bank
+- Cuentas de stores configuradas
+- Certificados y perfiles de firma
+- Scripts de build y release automatizados`,
+  notes: '',
+});
+
 // Alias for backward compatibility
 export const getDefaultCharacter = getDefaultFrontella;
