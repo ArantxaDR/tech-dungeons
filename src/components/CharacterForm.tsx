@@ -57,25 +57,15 @@ export const CharacterForm = ({ character, setCharacter, onReset }: CharacterFor
   const handleClassChange = (value: ClassName) => {
     const classInfo = CLASSES.find(c => c.value === value);
     const newClassName = classInfo?.label || value;
-    const newRole = classInfo?.suggestedRole || character.role;
     
-    applyPreset(newClassName, {
-      name: character.name,
-      role: newRole,
-      imageDataUrl: character.imageDataUrl,
-    });
+    setCharacter(prev => ({ ...prev, className: newClassName }));
   };
 
   const handleRaceChange = (value: RaceName) => {
     const raceInfo = RACES.find(r => r.value === value);
     const newRace = raceInfo?.label || value;
     
-    applyPreset(character.className, {
-      name: character.name,
-      role: character.role,
-      race: newRace,
-      imageDataUrl: character.imageDataUrl,
-    });
+    setCharacter(prev => ({ ...prev, race: newRace }));
   };
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
