@@ -30,14 +30,14 @@ export const SkillsSection = ({ character, setCharacter }: SkillsSectionProps) =
     <div className="rpg-card">
       <h2 className="section-title">🎯 Habilidades</h2>
       
-      <div className="space-y-1">
+      <div className="space-y-1 overflow-x-hidden">
         {/* Header */}
-        <div className="flex items-center gap-3 py-2 px-3 text-xs text-muted-foreground uppercase border-b border-border/50">
-          <span className="w-6">P</span>
-          <span className="w-6">E</span>
-          <span className="flex-1">Habilidad</span>
-          <span className="w-12 text-center">Atr</span>
-          <span className="w-16 text-center">Total</span>
+        <div className="flex items-center gap-2 sm:gap-3 py-2 px-2 sm:px-3 text-xs text-muted-foreground uppercase border-b border-border/50">
+          <span className="w-5 sm:w-6 flex-shrink-0">P</span>
+          <span className="w-5 sm:w-6 flex-shrink-0">E</span>
+          <span className="flex-1 min-w-0 truncate">Habilidad</span>
+          <span className="w-8 sm:w-12 text-center flex-shrink-0 hidden sm:block">Atr</span>
+          <span className="w-12 sm:w-16 text-center flex-shrink-0">Total</span>
         </div>
         
         {character.skills.map((skill, index) => {
@@ -49,22 +49,19 @@ export const SkillsSection = ({ character, setCharacter }: SkillsSectionProps) =
           );
           
           return (
-            <div key={skill.id} className="skill-row">
+            <div key={skill.id} className="skill-row gap-2 sm:gap-3 px-2 sm:px-3">
               {/* Proficiency */}
               <button
                 onClick={() => {
                   if (skill.expertise) {
-                    // If expertise, remove expertise
                     updateSkill(index, { expertise: false });
                   } else if (skill.proficient) {
-                    // If proficient but not expertise, remove proficiency
                     updateSkill(index, { proficient: false, expertise: false });
                   } else {
-                    // If not proficient, add proficiency
                     updateSkill(index, { proficient: true });
                   }
                 }}
-                className="w-6"
+                className="w-5 sm:w-6 flex-shrink-0"
                 title="Competencia"
               >
                 <Star 
@@ -79,7 +76,7 @@ export const SkillsSection = ({ character, setCharacter }: SkillsSectionProps) =
                     updateSkill(index, { expertise: !skill.expertise });
                   }
                 }}
-                className="w-6"
+                className="w-5 sm:w-6 flex-shrink-0"
                 title="Expertise (doble competencia)"
                 disabled={!skill.proficient}
               >
@@ -89,19 +86,19 @@ export const SkillsSection = ({ character, setCharacter }: SkillsSectionProps) =
               </button>
               
               {/* Skill Name */}
-              <span className="flex-1 text-foreground">
+              <span className="flex-1 min-w-0 truncate text-foreground text-sm sm:text-base">
                 {skill.name}
               </span>
               
-              {/* Ability */}
-              <span className="w-12 text-center text-muted-foreground text-sm">
+              {/* Ability - hidden on mobile */}
+              <span className="w-8 sm:w-12 text-center text-muted-foreground text-sm flex-shrink-0 hidden sm:block">
                 {skill.ability}
               </span>
               
               {/* Total */}
               <span 
-                className={`w-16 text-center font-bold ${getModifierClass(total)}`}
-                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '12px' }}
+                className={`w-12 sm:w-16 text-center font-bold flex-shrink-0 ${getModifierClass(total)}`}
+                style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '11px' }}
               >
                 {formatModifier(total)}
               </span>
