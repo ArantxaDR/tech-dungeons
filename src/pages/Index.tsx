@@ -81,7 +81,7 @@ const characters = [
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       {/* Hero Section */}
       <header className="relative py-20 px-4 text-center border-b-4 border-primary overflow-hidden">
         {/* Animated background */}

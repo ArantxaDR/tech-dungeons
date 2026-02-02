@@ -76,6 +76,7 @@
       radial-gradient(circle at 20% 80%, hsl(270 60% 20% / 0.3) 0%, transparent 50%),
       radial-gradient(circle at 80% 20%, hsl(175 70% 20% / 0.2) 0%, transparent 50%);
     min-height: 100vh;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
