@@ -12,11 +12,11 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc }: HeaderSect
   };
 
   return (
-    <div className="rpg-card">
-      <div className="flex flex-col lg:flex-row gap-6">
+    <div className="rpg-card overflow-hidden">
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
         {/* Avatar */}
         <div className="flex-shrink-0">
-          <div className="avatar-frame w-40 h-40 mx-auto lg:mx-0">
+          <div className="avatar-frame w-28 h-28 sm:w-40 sm:h-40 mx-auto lg:mx-0">
             {avatarSrc ? (
               <img 
                 src={avatarSrc} 
@@ -24,7 +24,7 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc }: HeaderSect
                 className="w-full h-full object-cover rounded-sm"
               />
             ) : (
-              <div className="w-full h-full flex items-center justify-center text-4xl bg-muted/50 rounded-sm">
+              <div className="w-full h-full flex items-center justify-center text-3xl sm:text-4xl bg-muted/50 rounded-sm">
                 🧙
               </div>
             )}
@@ -119,38 +119,38 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc }: HeaderSect
         </div>
 
         {/* Combat Stats */}
-        <div className="flex flex-wrap lg:flex-col gap-3 justify-center">
-          <div className="stat-box">
-            <span className="text-xs text-muted-foreground uppercase mb-1">HP</span>
+        <div className="grid grid-cols-4 lg:grid-cols-1 lg:flex lg:flex-col gap-2 sm:gap-3 justify-center w-full lg:w-auto">
+          <div className="stat-box min-w-0">
+            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">HP</span>
             <input
               type="number"
               min={0}
               value={character.hp}
               onChange={(e) => updateField('hp', parseInt(e.target.value) || 0)}
-              className="stat-value bg-transparent border-none text-center w-16 focus:outline-none"
+              className="stat-value bg-transparent border-none text-center w-12 sm:w-16 focus:outline-none text-sm sm:text-lg"
               style={{ fontFamily: '"Press Start 2P", cursive' }}
             />
-            <span className="text-xs text-muted-foreground">{character.hitDie}</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{character.hitDie}</span>
           </div>
-          <div className="stat-box">
-            <span className="text-xs text-muted-foreground uppercase mb-1">CA</span>
+          <div className="stat-box min-w-0">
+            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">CA</span>
             <input
               type="number"
               min={0}
               value={character.armorClass}
               onChange={(e) => updateField('armorClass', parseInt(e.target.value) || 0)}
-              className="stat-value bg-transparent border-none text-center w-16 focus:outline-none"
+              className="stat-value bg-transparent border-none text-center w-12 sm:w-16 focus:outline-none text-sm sm:text-lg"
               style={{ fontFamily: '"Press Start 2P", cursive' }}
             />
           </div>
-          <div className="stat-box">
-            <span className="text-xs text-muted-foreground uppercase mb-1">Inic.</span>
-            <span className="stat-modifier stat-modifier-positive">+{character.initiative}</span>
+          <div className="stat-box min-w-0">
+            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">Inic.</span>
+            <span className="stat-modifier stat-modifier-positive text-sm sm:text-xl">+{character.initiative}</span>
           </div>
-          <div className="stat-box">
-            <span className="text-xs text-muted-foreground uppercase mb-1">Vel.</span>
-            <span className="stat-value">{character.speed}</span>
-            <span className="text-xs text-muted-foreground">pies</span>
+          <div className="stat-box min-w-0">
+            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">Vel.</span>
+            <span className="stat-value text-sm sm:text-lg">{character.speed}</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">pies</span>
           </div>
         </div>
       </div>

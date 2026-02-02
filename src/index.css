@@ -103,14 +103,14 @@
   }
 
   .stat-box {
-    @apply flex flex-col items-center justify-center p-3 rounded-sm;
+    @apply flex flex-col items-center justify-center p-2 sm:p-3 rounded-sm;
     border: 2px solid hsl(var(--primary) / 0.6);
     background: linear-gradient(
       180deg,
       hsl(var(--muted) / 0.8) 0%,
       hsl(var(--card)) 100%
     );
-    min-width: 70px;
+    min-width: 0;
   }
 
   .stat-value {
@@ -208,7 +208,7 @@
   }
 
   .skill-row {
-    @apply flex items-center gap-3 py-2 px-3 rounded-sm transition-colors;
+    @apply flex items-center py-1.5 sm:py-2 rounded-sm transition-colors;
   }
 
   .skill-row:hover {
