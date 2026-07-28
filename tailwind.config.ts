@@ -14,8 +14,18 @@ export default {
     },
     extend: {
       fontFamily: {
-        pixel: ['"Press Start 2P"', 'cursive'],
-        mono: ['"VT323"', 'monospace'],
+        pixel: ['"Libre Caslon Text"', 'serif'],
+        serif: ['"Libre Caslon Text"', 'serif'],
+        sans: ['"Geist"', 'system-ui', 'sans-serif'],
+        mono: ['"Space Mono"', 'ui-monospace', 'monospace'],
+      },
+      fontSize: {
+        'display-lg': ['48px', { lineHeight: '56px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'headline-md': ['32px', { lineHeight: '40px', fontWeight: '600' }],
+        'headline-sm': ['24px', { lineHeight: '32px', fontWeight: '600' }],
+        'body-lg': ['18px', { lineHeight: '28px' }],
+        'label-caps': ['12px', { lineHeight: '16px', letterSpacing: '0.1em', fontWeight: '700' }],
+        'data-mono': ['14px', { lineHeight: '20px' }],
       },
       colors: {
         border: "hsl(var(--border))",
