@@ -10,13 +10,11 @@ const Pixaria = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
-      <CharacterSheet 
-        character={character} 
-        setCharacter={setCharacter}
-        avatarSrc={pixariaAvatar}
-      />
-    </div>
+    <CharacterSheet
+      character={character}
+      setCharacter={setCharacter}
+      avatarSrc={pixariaAvatar}
+    />
   );
 };
 

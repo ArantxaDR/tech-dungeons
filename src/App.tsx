@@ -12,6 +12,7 @@ import Stackia from "./pages/Stackia";
 import Bugaria from "./pages/Bugaria";
 import Applia from "./pages/Applia";
 import CharacterCreator from "./pages/CharacterCreator";
+import Manual from "./pages/Manual";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
           <Route path="/bugaria" element={<Bugaria />} />
           <Route path="/applia" element={<Applia />} />
           <Route path="/crear-personaje" element={<CharacterCreator />} />
+          <Route path="/manual" element={<Manual />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

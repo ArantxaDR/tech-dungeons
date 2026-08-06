@@ -3,6 +3,7 @@ import { Character, Condition } from '@/types/character';
 interface ConditionsSectionProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
+  readOnly?: boolean;
 }
 
 const CONDITION_ICONS: Record<string, string> = {
@@ -19,7 +20,7 @@ const CONDITION_COLORS: Record<string, string> = {
   ENVENENADA: 'border-purple-500 bg-purple-500/20 text-purple-400',
 };
 
-export const ConditionsSection = ({ character, setCharacter }: ConditionsSectionProps) => {
+export const ConditionsSection = ({ character, setCharacter, readOnly }: ConditionsSectionProps) => {
   const toggleCondition = (index: number) => {
     setCharacter(prev => {
       const newConditions = [...prev.conditions];
@@ -40,7 +41,9 @@ export const ConditionsSection = ({ character, setCharacter }: ConditionsSection
           <button
             key={condition.name}
             onClick={() => toggleCondition(index)}
-            className={`w-full text-left p-3 rounded-sm border-2 transition-all duration-200 ${
+            disabled={readOnly}
+            aria-pressed={condition.active}
+            className={`w-full text-left p-3 rounded-sm border-2 transition-all duration-200 disabled:cursor-default ${
               condition.active 
                 ? CONDITION_COLORS[condition.name] 
                 : 'border-muted bg-muted/30 text-muted-foreground'

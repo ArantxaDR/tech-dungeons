@@ -10,13 +10,11 @@ const Bitgrun = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
-      <CharacterSheet 
-        character={character} 
-        setCharacter={setCharacter} 
-        avatarSrc={bitgrunAvatar}
-      />
-    </div>
+    <CharacterSheet
+      character={character}
+      setCharacter={setCharacter}
+      avatarSrc={bitgrunAvatar}
+    />
   );
 };
 

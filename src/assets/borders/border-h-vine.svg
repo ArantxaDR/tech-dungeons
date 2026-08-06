@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Cenefa horizontal — pámpano/zarcillo con hojas y bayas.
+  Tile de 100×40, repite sin costura:
+    background-image: url(border-h-vine.svg);
+    background-repeat: repeat-x;
+    background-size: 100px 40px;
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 40" width="100" height="40">
+  <defs>
+    <g id="v-leaf">
+      <path d="M0,0 C-4,-5 -4,-12 0,-16 C4,-12 4,-5 0,0 Z" fill="none" />
+      <path d="M0,-2 L0,-14" fill="none" />
+    </g>
+    <g id="v-berries">
+      <circle cx="-2" cy="1" r="0.9" />
+      <circle cx="1.5" cy="2.5" r="0.9" />
+      <circle cx="0" cy="-1.5" r="0.9" />
+    </g>
+  </defs>
+
+  <!-- stem -->
+  <path d="M0,20 C25,8 75,32 100,20" fill="none"
+    stroke="hsl(var(--border-gold, 46 65% 38%))" stroke-width="1.3" stroke-linecap="round" />
+
+  <!-- upper leaf + berries -->
+  <use href="#v-leaf" transform="translate(23,17) rotate(-25)"
+    stroke="hsl(var(--border-lapis, 213 32% 40%))" stroke-width="0.9" />
+  <use href="#v-berries" transform="translate(23,17)" fill="hsl(var(--border-vermillion, 1 46% 43%))" />
+
+  <!-- lower leaf + berries -->
+  <use href="#v-leaf" transform="translate(77,23) rotate(155)"
+    stroke="hsl(var(--border-vermillion, 1 46% 43%))" stroke-width="0.9" />
+  <use href="#v-berries" transform="translate(77,23)" fill="hsl(var(--border-gold, 46 65% 38%))" />
+</svg>

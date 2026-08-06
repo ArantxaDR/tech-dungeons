@@ -4,6 +4,7 @@ import { Star } from 'lucide-react';
 interface AbilitiesSectionProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
+  readOnly?: boolean;
 }
 
 const ABILITY_NAMES: Record<string, string> = {
@@ -15,7 +16,7 @@ const ABILITY_NAMES: Record<string, string> = {
   CAR: 'Carisma',
 };
 
-export const AbilitiesSection = ({ character, setCharacter }: AbilitiesSectionProps) => {
+export const AbilitiesSection = ({ character, setCharacter, readOnly }: AbilitiesSectionProps) => {
   const updateAbility = (index: number, updates: Partial<Ability>) => {
     setCharacter(prev => {
       const newAbilities = [...prev.abilities];
@@ -58,25 +59,25 @@ export const AbilitiesSection = ({ character, setCharacter }: AbilitiesSectionPr
       
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {character.abilities.map((ability, index) => (
-          <div key={ability.name} className="stat-box relative">
+          <div key={ability.name} className="stat-box relative" title={ABILITY_NAMES[ability.name]}>
             {/* Saving Throw Indicator */}
             <button
               onClick={() => updateAbility(index, { savingThrowProficient: !ability.savingThrowProficient })}
-              className="absolute top-1 right-1"
+              disabled={readOnly}
+              className="absolute top-0 right-0 p-1.5 disabled:cursor-default"
               title="Competencia en tirada de salvación"
+              aria-label={`Competencia en tirada de salvación de ${ABILITY_NAMES[ability.name]}`}
+              aria-pressed={ability.savingThrowProficient}
             >
-              <Star 
+              <Star
                 className={`proficiency-star ${ability.savingThrowProficient ? 'proficiency-star-active fill-current' : 'proficiency-star-inactive'}`}
               />
             </button>
-            
-            <span className="text-xs text-muted-foreground font-bold mb-1">
+
+            <span className="text-xs text-muted-foreground font-bold mb-2">
               {ability.name}
             </span>
-            <span className="text-[10px] text-muted-foreground/70 mb-2">
-              {ABILITY_NAMES[ability.name]}
-            </span>
-            
+
             <span className={`stat-modifier ${getModifierClass(ability.modifier)}`}>
               {formatModifier(ability.modifier)}
             </span>
@@ -86,7 +87,8 @@ export const AbilitiesSection = ({ character, setCharacter }: AbilitiesSectionPr
               min={1}
               max={30}
               value={ability.score}
-              onChange={(e) => updateAbility(index, { score: parseInt(e.target.value) || 10 })}
+              onChange={readOnly ? undefined : (e) => updateAbility(index, { score: parseInt(e.target.value) || 10 })}
+              readOnly={readOnly}
               className="w-12 bg-muted/50 border border-border rounded text-center text-sm mt-2 focus:outline-none focus:border-secondary"
             />
             

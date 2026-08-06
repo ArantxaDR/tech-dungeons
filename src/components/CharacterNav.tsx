@@ -37,6 +37,7 @@ export const CharacterNav = () => {
                 ? 'border-primary bg-primary/20 text-primary'
                 : 'border-muted bg-muted/30 text-muted-foreground hover:border-secondary hover:text-secondary'
             }`}
+            aria-label={`${char.name} — ${char.subtitle}`}
             aria-current={isActive ? 'page' : undefined}
           >
             <span className="text-base sm:text-lg" aria-hidden="true">{char.icon}</span>

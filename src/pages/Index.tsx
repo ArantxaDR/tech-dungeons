@@ -1,6 +1,18 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Scroll, Sparkles, PlusCircle, Swords, Shield, Wand2 } from 'lucide-react';
+import { Users, Scroll, Sparkles, PlusCircle, Trash2, BookOpen } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
+import { BorderDivider } from '@/components/BorderDivider';
+import { BorderWatermark } from '@/components/BorderWatermark';
+import { getCustomCharacters, deleteCustomCharacter } from '@/data/customCharacters';
+import { ROLES } from '@/data/characterPresets';
+import { PageMargins } from '@/components/PageMargins';
+import arcasilKnightImg from '@/assets/arcasil-knight.webp';
+import loversImg from '@/assets/lovers.webp';
+import wolfImg from '@/assets/wolf.webp';
+import unicornImg from '@/assets/unicorn.webp';
+import demonImg from '@/assets/demon.webp';
 
 // Import avatars
 import frontellaAvatar from '@/assets/frontella-avatar.png';
@@ -80,24 +92,20 @@ const characters = [
 ];
 
 const Index = () => {
+  const [customCharacters, setCustomCharacters] = useState(() => getCustomCharacters());
+
+  const handleDelete = (id: string, name: string) => {
+    if (!window.confirm(`¿Borrar a ${name}? No se puede deshacer.`)) return;
+    deleteCustomCharacter(id);
+    setCustomCharacters(getCustomCharacters());
+    toast.success(`${name} borrado.`);
+  };
+
   return (
-    <div className="min-h-screen bg-background overflow-x-hidden">
+    <PageMargins className="min-h-screen overflow-x-hidden">
       {/* Hero Section */}
-      <header className="relative py-20 px-4 text-center border-b-4 border-primary overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-secondary/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent" />
-        
-        {/* Decorative icons */}
-        <div className="absolute top-10 left-10 text-primary/20 animate-pulse">
-          <Swords className="w-16 h-16" />
-        </div>
-        <div className="absolute top-20 right-16 text-secondary/20 animate-pulse delay-300">
-          <Shield className="w-12 h-12" />
-        </div>
-        <div className="absolute bottom-10 left-1/4 text-accent/20 animate-pulse delay-500">
-          <Wand2 className="w-10 h-10" />
-        </div>
+      <header className="relative py-20 px-4 text-center overflow-hidden">
+        <BorderWatermark className="absolute inset-0 flex items-center justify-center opacity-10 [&_svg]:w-[480px] [&_svg]:h-[480px]" />
 
         <div className="relative max-w-4xl mx-auto">
           <div className="mb-6">
@@ -106,9 +114,23 @@ const Index = () => {
             </span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold text-primary mb-6 tracking-tight font-pixel text-glow-primary">
-            ⚔️ Tech & Dungeons ⚔️
-          </h1>
+          <div className="flex items-center justify-center gap-4 md:gap-6 mb-6">
+            <img
+              src={wolfImg}
+              alt=""
+              aria-hidden="true"
+              className="hidden sm:block w-14 h-14 md:w-20 md:h-20 flex-shrink-0 rounded-lg object-cover border-2 border-primary/40"
+            />
+            <h1 className="text-5xl md:text-7xl font-bold text-primary tracking-tight font-display text-glow-primary">
+              Tech & Dungeons
+            </h1>
+            <img
+              src={unicornImg}
+              alt=""
+              aria-hidden="true"
+              className="hidden sm:block w-14 h-14 md:w-20 md:h-20 flex-shrink-0 rounded-lg object-cover border-2 border-primary/40"
+            />
+          </div>
           
           <p className="text-xl md:text-2xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
             Hojas de personaje épicas para el <span className="text-secondary font-bold">equipo tech</span> más legendario del reino digital
@@ -129,20 +151,36 @@ const Index = () => {
             </div>
           </div>
 
-          <Button size="lg" className="text-lg px-8 py-6 animate-pulse" asChild>
-            <Link to="/crear-personaje">
-              <PlusCircle className="w-5 h-5 mr-2" />
-              Crear tu propia heroína
-            </Link>
-          </Button>
+          <div className="flex justify-center gap-3 flex-wrap">
+            <Button size="lg" className="text-lg px-8 py-6 animate-pulse" asChild>
+              <Link to="/crear-personaje">
+                <PlusCircle className="w-5 h-5 mr-2" />
+                Crear tu propia heroína
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6" asChild>
+              <Link to="/manual">
+                <BookOpen className="w-5 h-5 mr-2" />
+                Manual
+              </Link>
+            </Button>
+          </div>
         </div>
       </header>
+
+      <BorderDivider variant="bestiary" className="max-w-2xl mx-auto" />
 
       {/* Characters Grid */}
       <main className="max-w-7xl mx-auto py-16 px-4">
         <div className="text-center mb-12">
+          <img
+            src={loversImg}
+            alt=""
+            aria-hidden="true"
+            className="w-28 md:w-36 mx-auto mb-4 rounded-lg object-cover border-2 border-primary/40"
+          />
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            🎭 Elige tu personaje
+            Elige tu personaje
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Cada heroína tiene habilidades únicas adaptadas a su rol en el equipo tech
@@ -202,10 +240,74 @@ const Index = () => {
           ))}
         </div>
 
+        {/* Custom characters */}
+        {customCharacters.length > 0 && (
+          <div className="mt-16">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">
+              Tus personajes
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {customCharacters.map((char) => {
+                const roleLabel = ROLES.find(r => r.value === char.role)?.label || char.role;
+                return (
+                  <Link
+                    key={char.id}
+                    to={`/crear-personaje?id=${char.id}`}
+                    className="group relative block overflow-hidden rounded-xl border-2 border-muted bg-card transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/20 hover:border-primary"
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleDelete(char.id, char.name || 'este personaje');
+                      }}
+                      aria-label={`Borrar a ${char.name || 'este personaje'}`}
+                      className="absolute top-3 right-3 z-10 p-2 rounded-full bg-card/80 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+
+                    <div className="p-6">
+                      <div className="flex justify-center mb-4">
+                        <img
+                          src={char.imageDataUrl || demonImg}
+                          alt=""
+                          aria-hidden="true"
+                          className="w-24 h-24 rounded-full object-cover border-4 border-primary/50 group-hover:border-primary transition-colors duration-300"
+                        />
+                      </div>
+                      <div className="text-center">
+                        <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors duration-300 mb-1">
+                          {char.name || 'Sin nombre'}
+                        </h3>
+                        <p className="text-sm text-primary font-bold uppercase tracking-wide">
+                          {roleLabel || 'Sin rol'}
+                        </p>
+                        <p className="text-xs text-muted-foreground mt-1 mb-4">
+                          {char.className || 'Sin clase'} · Nivel {char.level}
+                        </p>
+                        <div className="flex items-center justify-center gap-2 text-primary font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                          <span>Editar</span>
+                          <span className="text-xl">→</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Create character CTA */}
         <div className="mt-16 text-center">
           <div className="inline-block p-8 rounded-2xl border-2 border-dashed border-muted hover:border-primary transition-colors bg-card/50">
-            <div className="text-4xl mb-4">🧙‍♀️</div>
+            <img
+              src={arcasilKnightImg}
+              alt=""
+              aria-hidden="true"
+              className="w-20 h-20 mx-auto mb-4 rounded-lg object-cover border-2 border-primary/40"
+            />
             <h3 className="text-xl font-bold mb-2">¿No encuentras tu clase?</h3>
             <p className="text-muted-foreground mb-4">Crea tu propia heroína tech con stats personalizados</p>
             <Button variant="outline" asChild>
@@ -218,8 +320,10 @@ const Index = () => {
         </div>
       </main>
 
+      <BorderDivider variant="vine" className="max-w-2xl mx-auto" />
+
       {/* Footer */}
-      <footer className="py-8 text-center border-t border-muted bg-card/30">
+      <footer className="py-8 text-center">
         <p className="text-sm text-muted-foreground mb-2">
           Hecho con 💜 y mucho café ☕
         </p>
@@ -227,7 +331,7 @@ const Index = () => {
           Tech & Dungeons © 2024 - Porque el código también es magia
         </p>
       </footer>
-    </div>
+    </PageMargins>
   );
 };
 

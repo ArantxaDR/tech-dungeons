@@ -10,13 +10,11 @@ const Frontella = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
-      <CharacterSheet 
-        character={character} 
-        setCharacter={setCharacter} 
-        avatarSrc={frontellaAvatar}
-      />
-    </div>
+    <CharacterSheet
+      character={character}
+      setCharacter={setCharacter}
+      avatarSrc={frontellaAvatar}
+    />
   );
 };
 

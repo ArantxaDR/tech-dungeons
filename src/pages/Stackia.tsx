@@ -10,13 +10,11 @@ const Stackia = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background">
-      <CharacterSheet 
-        character={character} 
-        setCharacter={setCharacter}
-        avatarSrc={stackiaAvatar}
-      />
-    </div>
+    <CharacterSheet
+      character={character}
+      setCharacter={setCharacter}
+      avatarSrc={stackiaAvatar}
+    />
   );
 };
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Cenefa horizontal — cordón trenzado + nudos triqueta (estilo Libro de Kells).
+  Tile de 120×48, diseñada para repetir sin costura:
+    background-image: url(border-h-interlace.svg);
+    background-repeat: repeat-x;
+    background-size: 120px 48px; /* o auto × alto deseado, mantiene proporción */
+  Colores vía variables CSS del proyecto (src/index.css), con fallback HSL
+  literal para que el archivo también se vea bien abierto en solitario.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 48" width="120" height="48">
+  <defs>
+    <path id="i-triquetra" fill="none" stroke-linejoin="round"
+      d="M0,-12 A20.78,20.78 0 0 1 10.39,6 A20.78,20.78 0 0 1 -10.39,6 A20.78,20.78 0 0 1 0,-12 Z" />
+    <g id="i-dotring">
+      <circle cx="17" cy="0" r="1.1" />
+      <circle cx="13.03" cy="10.93" r="1.1" />
+      <circle cx="2.95" cy="16.74" r="1.1" />
+      <circle cx="-8.5" cy="14.72" r="1.1" />
+      <circle cx="-15.98" cy="5.82" r="1.1" />
+      <circle cx="-15.98" cy="-5.82" r="1.1" />
+      <circle cx="-8.5" cy="-14.72" r="1.1" />
+      <circle cx="2.95" cy="-16.74" r="1.1" />
+      <circle cx="13.03" cy="-10.93" r="1.1" />
+    </g>
+    <g id="i-medallion">
+      <use href="#i-dotring" fill="hsl(var(--border-vermillion, 1 46% 43%))" />
+      <use href="#i-triquetra" stroke="hsl(var(--border-lapis, 213 32% 40%))" stroke-width="1.4" />
+      <use href="#i-triquetra" stroke="hsl(var(--border-gold, 46 65% 38%))" stroke-width="1" transform="scale(0.55)" />
+    </g>
+  </defs>
+
+  <!-- twisted cord baseline, two offset strands for a woven-rope look -->
+  <path d="M0,24 C15,24 15,16 30,16 C45,16 45,24 60,24 C75,24 75,32 90,32 C105,32 105,24 120,24"
+    fill="none" stroke="hsl(var(--border-gold, 46 65% 38%))" stroke-width="1.2" stroke-linecap="round" />
+  <path d="M0,27 C15,27 15,19 30,19 C45,19 45,27 60,27 C75,27 75,35 90,35 C105,35 105,27 120,27"
+    fill="none" stroke="hsl(var(--border-lapis, 213 32% 40%))" stroke-width="0.9" stroke-linecap="round" opacity="0.7" />
+
+  <use href="#i-medallion" transform="translate(30,24)" />
+  <use href="#i-medallion" transform="translate(90,24)" />
+</svg>

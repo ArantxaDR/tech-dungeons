@@ -1,39 +1,86 @@
-import { Character, Ability, Skill, Condition } from '@/types/character';
+import { Character, Ability, AbilityName, Skill, Condition, calculateModifier } from '@/types/character';
 
 export type RoleName = 'frontend' | 'backend' | 'full-stack' | 'ux-ui' | 'qa' | 'devops' | 'data-ml' | 'product' | 'eng-manager';
 export type ClassName = 'Pícara' | 'Bárbara' | 'Exploradora' | 'Hechicera' | 'Monja' | 'Clériga' | 'Maga' | 'Barda' | 'Paladina';
 export type RaceName = 'Elfa' | 'Enana' | 'Mediana' | 'Semielfa' | 'Humana';
 
-export const ROLES: { value: RoleName; label: string }[] = [
-  { value: 'frontend', label: 'Frontend Developer' },
-  { value: 'backend', label: 'Backend Developer' },
-  { value: 'full-stack', label: 'Full-Stack Developer' },
-  { value: 'ux-ui', label: 'UX/UI Designer' },
-  { value: 'qa', label: 'QA / Test Engineer' },
-  { value: 'devops', label: 'DevOps / SRE' },
-  { value: 'data-ml', label: 'Data / ML Engineer' },
-  { value: 'product', label: 'Product Manager' },
-  { value: 'eng-manager', label: 'Engineering Manager' },
+// The 18 canonical D&D 5e skills, for manually adding to a character in the
+// creator (presets only ever list a hand-picked subset of these).
+export const ALL_SKILLS: { name: string; ability: AbilityName }[] = [
+  { name: 'Acrobacias', ability: 'DES' },
+  { name: 'Trato con Animales', ability: 'SAB' },
+  { name: 'Arcana', ability: 'INT' },
+  { name: 'Atletismo', ability: 'FUE' },
+  { name: 'Engaño', ability: 'CAR' },
+  { name: 'Historia', ability: 'INT' },
+  { name: 'Perspicacia', ability: 'SAB' },
+  { name: 'Intimidación', ability: 'CAR' },
+  { name: 'Investigación', ability: 'INT' },
+  { name: 'Medicina', ability: 'SAB' },
+  { name: 'Naturaleza', ability: 'INT' },
+  { name: 'Percepción', ability: 'SAB' },
+  { name: 'Performance', ability: 'CAR' },
+  { name: 'Persuasión', ability: 'CAR' },
+  { name: 'Religión', ability: 'INT' },
+  { name: 'Juego de Manos', ability: 'DES' },
+  { name: 'Sigilo', ability: 'DES' },
+  { name: 'Supervivencia', ability: 'SAB' },
 ];
 
-export const CLASSES: { value: ClassName; label: string; suggestedRole: RoleName }[] = [
-  { value: 'Pícara', label: 'Pícara (Rogue)', suggestedRole: 'frontend' },
-  { value: 'Bárbara', label: 'Bárbara (Barbarian)', suggestedRole: 'backend' },
-  { value: 'Exploradora', label: 'Exploradora (Ranger)', suggestedRole: 'full-stack' },
-  { value: 'Hechicera', label: 'Hechicera (Sorcerer)', suggestedRole: 'ux-ui' },
-  { value: 'Monja', label: 'Monja (Monk)', suggestedRole: 'qa' },
-  { value: 'Clériga', label: 'Clériga (Cleric)', suggestedRole: 'devops' },
-  { value: 'Maga', label: 'Maga (Wizard)', suggestedRole: 'data-ml' },
-  { value: 'Barda', label: 'Barda (Bard)', suggestedRole: 'product' },
-  { value: 'Paladina', label: 'Paladina (Paladin)', suggestedRole: 'eng-manager' },
+// focusSkills reflect the skills each role's canonical preset already
+// prioritizes (see getDefault* in types/character.ts) — not standalone
+// ability bonuses, since Role in this app is a flavor label layered on top
+// of a Class, not an independent stat-granting axis.
+export const ROLES: { value: RoleName; label: string; focusSkills: string[] }[] = [
+  { value: 'frontend', label: 'Frontend Developer', focusSkills: ['Percepción', 'Destreza manual', 'Sigilo'] },
+  { value: 'backend', label: 'Backend Developer', focusSkills: ['Atletismo', 'Investigación', 'Supervivencia'] },
+  { value: 'full-stack', label: 'Full-Stack Developer', focusSkills: ['Supervivencia', 'Investigación', 'Naturaleza'] },
+  { value: 'ux-ui', label: 'UX/UI Designer', focusSkills: ['Performance', 'Percepción', 'Persuasión'] },
+  { value: 'qa', label: 'QA / Test Engineer', focusSkills: ['Percepción', 'Perspicacia', 'Acrobacias'] },
+  { value: 'devops', label: 'DevOps / SRE', focusSkills: ['Medicina', 'Perspicacia', 'Historia'] },
+  { value: 'data-ml', label: 'Data / ML Engineer', focusSkills: ['Arcana', 'Investigación', 'Historia'] },
+  { value: 'product', label: 'Product Manager', focusSkills: ['Persuasión', 'Performance', 'Perspicacia'] },
+  { value: 'eng-manager', label: 'Engineering Manager', focusSkills: ['Persuasión', 'Perspicacia', 'Atletismo'] },
 ];
 
-export const RACES: { value: RaceName; label: string; speed: number }[] = [
-  { value: 'Elfa', label: 'Elfa', speed: 30 },
-  { value: 'Enana', label: 'Enana', speed: 25 },
-  { value: 'Mediana', label: 'Mediana (Halfling)', speed: 25 },
-  { value: 'Semielfa', label: 'Semielfa', speed: 30 },
-  { value: 'Humana', label: 'Humana', speed: 30 },
+// hitDie, primaryAbility and savingThrows are read directly off each class's
+// canonical preset (getDefault* in types/character.ts) — this table doesn't
+// invent numbers the creator's "Autocompletar Stats" doesn't already use.
+export const CLASSES: {
+  value: ClassName;
+  label: string;
+  suggestedRole: RoleName;
+  hitDie: string;
+  primaryAbility: AbilityName;
+  savingThrows: [AbilityName, AbilityName];
+}[] = [
+  { value: 'Pícara', label: 'Pícara (Rogue)', suggestedRole: 'frontend', hitDie: 'd8', primaryAbility: 'DES', savingThrows: ['DES', 'INT'] },
+  { value: 'Bárbara', label: 'Bárbara (Barbarian)', suggestedRole: 'backend', hitDie: 'd12', primaryAbility: 'FUE', savingThrows: ['FUE', 'CON'] },
+  { value: 'Exploradora', label: 'Exploradora (Ranger)', suggestedRole: 'full-stack', hitDie: 'd10', primaryAbility: 'INT', savingThrows: ['FUE', 'DES'] },
+  { value: 'Hechicera', label: 'Hechicera (Sorcerer)', suggestedRole: 'ux-ui', hitDie: 'd6', primaryAbility: 'CAR', savingThrows: ['CON', 'CAR'] },
+  { value: 'Monja', label: 'Monja (Monk)', suggestedRole: 'qa', hitDie: 'd8', primaryAbility: 'DES', savingThrows: ['FUE', 'DES'] },
+  { value: 'Clériga', label: 'Clériga (Cleric)', suggestedRole: 'devops', hitDie: 'd8', primaryAbility: 'SAB', savingThrows: ['SAB', 'CAR'] },
+  { value: 'Maga', label: 'Maga (Wizard)', suggestedRole: 'data-ml', hitDie: 'd6', primaryAbility: 'INT', savingThrows: ['INT', 'SAB'] },
+  { value: 'Barda', label: 'Barda (Bard)', suggestedRole: 'product', hitDie: 'd8', primaryAbility: 'CAR', savingThrows: ['DES', 'CAR'] },
+  { value: 'Paladina', label: 'Paladina (Paladin)', suggestedRole: 'eng-manager', hitDie: 'd10', primaryAbility: 'CAR', savingThrows: ['SAB', 'CAR'] },
+];
+
+// abilityBonus is new, invented content — the presets don't decompose a
+// race-only bonus separate from the class's hand-tuned scores. trait is a
+// condensed line pulled from each race's racialTraits text already in
+// types/character.ts.
+export const RACES: {
+  value: RaceName;
+  label: string;
+  speed: number;
+  abilityBonus: Partial<Record<AbilityName, number>>;
+  trait: string;
+}[] = [
+  { value: 'Elfa', label: 'Elfa', speed: 30, abilityBonus: { DES: 2 }, trait: 'Visión en la oscuridad 60 pies. Inmune a sueño mágico.' },
+  { value: 'Enana', label: 'Enana', speed: 25, abilityBonus: { CON: 2 }, trait: 'Resistencia a veneno. Visión en la oscuridad 60 pies.' },
+  { value: 'Mediana', label: 'Mediana (Halfling)', speed: 25, abilityBonus: { DES: 2 }, trait: 'Suerte: repite 1s en tiradas de ataque, habilidad o salvación.' },
+  { value: 'Semielfa', label: 'Semielfa', speed: 30, abilityBonus: { CAR: 2, DES: 1 }, trait: 'Inmune a Charm, ventaja contra Sleep. Dos competencias extra.' },
+  { value: 'Humana', label: 'Humana', speed: 30, abilityBonus: { FUE: 1, DES: 1, CON: 1, INT: 1, SAB: 1, CAR: 1 }, trait: 'Versátil: +1 a todas las características.' },
 ];
 
 interface PresetConfig {
@@ -557,3 +604,81 @@ export const getEmptyCharacter = (): Character & { role: string; imageDataUrl?: 
   notes: '',
   imageDataUrl: undefined,
 });
+
+const HIT_DIE_MAX: Record<string, number> = { d6: 6, d8: 8, d10: 10, d12: 12 };
+
+const slugifySkill = (name: string) =>
+  name.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-');
+
+// The manual (CLASSES/RACES/ROLES above) is the single source of truth for
+// crunch: pick any race + class + role and this computes real stats for it,
+// instead of silently falling back to whichever one of the 9 named presets
+// happens to share the chosen class (the old "Autocompletar Stats" bug —
+// it looked up by class only, so the race you picked was ignored).
+// Flavor text (features/traits/proficiencies/equipment) has no formula: it's
+// borrowed from the matching named preset when the race+class pair is one of
+// the 9 canonical ones, and left blank otherwise for the player to fill in.
+export const generateCharacter = (
+  raceValue: RaceName,
+  classValue: ClassName,
+  roleValue?: RoleName
+): Omit<Character, 'name' | 'imageDataUrl'> => {
+  const race = RACES.find(r => r.value === raceValue);
+  const cls = CLASSES.find(c => c.value === classValue);
+  if (!race || !cls) return getEmptyCharacter();
+
+  const scores: Record<AbilityName, number> = { FUE: 10, DES: 10, CON: 10, INT: 10, SAB: 10, CAR: 10 };
+  scores[cls.primaryAbility] += 4;
+  cls.savingThrows.forEach(ability => {
+    if (ability !== cls.primaryAbility) scores[ability] += 2;
+  });
+  (Object.entries(race.abilityBonus) as [AbilityName, number][]).forEach(([ability, bonus]) => {
+    scores[ability] += bonus;
+  });
+
+  const abilities: Ability[] = (Object.keys(scores) as AbilityName[]).map(name => ({
+    name,
+    score: scores[name],
+    modifier: calculateModifier(scores[name]),
+    savingThrowProficient: cls.savingThrows.includes(name),
+  }));
+
+  const role = ROLES.find(r => r.value === roleValue);
+  const skills: Skill[] = (role?.focusSkills ?? []).map(skillName => {
+    const def = ALL_SKILLS.find(s => s.name === skillName);
+    const ability = def?.ability ?? cls.primaryAbility;
+    return {
+      id: slugifySkill(skillName),
+      name: skillName,
+      ability,
+      baseModifier: calculateModifier(scores[ability]),
+      proficient: true,
+      expertise: false,
+    };
+  });
+
+  const exactPreset = findPreset(raceValue, classValue)?.preset;
+
+  return {
+    race: race.label,
+    className: cls.label,
+    level: 1,
+    background: exactPreset?.background ?? '',
+    alignment: exactPreset?.alignment ?? '',
+    xp: 0,
+    hp: HIT_DIE_MAX[cls.hitDie] + calculateModifier(scores.CON),
+    hitDie: cls.hitDie,
+    armorClass: 10 + calculateModifier(scores.DES),
+    initiative: calculateModifier(scores.DES),
+    proficiencyBonus: 2,
+    speed: race.speed,
+    abilities,
+    skills,
+    classFeatures: exactPreset?.classFeatures ?? '',
+    racialTraits: exactPreset?.racialTraits ?? race.trait,
+    proficiencies: exactPreset?.proficiencies ?? '',
+    equipment: exactPreset?.equipment ?? '',
+    conditions: exactPreset?.conditions ?? createDefaultConditions(role?.label ?? cls.label),
+    notes: '',
+  };
+};
