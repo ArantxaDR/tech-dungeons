@@ -46,13 +46,13 @@ No hay base de datos ni API: todo vive en el tipo `Character` (`src/types/charac
 
 ## Lint y tipos
 
-- **ESLint** (`eslint.config.js`), no `oxlint` — ya configurado con `typescript-eslint`, `react-hooks`, `react-refresh`. `npm run lint`.
+- **ESLint** (`eslint.config.js`), no `oxlint` — ya configurado con `typescript-eslint`, `react-hooks`, `react-refresh`. `pnpm lint`.
 - `tsconfig` actual tiene `strict: false`, `noImplicitAny: false`, `strictNullChecks: false` (heredado del scaffold Lovable). El flujo SDD+TDD no exige subir esto a `strict: true` de golpe: código nuevo debe evitar `any` explícito y `as unknown as` por convención, pero no hay gate de compilador que lo fuerce hoy. Si se decide endurecer `tsconfig`, es una spec/decisión aparte (afecta a todo el código existente).
-- No hay script `typecheck` en `package.json`; usar `npx tsc --noEmit` si hace falta comprobar tipos fuera del build.
+- No hay script `typecheck` en `package.json`; usar `pnpm exec tsc --noEmit` si hace falta comprobar tipos fuera del build.
 
 ## Despliegue
 
-Gestionado por Lovable (lovable.dev): los cambios en este repo se sincronizan con el proyecto Lovable y viceversa. Sin backend, sin variables de entorno de servidor. `npm run build` genera `dist/` si se necesita build local o preview fuera de Lovable.
+Gestionado por Lovable (lovable.dev): los cambios en este repo se sincronizan con el proyecto Lovable y viceversa. Sin backend, sin variables de entorno de servidor. `pnpm build` genera `dist/` si se necesita build local o preview fuera de Lovable.
 
 ## Riesgos
 

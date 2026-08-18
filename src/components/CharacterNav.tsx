@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { FiHome as Home } from 'react-icons/fi';
 
 const characters = [
   { path: '/frontella', name: 'Frontella', icon: '🧝‍♀️', subtitle: 'Frontend' },

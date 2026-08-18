@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { FiArrowLeft as ArrowLeft } from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import {
   Table,

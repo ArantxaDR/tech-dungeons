@@ -1,5 +1,5 @@
 import { Character, Ability, calculateModifier } from '@/types/character';
-import { Star } from 'lucide-react';
+import { FiStar as Star } from 'react-icons/fi';
 
 interface AbilitiesSectionProps {
   character: Character;

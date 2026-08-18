@@ -10,11 +10,11 @@ Se implementa **un test (o grupo cohesivo de un mismo AC) a la vez**. Nunca todo
 ## Comandos base
 
 ```bash
-npm run test              # suite completa (vitest run)
-npm run test:watch        # watch durante el ciclo
-npx vitest run <archivo>  # un archivo concreto
-npx tsc --noEmit          # no hay script "typecheck" en package.json
-npm run lint               # eslint . (strict:false en tsconfig — lint es el gate real, no tsc)
+pnpm test                    # suite completa (vitest run)
+pnpm test:watch              # watch durante el ciclo
+pnpm exec vitest run <archivo>  # un archivo concreto
+pnpm exec tsc --noEmit       # no hay script "typecheck" en package.json
+pnpm lint                     # eslint . (strict:false en tsconfig — lint es el gate real, no tsc)
 ```
 
 ## Fase 1: ROJO
@@ -33,7 +33,7 @@ npm run lint               # eslint . (strict:false en tsconfig — lint es el g
    - Sin manejar errores que ningún EC exige (aún).
    - Sin abstracciones "por si acaso".
 2. Ejecuta el test objetivo → verde. Ejecuta la suite completa → sin regresiones.
-3. `npx tsc --noEmit` limpio. Prohibido `any`, `@ts-ignore`, `as unknown as` para forzar el verde (aunque `strict: false` no lo bloquee).
+3. `pnpm exec tsc --noEmit` limpio. Prohibido `any`, `@ts-ignore`, `as unknown as` para forzar el verde (aunque `strict: false` no lo bloquee).
 
 ## Fase 3: REFACTOR
 

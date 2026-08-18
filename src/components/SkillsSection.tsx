@@ -1,6 +1,7 @@
 import { Character, Skill, calculateSkillTotal } from '@/types/character';
 import { ALL_SKILLS } from '@/data/characterPresets';
-import { Star, Sparkles, X } from 'lucide-react';
+import { FiStar as Star, FiX as X } from 'react-icons/fi';
+import { HiSparkles as Sparkles } from 'react-icons/hi2';
 import {
   Select,
   SelectContent,

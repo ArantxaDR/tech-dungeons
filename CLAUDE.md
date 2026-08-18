@@ -8,16 +8,20 @@ D&D-style character sheet app (Spanish UI) that reimagines tech roles (frontend,
 
 ## Commands
 
+Package manager is **pnpm** (`packageManager` field in `package.json`) — not npm/yarn.
+
 ```sh
-npm run dev          # start dev server (vite, port 8080)
-npm run build         # production build
-npm run build:dev     # dev-mode build (keeps lovable-tagger)
-npm run lint           # eslint .
-npm test               # vitest run (single run)
-npm run test:watch     # vitest watch mode
+pnpm dev          # start dev server (vite, port 8080)
+pnpm build         # production build
+pnpm build:dev     # dev-mode build (keeps lovable-tagger)
+pnpm lint           # eslint .
+pnpm test           # vitest run (single run)
+pnpm test:watch     # vitest watch mode
 ```
 
-Run a single test file: `npx vitest run src/test/example.test.ts`
+Run a single test file: `pnpm exec vitest run src/test/example.test.ts`
+
+Icons: `react-icons` (not lucide-react — removed). Import with an alias matching the original lucide name to keep call sites unchanged, e.g. `import { FiTrash2 as Trash2 } from 'react-icons/fi'`. Prefer `react-icons/fi` (Feather, closest visual match to the old lucide set); fall back to another subset (`gi`, `bs`, `tb`, `hi2`, ...) only when Feather lacks the icon — verify the export name exists before using it (TS types don't always catch a wrong name; `pnpm build` will).
 
 No `typecheck` script exists; use `npx tsc --noEmit` if needed. `tsconfig` has `strict: false` / `noImplicitAny: false` / `strictNullChecks: false` (inherited from the Lovable scaffold) — ESLint is the real gate, not the compiler. New code should still avoid explicit `any`, `@ts-ignore`, `as unknown as` by convention.
 

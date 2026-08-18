@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, Scroll, Sparkles, PlusCircle, Trash2, BookOpen } from 'lucide-react';
+import { FiUsers as Users, FiPlusCircle as PlusCircle, FiTrash2 as Trash2, FiBookOpen as BookOpen } from 'react-icons/fi';
+import { HiSparkles as Sparkles } from 'react-icons/hi2';
+import { GiScrollUnfurled as Scroll } from 'react-icons/gi';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { BorderDivider } from '@/components/BorderDivider';

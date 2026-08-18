@@ -18,7 +18,8 @@ import {
   RaceName
 } from '@/data/characterPresets';
 import { DraftCharacter } from '@/data/customCharacters';
-import { Upload, Wand2, Save, RotateCcw, X } from 'lucide-react';
+import { FiUpload as Upload, FiSave as Save, FiRotateCcw as RotateCcw, FiX as X } from 'react-icons/fi';
+import { GiFairyWand as Wand2 } from 'react-icons/gi';
 
 const selectTriggerClass = 'rounded-none';
 

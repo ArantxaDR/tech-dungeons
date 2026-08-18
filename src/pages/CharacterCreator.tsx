@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, BookOpen } from 'lucide-react';
+import { FiArrowLeft as ArrowLeft, FiBookOpen as BookOpen } from 'react-icons/fi';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { CharacterForm } from '@/components/CharacterForm';
