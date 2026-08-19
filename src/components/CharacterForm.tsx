@@ -18,7 +18,7 @@ import {
   RaceName
 } from '@/data/characterPresets';
 import { DraftCharacter } from '@/data/customCharacters';
-import { FiUpload as Upload, FiSave as Save, FiRotateCcw as RotateCcw, FiX as X } from 'react-icons/fi';
+import { GiSunrise  as Upload, GiSave as Save, GiCycle  as RotateCcw, GiCrossedBones  as X , GiWyvern as Character} from 'react-icons/gi';
 import { GiFairyWand as Wand2 } from 'react-icons/gi';
 
 const selectTriggerClass = 'rounded-none';
@@ -122,7 +122,7 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
 
   return (
     <div className="rpg-card">
-      <h2 className="section-title">🧙 Crear Personaje</h2>
+      <h2 className="section-title">Crear Personaje</h2>
 
       <div className="space-y-6">
         {/* Name */}

@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FiUsers as Users, FiPlusCircle as PlusCircle, FiTrash2 as Trash2, FiBookOpen as BookOpen } from 'react-icons/fi';
-import { HiSparkles as Sparkles } from 'react-icons/hi2';
-import { GiScrollUnfurled as Scroll } from 'react-icons/gi';
+import { GiCapeArmor as Users, GiAncientSword as PlusCircle, GiTrashCan as Trash2, GiBookCover as BookOpen, GiScrollUnfurled as Scroll, GiDiceTwentyFacesOne as Sparkles, GiSparkles, GiPerson, GiBattleAxe, GiHeavyArrow, GiMagnifyingGlass, GiSmartphone } from 'react-icons/gi';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { BorderDivider } from '@/components/BorderDivider';
@@ -12,7 +10,7 @@ import { ROLES } from '@/data/characterPresets';
 import { PageMargins } from '@/components/PageMargins';
 import arcasilKnightImg from '@/assets/arcasil-knight.webp';
 import loversImg from '@/assets/lovers.webp';
-import wolfImg from '@/assets/wolf.webp';
+import dragonImg from '@/assets/dragon.webp';
 import unicornImg from '@/assets/unicorn.webp';
 import demonImg from '@/assets/demon.webp';
 
@@ -25,10 +23,10 @@ import bugariaAvatar from '@/assets/bugaria-avatar.png';
 import appliaAvatar from '@/assets/applia-avatar.png';
 
 const characters = [
-  { 
-    path: '/frontella', 
-    name: 'Frontella Brillopíxel', 
-    icon: '🧝‍♀️',
+  {
+    path: '/frontella',
+    name: 'Frontella Brillopíxel',
+    icon: <GiPerson className="fill-primary" />,
     avatar: frontellaAvatar,
     role: 'Frontend Developer',
     class: 'Pícara (Rogue)',
@@ -36,10 +34,10 @@ const characters = [
     accentColor: 'from-emerald-500/20 to-teal-500/20',
     borderColor: 'hover:border-emerald-500'
   },
-  { 
-    path: '/bitgrun', 
-    name: 'Bitgrun MartilloAPI', 
-    icon: '⛏️',
+  {
+    path: '/bitgrun',
+    name: 'Bitgrun MartilloAPI',
+    icon: <GiBattleAxe className="fill-secondary"/>,
     avatar: bitgrunAvatar,
     role: 'Backend Developer',
     class: 'Bárbara',
@@ -47,10 +45,10 @@ const characters = [
     accentColor: 'from-orange-500/20 to-red-500/20',
     borderColor: 'hover:border-orange-500'
   },
-  { 
-    path: '/pixaria', 
-    name: 'Pixaria Interfacea', 
-    icon: '✨',
+  {
+    path: '/pixaria',
+    name: 'Pixaria Interfacea',
+    icon: <GiSparkles className="fill-accent" />,
     avatar: pixariaAvatar,
     role: 'UX/UI Designer',
     class: 'Hechicera (Sorcerer)',
@@ -58,10 +56,10 @@ const characters = [
     accentColor: 'from-purple-500/20 to-pink-500/20',
     borderColor: 'hover:border-purple-500'
   },
-  { 
-    path: '/stackia', 
-    name: 'Stackia Caminacódigo', 
-    icon: '🏹',
+  {
+    path: '/stackia',
+    name: 'Stackia Caminacódigo',
+    icon: <GiHeavyArrow className="fill-surface" />,
     avatar: stackiaAvatar,
     role: 'Full-Stack Developer',
     class: 'Exploradora (Ranger)',
@@ -69,10 +67,10 @@ const characters = [
     accentColor: 'from-blue-500/20 to-cyan-500/20',
     borderColor: 'hover:border-blue-500'
   },
-  { 
-    path: '/bugaria', 
-    name: 'Bugaria OjoFino', 
-    icon: '🔍',
+  {
+    path: '/bugaria',
+    name: 'Bugaria OjoFino',
+    icon: <GiMagnifyingGlass className="fill-primary" />,
     avatar: bugariaAvatar,
     role: 'QA / Test Engineer',
     class: 'Monja (Monk)',
@@ -80,10 +78,10 @@ const characters = [
     accentColor: 'from-amber-500/20 to-yellow-500/20',
     borderColor: 'hover:border-amber-500'
   },
-  { 
-    path: '/applia', 
-    name: 'Applia Pantallatáctil', 
-    icon: '📱',
+  {
+    path: '/applia',
+    name: 'Applia Pantallatáctil',
+    icon: <GiSmartphone className="fill-secondary" />,
     avatar: appliaAvatar,
     role: 'Mobile Developer',
     class: 'Exploradora (Ranger)',
@@ -115,29 +113,29 @@ const Index = () => {
               RPG Character Sheets
             </span>
           </div>
-          
+
           <div className="flex items-center justify-center gap-4 md:gap-6 mb-6">
             <img
-              src={wolfImg}
+              src={dragonImg}
               alt=""
               aria-hidden="true"
-              className="hidden sm:block w-14 h-14 md:w-20 md:h-20 flex-shrink-0 rounded-lg object-cover border-2 border-primary/40"
+              className="hidden sm:block w-14 h-14 md:w-32 md:h-20 flex-shrink-0 rounded-lg object-cover border-2 border-primary/40"
             />
             <h1 className="text-5xl md:text-7xl font-bold text-primary tracking-tight font-display text-glow-primary">
-              Tech & Dungeons
+              Dungeons & Tech
             </h1>
             <img
               src={unicornImg}
               alt=""
               aria-hidden="true"
-              className="hidden sm:block w-14 h-14 md:w-20 md:h-20 flex-shrink-0 rounded-lg object-cover border-2 border-primary/40"
+              className="hidden sm:block w-14 h-14 md:w-28 md:h-20 flex-shrink-0 rounded-lg object-cover border-2 border-primary/40"
             />
           </div>
-          
+
           <p className="text-xl md:text-2xl text-foreground/80 mb-8 max-w-2xl mx-auto leading-relaxed">
             Hojas de personaje épicas para el <span className="text-secondary font-bold">equipo tech</span> más legendario del reino digital
           </p>
-          
+
           <div className="flex justify-center gap-6 flex-wrap mb-10">
             <div className="flex items-center gap-2 px-4 py-2 bg-card/50 border border-muted rounded-lg">
               <Users className="w-5 h-5 text-primary" />
@@ -148,7 +146,7 @@ const Index = () => {
               <span className="text-sm font-medium">Guardado Local</span>
             </div>
             <div className="flex items-center gap-2 px-4 py-2 bg-card/50 border border-muted rounded-lg">
-              <Sparkles className="w-5 h-5 text-accent" />
+              <Sparkles className="w-5 h-5 text-primary" />
               <span className="text-sm font-medium">100% Editable</span>
             </div>
           </div>
@@ -188,7 +186,7 @@ const Index = () => {
             Cada heroína tiene habilidades únicas adaptadas a su rol en el equipo tech
           </p>
         </div>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {characters.map((char) => (
             <Link
@@ -198,14 +196,14 @@ const Index = () => {
             >
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${char.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              
+
               <div className="relative p-6">
                 {/* Avatar */}
                 <div className="flex justify-center mb-4">
                   <div className="relative">
                     <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/50 group-hover:border-primary transition-colors duration-300 shadow-lg group-hover:shadow-primary/30">
-                      <img 
-                        src={char.avatar} 
+                      <img
+                        src={char.avatar}
                         alt={char.name}
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                       />
@@ -230,7 +228,7 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     {char.description}
                   </p>
-                  
+
                   {/* CTA */}
                   <div className="mt-6 flex items-center justify-center gap-2 text-primary font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     <span>Ver ficha completa</span>

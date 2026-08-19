@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { FiArrowLeft as ArrowLeft, FiBookOpen as BookOpen } from 'react-icons/fi';
+import { GiArrowCursor as ArrowLeft, GiBookCover as BookOpen } from 'react-icons/gi';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { CharacterForm } from '@/components/CharacterForm';

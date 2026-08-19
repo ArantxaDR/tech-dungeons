@@ -1,4 +1,5 @@
 import { Character, Condition } from '@/types/character';
+import { GiBleedingHeart, GiInspiration, GiPoisonBottle, GiTiredEye } from 'react-icons/gi';
 
 interface ConditionsSectionProps {
   character: Character;
@@ -6,11 +7,11 @@ interface ConditionsSectionProps {
   readOnly?: boolean;
 }
 
-const CONDITION_ICONS: Record<string, string> = {
-  INSPIRADA: '✨',
-  DESMORALIZADA: '😔',
-  AGOTADA: '💤',
-  ENVENENADA: '☠️',
+const CONDITION_ICONS: Record<string, React.ReactNode> = {
+  INSPIRADA: <GiInspiration />,
+  DESMORALIZADA: <GiBleedingHeart />,
+  AGOTADA: <GiTiredEye />,
+  ENVENENADA: <GiPoisonBottle />,
 };
 
 const CONDITION_COLORS: Record<string, string> = {
@@ -34,7 +35,7 @@ export const ConditionsSection = ({ character, setCharacter, readOnly }: Conditi
 
   return (
     <div className="rpg-card">
-      <h2 className="section-title">🎭 Condiciones</h2>
+      <h2 className="section-title">Condiciones</h2>
       
       <div className="space-y-3">
         {character.conditions.map((condition, index) => (

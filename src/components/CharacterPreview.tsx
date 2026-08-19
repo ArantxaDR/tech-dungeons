@@ -7,6 +7,7 @@ import { Character } from '@/types/character';
 import { DraftCharacter } from '@/data/customCharacters';
 import { ROLES } from '@/data/characterPresets';
 import demonImg from '@/assets/demon.webp';
+import { GiAxeSword, GiBandana, GiDwarfFace, GiWizardStaff } from 'react-icons/gi';
 
 interface CharacterPreviewProps {
   character: DraftCharacter;
@@ -15,11 +16,11 @@ interface CharacterPreviewProps {
 
 type DetailField = 'classFeatures' | 'racialTraits' | 'proficiencies' | 'equipment';
 
-const DETAIL_BLOCKS: Array<{ field: DetailField; icon: string; title: string }> = [
-  { field: 'classFeatures', icon: '🎭', title: 'Rasgos de Clase' },
-  { field: 'racialTraits', icon: '🧝', title: 'Rasgos Raciales' },
-  { field: 'proficiencies', icon: '📚', title: 'Competencias' },
-  { field: 'equipment', icon: '🎒', title: 'Equipo' },
+const DETAIL_BLOCKS: Array<{ field: DetailField; icon: React.ReactNode; title: string }> = [
+  { field: 'classFeatures', icon: <GiBandana />, title: 'Rasgos de Clase' },
+  { field: 'racialTraits', icon: <GiDwarfFace  />, title: 'Rasgos Raciales' },
+  { field: 'proficiencies', icon: <GiWizardStaff  />, title: 'Competencias' },
+  { field: 'equipment', icon: <GiAxeSword  />, title: 'Equipo' },
 ];
 
 export const CharacterPreview = ({ character, setCharacter }: CharacterPreviewProps) => {
@@ -33,7 +34,7 @@ export const CharacterPreview = ({ character, setCharacter }: CharacterPreviewPr
     <div className="space-y-6">
       {/* Identity + editable vitals */}
       <div className="rpg-card">
-        <h2 className="section-title">👁️ Vista Previa</h2>
+        <h2 className="section-title">Vista Previa</h2>
 
         <div className="flex gap-4 items-start">
           {character.imageDataUrl ? (
@@ -114,7 +115,7 @@ export const CharacterPreview = ({ character, setCharacter }: CharacterPreviewPr
           by default so the auto-filled preview doesn't scroll on forever. */}
       {DETAIL_BLOCKS.some(block => character[block.field]) && (
         <div className="rpg-card">
-          <h2 className="section-title">📜 Detalles</h2>
+          <h2 className="section-title">Detalles</h2>
           <Accordion type="multiple">
             {DETAIL_BLOCKS.filter(block => character[block.field]).map(block => (
               <AccordionItem key={block.field} value={block.field}>

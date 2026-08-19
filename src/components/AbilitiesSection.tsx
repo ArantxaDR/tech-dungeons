@@ -1,5 +1,5 @@
 import { Character, Ability, calculateModifier } from '@/types/character';
-import { FiStar as Star } from 'react-icons/fi';
+import { GiRoundStar as Star } from 'react-icons/gi';
 
 interface AbilitiesSectionProps {
   character: Character;
@@ -55,7 +55,7 @@ export const AbilitiesSection = ({ character, setCharacter, readOnly }: Abilitie
 
   return (
     <div className="rpg-card">
-      <h2 className="section-title">⚔️ Atributos</h2>
+      <h2 className="section-title">Atributos</h2>
       
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {character.abilities.map((ability, index) => (

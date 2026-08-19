@@ -1,7 +1,6 @@
 import { Character, Skill, calculateSkillTotal } from '@/types/character';
 import { ALL_SKILLS } from '@/data/characterPresets';
-import { FiStar as Star, FiX as X } from 'react-icons/fi';
-import { HiSparkles as Sparkles } from 'react-icons/hi2';
+import { GiSparkles as Sparkles, GiRoundStar as Star, GiCrossedBones as X} from 'react-icons/gi';
 import {
   Select,
   SelectContent,
@@ -9,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
 
 interface SkillsSectionProps {
   character: Character;
@@ -158,7 +158,7 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
 
   return (
     <div className="rpg-card">
-      <h2 className="section-title">🎯 Habilidades</h2>
+      <h2 className="section-title">Habilidades</h2>
 
       <div className={allowManualSkills ? undefined : 'grid sm:grid-cols-2 sm:gap-x-6'}>
         {columns.map((rows, i) => (
@@ -183,8 +183,8 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
         </div>
       )}
 
-      <p className="text-xs text-muted-foreground mt-4 text-center">
-        ⭐ = Competencia (+{character.proficiencyBonus}) | ✨ = Expertise (+{character.proficiencyBonus * 2})
+      <p className="flex text-md text-muted-foreground mt-4 justify-center items-center">
+        <Star /> = Competencia (+{character.proficiencyBonus}) |  <Sparkles className='ml-1'/> = Expertise (+{character.proficiencyBonus * 2})
       </p>
     </div>
   );
