@@ -1,5 +1,6 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
-import { Character, getDefaultFrontella } from '@/types/character';
+import { Character } from '@/types/character';
+import { getDefaultFrontella } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import frontellaAvatar from '@/assets/avatars/front.webp';
 

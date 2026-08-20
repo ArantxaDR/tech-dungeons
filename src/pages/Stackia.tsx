@@ -1,5 +1,6 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
-import { Character, getDefaultStackia } from '@/types/character';
+import { Character } from '@/types/character';
+import { getDefaultStackia } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import stackiaAvatar from '@/assets/avatars/fullstack.webp';
 

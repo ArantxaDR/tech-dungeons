@@ -1,5 +1,6 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
-import { Character, getDefaultBitgrun } from '@/types/character';
+import { Character } from '@/types/character';
+import { getDefaultBitgrun } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import bitgrunAvatar from '@/assets/avatars/back.webp';
 

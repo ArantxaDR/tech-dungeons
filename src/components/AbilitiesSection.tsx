@@ -70,7 +70,7 @@ export const AbilitiesSection = ({ character, setCharacter, readOnly }: Abilitie
               aria-pressed={ability.savingThrowProficient}
             >
               <Star
-                className={`proficiency-star ${ability.savingThrowProficient ? 'proficiency-star-active fill-current' : 'proficiency-star-inactive'}`}
+                className={`proficiency-star ${ability.savingThrowProficient ? 'proficiency-star-active fill-accent' : 'proficiency-star-inactive'}`}
               />
             </button>
 

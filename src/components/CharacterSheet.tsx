@@ -1,4 +1,8 @@
-import { Character } from '@/types/character';
+import type { Dispatch, SetStateAction } from 'react';
+import type { IconType } from 'react-icons';
+
+import type { Character, CharacterFeature } from '@/types/character';
+
 import { HeaderSection } from './HeaderSection';
 import { AbilitiesSection } from './AbilitiesSection';
 import { SkillsSection } from './SkillsSection';
@@ -7,103 +11,238 @@ import { TextBlock } from './TextBlock';
 import { CharacterNav } from './CharacterNav';
 import { BorderDivider } from './BorderDivider';
 import { PageMargins } from './PageMargins';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
-type DetailField = 'classFeatures' | 'racialTraits' | 'proficiencies' | 'equipment';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
 
-const DETAIL_BLOCKS: Array<{ field: DetailField; icon: string; title: string; placeholder: string }> = [
-  { field: 'classFeatures', icon: '🎭', title: 'Rasgos de Clase', placeholder: 'Escribe los rasgos de clase aquí...' },
-  { field: 'racialTraits', icon: '🧝', title: 'Rasgos Raciales', placeholder: 'Escribe los rasgos raciales aquí...' },
-  { field: 'proficiencies', icon: '📚', title: 'Competencias', placeholder: 'Armas, armaduras, herramientas, idiomas...' },
-  { field: 'equipment', icon: '🎒', title: 'Equipo', placeholder: 'Lista tu equipo aquí...' },
+import {
+  GiAxeSword,
+  GiBandana,
+  GiDwarfFace,
+  GiSparkles,
+  GiWizardStaff,
+} from 'react-icons/gi';
+
+type DetailField =
+  | 'classFeatures'
+  | 'racialTraits'
+  | 'proficiencies'
+  | 'equipment';
+
+interface DetailBlock {
+  field: DetailField;
+  icon: IconType;
+  title: string;
+  placeholder: string;
+}
+
+const DETAIL_BLOCKS: DetailBlock[] = [
+  {
+    field: 'classFeatures',
+    icon: GiBandana,
+    title: 'Rasgos de Clase',
+    placeholder: 'Escribe los rasgos de clase aquí...',
+  },
+  {
+    field: 'racialTraits',
+    icon: GiDwarfFace,
+    title: 'Rasgos Raciales',
+    placeholder: 'Escribe los rasgos raciales aquí...',
+  },
+  {
+    field: 'proficiencies',
+    icon: GiWizardStaff,
+    title: 'Competencias',
+    placeholder: 'Armas, armaduras, herramientas, idiomas...',
+  },
+  {
+    field: 'equipment',
+    icon: GiAxeSword,
+    title: 'Equipo',
+    placeholder: 'Lista tu equipo aquí...',
+  },
 ];
 
 interface CharacterSheetProps {
   character: Character;
-  setCharacter: React.Dispatch<React.SetStateAction<Character>>;
+  setCharacter: Dispatch<SetStateAction<Character>>;
   avatarSrc?: string;
 }
 
-export const CharacterSheet = ({ character, setCharacter, avatarSrc }: CharacterSheetProps) => {
-  const updateTextField = (field: keyof Character) => (value: string) => {
-    setCharacter(prev => ({ ...prev, [field]: value }));
+const hasDetailContent = (
+  value: CharacterFeature[] | string | undefined
+): boolean => {
+  if (Array.isArray(value)) {
+    return value.length > 0;
+  }
+
+  return Boolean(value?.trim());
+};
+
+const FeatureList = ({ features }: { features: CharacterFeature[] }) => {
+  return (
+    <div className="space-y-4">
+      {features.map((feature) => {
+        const FeatureIcon = feature.icon;
+
+        return (
+          <article
+            key={feature.id}
+            className="flex gap-3 rounded-lg border border-border bg-muted p-4"
+          >
+            <FeatureIcon
+              aria-hidden="true"
+              className="mt-0.5 size-5 shrink-0 fill-primary text-primary"
+            />
+
+            <div>
+              <h3 className="font-bold text-foreground">{feature.title}</h3>
+
+              <p className="mt-1 whitespace-pre-wrap text-sm text-muted-foreground">
+                {feature.description}
+              </p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+};
+
+export const CharacterSheet = ({
+  character,
+  setCharacter,
+  avatarSrc,
+}: CharacterSheetProps) => {
+  const updateNotes = (value: string) => {
+    setCharacter((previousCharacter) => ({
+      ...previousCharacter,
+      notes: value,
+    }));
   };
 
-  // Determine quest subtitle based on character class
-  const questSubtitle = character.className.toLowerCase().includes('bárbar') 
-    ? 'Backend Developer Quest' 
+  const questSubtitle = character.className.toLowerCase().includes('bárbar')
+    ? 'Backend Developer Quest'
     : 'Frontend Developer Quest';
+
+  const visibleDetails = DETAIL_BLOCKS.filter((block) =>
+    hasDetailContent(character[block.field])
+  );
 
   return (
     <PageMargins>
-      <div className="max-w-6xl w-full mx-auto p-2 sm:p-4 space-y-4 sm:space-y-6 overflow-x-hidden">
-        {/* Character Navigation */}
+      <div className="mx-auto w-full max-w-6xl space-y-4 overflow-x-hidden p-2 sm:space-y-6 sm:p-4">
         <CharacterNav />
 
-        {/* Title */}
-        <header className="text-center py-4">
-          <h1 className="font-display text-xl md:text-2xl text-primary text-glow-primary mb-2">
+        <header className="py-4 text-center">
+          <h1 className="mb-2 font-display text-xl text-primary text-glow-primary md:text-2xl">
             HOJA DE PERSONAJE
           </h1>
-          <p className="text-secondary">
-            {questSubtitle}
-          </p>
+
+          <p className="text-secondary">{questSubtitle}</p>
         </header>
 
         <BorderDivider variant="interlace" className="mb-2" />
 
-        {/* Header Section */}
-        <HeaderSection character={character} setCharacter={setCharacter} avatarSrc={avatarSrc} readOnly />
+        <HeaderSection
+          character={character}
+          setCharacter={setCharacter}
+          avatarSrc={avatarSrc}
+          readOnly
+        />
 
-        {/* Main Grid */}
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Left Column */}
+        <div className="grid gap-6 lg:grid-cols-2">
           <div className="space-y-6">
-            <AbilitiesSection character={character} setCharacter={setCharacter} readOnly />
-            <SkillsSection character={character} setCharacter={setCharacter} readOnly />
+            <AbilitiesSection
+              character={character}
+              setCharacter={setCharacter}
+              readOnly
+            />
+
+            <SkillsSection
+              character={character}
+              setCharacter={setCharacter}
+              readOnly
+            />
           </div>
 
-          {/* Right Column */}
           <div className="space-y-6">
-            <ConditionsSection character={character} setCharacter={setCharacter} readOnly />
+            <ConditionsSection
+              character={character}
+              setCharacter={setCharacter}
+              readOnly
+            />
 
-            <div className="rpg-card">
-              <h2 className="section-title">📜 Detalles</h2>
-              <Accordion type="multiple" defaultValue={['classFeatures']}>
-                {DETAIL_BLOCKS.map(block => (
-                  <AccordionItem key={block.field} value={block.field}>
-                    <AccordionTrigger>{block.icon} {block.title}</AccordionTrigger>
-                    <AccordionContent>
-                      <textarea
-                        value={character[block.field]}
-                        readOnly
-                        placeholder={block.placeholder}
-                        className="field-textarea"
-                        aria-label={block.title}
-                      />
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+            {visibleDetails.length > 0 && (
+              <div className="rpg-card">
+                <h2 className="section-title">Detalles</h2>
+
+                <Accordion
+                  type="multiple"
+                  defaultValue={['classFeatures']}
+                >
+                  {visibleDetails.map((block) => {
+                    const BlockIcon = block.icon;
+                    const content = character[block.field];
+
+                    return (
+                      <AccordionItem
+                        key={block.field}
+                        value={block.field}
+                      >
+                        <AccordionTrigger>
+                          <span className="flex items-center gap-2">
+                            <BlockIcon
+                              aria-hidden="true"
+                              className="size-5 shrink-0 fill-primary text-primary"
+                            />
+
+                            {block.title}
+                          </span>
+                        </AccordionTrigger>
+
+                        <AccordionContent>
+                          {Array.isArray(content) ? (
+                            <FeatureList features={content} />
+                          ) : (
+                            <div className="whitespace-pre-wrap rounded-lg bg-muted p-4 text-sm text-muted-foreground">
+                              {content || block.placeholder}
+                            </div>
+                          )}
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Notes */}
         <TextBlock
           title="Notas"
-          icon="📝"
           value={character.notes}
-          onChange={updateTextField('notes')}
+          onChange={updateNotes}
           placeholder="Apuntes de sesión, objetivos, ideas..."
           readOnly
         />
 
         <BorderDivider variant="vine" className="mt-2" />
 
-        {/* Footer */}
-        <footer className="text-center py-6 text-muted-foreground text-sm">
-          <p>Hoja de referencia — no editable. Crea tu propio personaje para personalizarla ✨</p>
+        <footer className="flex items-center justify-center gap-2 py-6 text-center text-sm text-muted-foreground">
+          <GiSparkles
+            aria-hidden="true"
+            className="size-4 shrink-0 fill-secondary text-secondary"
+          />
+
+          <p>
+            Hoja de referencia — no editable. Crea tu propio personaje para
+            personalizarla.
+          </p>
         </footer>
       </div>
     </PageMargins>

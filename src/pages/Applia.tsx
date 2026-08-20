@@ -1,5 +1,6 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
-import { Character, getDefaultApplia } from '@/types/character';
+import { Character } from '@/types/character';
+import { getDefaultApplia } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import appliaAvatar from '@/assets/avatars/mobile.webp';
 

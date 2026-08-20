@@ -1,4 +1,7 @@
+import type { IconType } from 'react-icons';
 import { Character, Ability, AbilityName, Skill, Condition, calculateModifier } from '@/types/character';
+import { GiAchievement, GiBrain, GiCrossedSwords, GiCrystalBall, GiDungeonGate, GiFairyWand, GiFlame, GiFootprint, GiHealing, GiMagicLamp, GiMagnifyingGlass, GiMapleLeaf, GiMeditation, GiMoon, GiPoisonBottle, GiSandsOfTime, GiScrollUnfurled, GiShield, GiStoneAxe, GiStrong, GiThreeFriends, GiWalkingBoot, GiSmartphone } from 'react-icons/gi';
+
 
 export type RoleName = 'frontend' | 'backend' | 'full-stack' | 'ux-ui' | 'qa' | 'devops' | 'data-ml' | 'product' | 'eng-manager';
 export type ClassName = 'Pícara' | 'Bárbara' | 'Exploradora' | 'Hechicera' | 'Monja' | 'Clériga' | 'Maga' | 'Barda' | 'Paladina';
@@ -140,26 +143,74 @@ const frontellaPreset: PresetConfig = {
       { name: 'DESMORALIZADA', active: false, description: '−2 en tiradas sociales tras varios rechazos' },
       { name: 'AGOTADA', active: false, description: '−2 en tiradas de concentración (pruebas técnicas)' },
     ],
-    classFeatures: `🎯 EXPERTISE
-Dominio doble en 2 habilidades: Percepción y Destreza manual.
+    classFeatures: [
+      {
+        id: 'expertise',
+        title: 'EXPERTISE',
+        description: 'Dominio doble en 2 habilidades elegidas: Percepción y Destreza manual. El bonus de competencia se duplica.',
+        icon: GiAchievement,
+      },
+      {
+        id: 'sneak-attack',
+        title: 'SNEAK ATTACK (1d6)',
+        description: 'Una vez por turno, puedes infligir +1d6 de daño extra si atacas con ventaja o si un aliado está a 5 pies del objetivo.',
+        icon: GiCrossedSwords,
+      },
+      {
+        id: 'thieves-cant',
+        title: "THIEVES' CANT",
+        description: 'Lenguaje secreto de los pícaros. Puedes comunicarte con otros desarrolladores mediante comentarios en código, commits crípticos y jerga técnica.',
+        icon: GiScrollUnfurled,
+      },
+    ],
+    racialTraits: [
+      {
+        id: 'darkvision',
+        title: 'VISIÓN EN LA OSCURIDAD',
+        description: 'Puedes ver en luz tenue a 60 pies como si fuera luz brillante. Perfecto para sesiones de debugging nocturnas.',
+        icon: GiMoon,
+      },
+      {
+        id: 'keen-senses',
+        title: 'SENTIDOS AGUDOS',
+        description: 'Competencia en Percepción. Detectas bugs antes que nadie.',
+        icon: GiMagnifyingGlass,
+      },
+      {
+        id: 'trance',
+        title: 'TRANCE',
+        description: 'No necesitas dormir. En lugar de eso, meditas profundamente 4 horas, equivalentes a 8 horas de descanso largo. Tiempo extra para side projects.',
+        icon: GiMeditation,
+      },
+    ],
+    proficiencies: `🗡️ ARMAS: Armas sencillas, armas de finesse, ballesta de mano, espada corta, espada larga, arco corto
 
-⚔️ SNEAK ATTACK (1d6)
-+1d6 de daño extra con ventaja o aliado cerca.
+🛡️ ARMADURAS: Armaduras ligeras
 
-🗣️ THIEVES' CANT
-Lenguaje secreto: comentarios en código y jerga técnica.`,
-    racialTraits: `👁️ VISIÓN EN LA OSCURIDAD
-Ver en luz tenue a 60 pies. Perfecto para debugging nocturno.
+🔧 HERRAMIENTAS: 
+- Herramientas de ladrón (DevTools, Figma, Storybook)
+- Kit de depuración (console.log, breakpoints)
 
-👂 SENTIDOS AGUDOS
-Competencia en Percepción. Detecta bugs antes que nadie.
+🌐 IDIOMAS: 
+- Común (Español)
+- Élfico (TypeScript)
+- Jerga técnica (HTML/CSS/JS)
+- Thieves' Cant (Git commits)`,
+    equipment: `📦 EQUIPO INICIAL:
+- Armadura de cuero (AC 11 + DES)
+- 2 Dagas de precisión (finesse)
+- Arco corto + 20 flechas
+- Kit de herramientas de ladrón
+- Pack de explorador
 
-🧝 ASCENDENCIA FEÉRICA
-Inmune a Charm, resistente a sleep. No cae en trampas de scope creep.`,
-    proficiencies: `Frontend: HTML, CSS, JavaScript, TypeScript, React.
-Herramientas: Git, VS Code, Chrome DevTools, Figma.`,
-    equipment: `Portátil con terminal, editor configurado, notas de diseño, café.`,
-    notes: '',
+💻 EQUIPO TECH:
+- Portátil encantado (MacBook Pro)
+- Portfolio mágico desplegado
+- Cuenta de GitHub con contribuciones verdes
+- Perfil de LinkedIn optimizado
+- Headphones de concentración +2
+- Monitor ultrawide de visión ampliada`,
+    notes: ''
   },
 };
 
@@ -194,26 +245,81 @@ const bitgrunPreset: PresetConfig = {
       { name: 'DESMORALIZADA', active: false, description: '−2 cuando las queries no escalan' },
       { name: 'AGOTADA', active: false, description: '−2 tras sesiones largas de debugging' },
     ],
-    classFeatures: `💢 RAGE (2 usos/día)
-Bonus +2 al daño cuerpo a cuerpo, resistencia a daño físico.
+    classFeatures: [
+      {
+        id: 'rage',
+        title: 'RABIA (RAGE)',
+        description: 'Cuando entras en modo resolución de incidentes, ganas ventaja en tiradas de FUE (trabajo duro) and resistencia al daño emocional del legacy. 2 usos por descanso largo.',
+        icon: GiFlame,
+      },
+      {
+        id: 'unarmored-defense',
+        title: 'DEFENSA SIN ARMADURA',
+        description: 'Tu resiliencia personal te da CA = 10 + DES + CON cuando no llevas armadura pesada. La experiencia te ha curtido.',
+        icon: GiShield,
+      },
+      {
+        id: 'furious-attack',
+        title: 'ATAQUE FURIOSO',
+        description: 'Durante la Rabia, puedes hacer un ataque adicional como acción bonus si usas el modificador de FUE.',
+        icon: GiCrossedSwords,
+      },
+    ],
 
-🛡️ UNARMORED DEFENSE
-CA = 10 + DES + CON sin armadura.
+    racialTraits: [
+      {
+        id: 'dwarven-resilience',
+        title: 'RESISTENCIA ENANA',
+        description: 'Tienes ventaja en tiradas de salvación contra veneno y resistencia al daño por veneno. Los entornos tóxicos no te afectan tanto.',
+        icon: GiPoisonBottle,
+      },
+      {
+        id: 'dwarven-toughness',
+        title: 'ROBUSTEZ',
+        description: 'Tu velocidad no se reduce por llevar armadura pesada. Puedes cargar con cualquier peso de responsabilidades.',
+        icon: GiStrong,
+      },
+      {
+        id: 'tool-affinity',
+        title: 'AFINIDAD CON HERRAMIENTAS',
+        description: 'Competencia con herramientas de artesano. Entiendes la estructura interna de cualquier sistema.',
+        icon: GiCrossedSwords,
+      },
+      {
+        id: 'dwarven-speed',
+        title: 'VELOCIDAD 25',
+        description: 'Los enanos se mueven a 25 pies, pero llegan seguros. Prefieren la estabilidad a la velocidad.',
+        icon: GiWalkingBoot,
+      },
+    ],
+    proficiencies: `🗡️ ARMAS: Armas simples, armas marciales, martillos de guerra, hachas
 
-🔥 FURIA DE CÓDIGO
-Cada bug encontrado aumenta la furia.`,
-    racialTraits: `⛏️ RESISTENCIA ENANA
-Ventaja en tiradas contra veneno. Soporta código legacy.
+🛡️ ARMADURAS: Armaduras ligeras, medianas, escudos
 
-🔍 VISIÓN EN LA OSCURIDAD
-60 pies de visión en oscuridad.
+🔧 HERRAMIENTAS: 
+- APIs y bases de datos
+- Scripts de automatización
+- CLIs y terminales
+- Sistemas de monitorización
 
-🪨 DUREZA ENANA
-+1 HP por nivel.`,
-    proficiencies: `Backend: Python, Node.js, SQL, APIs REST/GraphQL.
-Herramientas: Terminal, Docker, bases de datos.`,
-    equipment: `Servidor portátil, martillo de guerra (teclado mecánico), documentación API.`,
-    notes: '',
+🌐 IDIOMAS: 
+- Común (Español)
+- Enano (SQL)
+- Lenguaje de sistemas (Bash/Shell)`,
+    equipment: `📦 EQUIPO INICIAL:
+- Armadura de cuero reforzada (AC 13 + DES)
+- Martillo-servidor (1d10 contundente)
+- 2 Hachas de mano (backup scripts)
+- Pack de explorador de sistemas
+
+💻 EQUIPO TECH:
+- Consola de terminal legendaria
+- Scripts de migración +3
+- Repositorio de servicios backend
+- Documentación de endpoints sagrada
+- Grafana Dashboard de vigilancia
+- PagerDuty de alertas críticas`,
+    notes: ''
   },
 };
 
@@ -248,26 +354,76 @@ const pixariaPreset: PresetConfig = {
       { name: 'DESMORALIZADA', active: false, description: '−2 cuando el diseño se implementa mal' },
       { name: 'AGOTADA', active: false, description: '−2 tras muchas iteraciones sin feedback claro' },
     ],
-    classFeatures: `✨ MAGIA INNATA
-La magia del diseño fluye naturalmente. Carisma como stat de lanzamiento.
+    classFeatures: [
+      {
+        id: 'prototype-magic',
+        title: 'MAGIA DE PROTOTIPO',
+        description: 'Convierte ideas en pantallas rápidamente. Puedes materializar wireframes y mockups con un gesto.',
+        icon: GiFairyWand,
+      },
+      {
+        id: 'usability-spells',
+        title: 'HECHIZOS DE USABILIDAD',
+        description: 'Dominas tests de usuario, entrevistas y sesiones de feedback. Cada hechizo revela verdades sobre la experiencia.',
+        icon: GiBrain,
+      },
+      {
+        id: 'illusion-spells',
+        title: 'HECHIZOS DE ILUSIÓN',
+        description: 'Creas wireframes, mockups y prototipos interactivos que parecen productos reales antes de escribir una línea de código.',
+        icon: GiCrystalBall,
+      },
+    ],
 
-🔮 ORIGEN HECHICERO: Estética Salvaje
-El diseño surge de la intuición, no solo de reglas.
+    racialTraits: [
+      {
+        id: 'half-elf-heritage',
+        title: 'HERENCIA MIXTA (SEMIELFA)',
+        description: 'Versátil y empática. Buen equilibrio entre análisis y trato con personas.',
+        icon: GiThreeFriends,
+      },
+      {
+        id: 'universal-connection',
+        title: 'CONEXIÓN UNIVERSAL',
+        description: 'Facilidad para conectar con perfiles técnicos y no técnicos por igual.',
+        icon: GiMagicLamp,
+      },
+      {
+        id: 'darkvision',
+        title: 'VISIÓN EN LA OSCURIDAD',
+        description: 'Puedes ver en luz tenue a 60 pies. Útil para detectar problemas de contraste y accesibilidad.',
+        icon: GiMoon,
+      },
+      {
+        id: 'extra-language',
+        title: 'IDIOMAS EXTRA',
+        description: 'Conoces un idioma adicional de tu elección.',
+        icon: GiScrollUnfurled,
+      },
+    ],
+    proficiencies: `🎨 HERRAMIENTAS:
+- Figma y herramientas de prototipado
+- Sistemas de diseño y librerías de componentes
+- Herramientas de investigación UX
 
-🎭 METAMAGIA
-Alterar prototipos sobre la marcha.`,
-    racialTraits: `🧝 VISIÓN EN LA OSCURIDAD
-Ver en oscuridad a 60 pies.
+🌐 IDIOMAS: 
+- Común (Español)
+- Élfico (principios de diseño)
+- Jerga UX/UI y términos de producto`,
+    equipment: `📦 EQUIPO INICIAL:
+- Ropa cómoda de trabajo (AC 10 + DES)
+- Portátil encantado
+- Tablet para dibujar bocetos
+- Cuaderno de ideas
 
-💫 ASCENDENCIA FEÉRICA
-Inmune a ser Charmed, ventaja contra Sleep.
-
-🌟 VERSATILIDAD
-+2 competencias adicionales de skills.`,
-    proficiencies: `UX: Research, wireframing, prototipado, testing con usuarios.
-Herramientas: Figma, Sketch, herramientas de testing.`,
-    equipment: `Tablet con stylus, libreta de sketches, paleta de colores, componentes UI.`,
-    notes: '',
+💻 EQUIPO TECH:
+- Biblioteca de componentes
+- Sistema de diseño compartido
+- Plantillas de tests de usuario
+- Colección de patrones de interacción
+- Suscripción a Figma Premium
+- Libros de Nielsen Norman Group`,
+    notes: ''
   },
 };
 
@@ -302,26 +458,82 @@ const stackiaPreset: PresetConfig = {
       { name: 'DESMORALIZADA', active: false, description: '−2 cuando tiene demasiados frentes abiertos' },
       { name: 'AGOTADA', active: false, description: '−2 tras mucho context switching entre frontend y backend' },
     ],
-    classFeatures: `🗺️ EXPLORADORA DEL STACK
-Entiende de base de datos a UI.
+    classFeatures: [
+      {
+        id: 'stack-explorer',
+        title: 'EXPLORADORA DEL STACK',
+        description: 'Entiende desde la base de datos hasta la UI. Puede navegar cualquier capa de la arquitectura.',
+        icon: GiDungeonGate,
+      },
+      {
+        id: 'bug-tracker',
+        title: 'RASTREADORA DE BUGS',
+        description: 'Sigue el rastro de logs y errores a través de todo el sistema. Ventaja en tiradas de debugging.',
+        icon: GiMagnifyingGlass,
+      },
+      {
+        id: 'architecture-maps',
+        title: 'MAPAS DE ARQUITECTURA',
+        description: 'Dibuja cómo encajan todas las piezas. Puede visualizar dependencias y flujos de datos.',
+        icon: GiSandsOfTime,
+      },
+    ],
 
-🔍 RASTREADORA DE BUGS
-Sigue el rastro de logs y errores.
+    racialTraits: [
+      {
+        id: 'halfling-luck',
+        title: 'SUERTE MEDIANA',
+        description: 'Cuando sacas un 1 en un d20, puedes volver a tirar y usar el nuevo resultado. Los deploys fallidos a veces se arreglan solos.',
+        icon: GiMapleLeaf,
+      },
+      {
+        id: 'halfling-agility',
+        title: 'AGILIDAD MEDIANA',
+        description: 'Puedes moverte a través del espacio de criaturas más grandes. Te cuelas por todos los rincones del stack.',
+        icon: GiFootprint,
+      },
+      {
+        id: 'brave',
+        title: 'VALIENTE',
+        description: 'Tienes ventaja en tiradas contra miedo. Los deadlines imposibles no te asustan.',
+        icon: GiThreeFriends,
+      },
+      {
+        id: 'halfling-speed',
+        title: 'VELOCIDAD 25',
+        description: 'Los medianos se mueven a 25 pies. Pequeña pero constante.',
+        icon: GiWalkingBoot,
+      },
+    ],
+    proficiencies: `🌐 DESARROLLO:
+- Frontend y backend web
+- APIs REST y GraphQL
+- Bases de datos SQL y NoSQL
 
-📐 MAPAS DE ARQUITECTURA
-Dibuja cómo encajan las piezas.`,
-    racialTraits: `🍀 SUERTE DE MEDIANA
-Repetir 1s en tiradas de ataque, habilidad o salvación.
+🔧 HERRAMIENTAS: 
+- Terminal y línea de comandos
+- Navegador y DevTools
+- Cliente de base de datos
+- Herramientas de logs y monitorización
 
-🐇 VALIENTE
-Ventaja contra ser asustado.
+🌍 IDIOMAS: 
+- Común (Español)
+- Mediano (JavaScript/TypeScript)
+- Lengua de sistemas (Python/Node)`,
+    equipment: `📦 EQUIPO INICIAL:
+- Armadura de cuero reforzada (AC 12 + DES)
+- Arco corto + 20 flechas
+- 2 Espadas cortas
+- Pack de explorador
 
-⚡ ÁGIL
-Moverse a través del espacio de criaturas más grandes.`,
-    proficiencies: `Frontend y backend web, APIs REST, bases de datos.
-Herramientas: terminal, navegador, cliente de BD, herramientas de logs.`,
-    equipment: `Portátil, mochila llena de cables, diagrama de arquitectura, scripts de deploy.`,
-    notes: '',
+💻 EQUIPO TECH:
+- Portátil todoterreno
+- Mochila llena de cables y adaptadores
+- Diagrama de arquitectura enrollado
+- Scripts de deploy automatizados
+- Acceso a múltiples entornos (dev, staging, prod)
+- Terminal con aliases personalizados`,
+    notes: ''
   },
 };
 
@@ -355,22 +567,187 @@ const bugariaPreset: PresetConfig = {
       { name: 'DESMORALIZADA', active: false, description: '−2 cuando su rol se percibe como "solo hacer clics"' },
       { name: 'AGOTADA', active: false, description: '−2 cuando el testing llega siempre al final del proceso' },
     ],
-    classFeatures: `🧘 DISCIPLINA DEL MONJE
-Rutinas de regresión y checks repetitivos sin perder foco.
+    classFeatures: [
+      {
+        id: 'monk-discipline',
+        title: 'DISCIPLINA DEL MONJE',
+        description: 'Rutinas de regresión y checks repetitivos sin perder foco. La constancia es tu mayor virtud.',
+        icon: GiMeditation,
+      },
+      {
+        id: 'precise-strikes',
+        title: 'GOLPES PRECISOS',
+        description: 'Tests que van directo al punto. Cada caso de prueba es un ataque certero al código.',
+        icon: GiCrossedSwords,
+      },
+      {
+        id: 'unarmored-movement',
+        title: 'MOVIMIENTO SIN ARMADURA',
+        description: 'Se adapta rápido a nuevos entornos, dispositivos y navegadores. CA = 10 + DES + SAB.',
+        icon: GiWalkingBoot,
+      },
+    ],
 
-👊 GOLPES PRECISOS
-Tests que van directo al punto.
+    racialTraits: [
+      {
+        id: 'human-versatility',
+        title: 'VERSATILIDAD HUMANA',
+        description: 'Capaz de aprender lo que haga falta para asegurar calidad. +1 a dos características de tu elección.',
+        icon: GiStrong,
+      },
+      {
+        id: 'extra-skill',
+        title: 'HABILIDAD EXTRA',
+        description: 'Los humanos ganan una habilidad adicional de su elección. Flexibilidad para especializarse.',
+        icon: GiAchievement,
+      },
+      {
+        id: 'human-speed',
+        title: 'VELOCIDAD 30',
+        description: 'Ritmo estándar. Ni demasiado rápido ni demasiado lento.',
+        icon: GiScrollUnfurled,
+      },
+    ],
+    proficiencies: `🔧 HERRAMIENTAS DE TESTING:
+- Testing manual y exploratorio
+- Suites de pruebas automatizadas
+- Herramientas de reporte de bugs
 
-💨 MOVIMIENTO SIN ARMADURA
-Se adapta rápido a nuevos entornos y navegadores.`,
-    racialTraits: `🌍 VERSATILIDAD HUMANA
-+1 a todas las características, una habilidad extra.
+📋 METODOLOGÍAS:
+- Casos de prueba y checklists
+- Testing de regresión
+- Pruebas de aceptación
 
-📚 ADAPTABILIDAD
-Capaz de aprender lo que haga falta para asegurar calidad.`,
-    proficiencies: `Testing manual y automatizado, suites de pruebas, herramientas de reporte.
-Herramientas: Jira, Linear, Selenium, Cypress.`,
-    equipment: `Tablero de pruebas, lista de casos de test, checklist de regresión.`,
+🌐 IDIOMAS: 
+- Común (Español)
+- Lenguaje de testing (Gherkin/BDD)
+- Jerga de calidad (ISTQB)`,
+    equipment: `📦 EQUIPO INICIAL:
+- Túnica de monje (AC 10 + DES + SAB)
+- Bastón de combate (1d6/1d8 contundente)
+- 10 Dardos de precisión
+- Pack de explorador
+
+💻 EQUIPO TECH:
+- Tablero de pruebas Kanban
+- Lista de casos de test exhaustiva
+- Herramientas de reporte (Jira, Linear)
+- Checklist de regresión sagrada
+- Dispositivos de prueba variados
+- Extensiones de accesibilidad`,
+    notes: ''
+  },
+};
+
+// Mobile - Mediana Exploradora
+const appliaPreset: PresetConfig = {
+  race: 'Mediana',
+  className: 'Exploradora',
+  preset: {
+    race: 'Mediana (Halfling)',
+    className: 'Exploradora (Ranger)',
+    level: 1,
+    background: 'Exploradora de ecosistemas móviles',
+    alignment: 'Caótica buena',
+    xp: 0,
+    hp: 12,
+    hitDie: 'd10',
+    armorClass: 14,
+    initiative: 2,
+    proficiencyBonus: 2,
+    speed: 25,
+    abilities: createAbilities(10, 15, 14, 13, 12, 8, { des: true, con: true }),
+    skills: [
+      { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: 1, proficient: true, expertise: false },
+      { id: 'investigacion', name: 'Investigación', ability: 'INT', baseModifier: 1, proficient: true, expertise: false },
+      { id: 'acrobacias', name: 'Acrobacias', ability: 'DES', baseModifier: 2, proficient: true, expertise: false },
+      { id: 'supervivencia', name: 'Supervivencia', ability: 'SAB', baseModifier: 1, proficient: true, expertise: false },
+      { id: 'sigilo', name: 'Sigilo', ability: 'DES', baseModifier: 2, proficient: true, expertise: true },
+      { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+      { id: 'persuasion', name: 'Persuasión', ability: 'CAR', baseModifier: -1, proficient: false, expertise: false },
+      { id: 'perspicacia', name: 'Perspicacia', ability: 'SAB', baseModifier: 1, proficient: false, expertise: false },
+      { id: 'atletismo', name: 'Atletismo', ability: 'FUE', baseModifier: 0, proficient: false, expertise: false },
+      { id: 'naturaleza', name: 'Naturaleza', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
+    ],
+    conditions: [
+      { name: 'INSPIRADA', active: false, description: '+2 en tiradas técnicas (logs, rendimiento) tras un release estable con buenas reseñas' },
+      { name: 'DESMORALIZADA', active: false, description: '−2 en tiradas sociales cuando recibe muchas issues por decisiones fuera de su control (negocio, marketing)' },
+      { name: 'AGOTADA', active: false, description: '−2 en concentración tras demasiado hotfixes y builds urgentes' },
+    ],
+    classFeatures: [
+      {
+        id: 'mobile-explorer',
+        title: 'EXPLORADORA DE PLATAFORMAS MÓVILES',
+        description: 'Conoce iOS, Android y/o frameworks cross-platform. Domina los ecosistemas nativos y sus peculiaridades.',
+        icon: GiSmartphone,
+      },
+      {
+        id: 'bug-tracker',
+        title: 'RASTREADORA DE BUGS',
+        description: 'Sigue pistas en logs, crash reports y analíticas. Encuentra el origen de cualquier crash.',
+        icon: GiMagnifyingGlass,
+      },
+      {
+        id: 'user-guide',
+        title: 'GUÍA DEL USUARIO',
+        description: 'Piensa en contexto real: batería baja, mala conectividad, uso con una mano, interrupciones constantes.',
+        icon: GiScrollUnfurled,
+      },
+    ],
+    racialTraits: [
+      {
+        id: 'halfling-luck',
+        title: 'SUERTE MEDIANA',
+        description: 'Cuando sacas un 1 en un d20, puedes volver a tirar. Los builds fallidos a veces se arreglan en el segundo intento.',
+        icon: GiMapleLeaf,
+      },
+      {
+        id: 'halfling-agility',
+        title: 'AGILIDAD MEDIANA',
+        description: 'Puedes moverte entre espacios reducidos. Te adaptas a pantallas pequeñas y dispositivos raros.',
+        icon: GiFootprint,
+      },
+      {
+        id: 'brave',
+        title: 'VALIENTE',
+        description: 'Tienes ventaja contra miedo. Los rechazos en App Store no te asustan.',
+        icon: GiThreeFriends,
+      },
+      {
+        id: 'halfling-speed',
+        title: 'VELOCIDAD 25',
+        description: 'Los medianos se mueven a 25 pies. Pequeña pero constante. El desarrollo mobile requiere paciencia.',
+        icon: GiWalkingBoot,
+      },
+    ],
+    proficiencies: `📱 LENGUAJES/FRAMEWORKS MOBILE:
+- Kotlin, Swift
+- Flutter, React Native
+- Jetpack Compose, SwiftUI
+
+🔧 HERRAMIENTAS: 
+- IDEs (Android Studio, Xcode)
+- Emuladores y device farms
+- CI/CD móvil (Fastlane, Bitrise)
+- Analíticas y Crashlytics
+
+🌐 IDIOMAS: 
+- Común (Español)
+- Mediano (Dart/Kotlin)
+- Lengua de stores (App Store Connect, Play Console)`,
+    equipment: `📦 EQUIPO INICIAL:
+- Armadura ligera de cuero (AC 12 + DES)
+- Arco corto + 20 flechas
+- 2 Dagas de debugging
+- Pack de explorador móvil
+
+💻 EQUIPO TECH:
+- Portátil con emuladores
+- 2-3 dispositivos físicos de prueba
+- Cables y power bank
+- Cuentas de stores configuradas
+- Certificados y perfiles de firma
+- Scripts de build y release automatizados`,
     notes: '',
   },
 };
@@ -400,23 +777,50 @@ const devopsPreset: PresetConfig = {
       { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 1, proficient: false, expertise: false },
     ],
     conditions: createDefaultConditions('DevOps'),
-    classFeatures: `✝️ DOMINIO DE LA INFRAESTRUCTURA
-Especialista en mantener sistemas vivos.
+    classFeatures: [
+      {
+        id: 'infrastructure-domain',
+        title: 'DOMINIO DE LA INFRAESTRUCTURA',
+        description: 'Especialista en mantener sistemas vivos. Protege la estabilidad, disponibilidad y salud de los servicios.',
+        icon: GiShield,
+      },
+      {
+        id: 'cure-wounds',
+        title: 'CURAR HERIDAS',
+        description: 'Restaurar servicios caídos con un toque divino. Diagnostica incidencias y devuelve los sistemas a producción.',
+        icon: GiHealing,
+      },
+      {
+        id: 'divine-protection',
+        title: 'PROTECCIÓN DIVINA',
+        description: 'Armadura pesada y escudo protegen el uptime. Monitorización, alertas y planes de recuperación reducen el impacto.',
+        icon: GiShield,
+      },
+    ],
 
-🩹 CURAR HERIDAS
-Restaurar servicios caídos con un toque divino.
-
-🛡️ PROTECCIÓN DIVINA
-Armadura pesada y escudo protegen el uptime.`,
-    racialTraits: `⛏️ RESISTENCIA ENANA
-Ventaja contra veneno. Soporta on-call sin caer.
-
-🔍 VISIÓN EN LA OSCURIDAD
-Ver logs en la oscuridad de la noche.`,
-    proficiencies: `DevOps: CI/CD, Docker, Kubernetes, Terraform, monitoreo.
-Herramientas: Terminal, AWS/GCP/Azure, Prometheus, Grafana.`,
-    equipment: `Consola de monitoreo, pager, scripts de emergencia, café eterno.`,
-    notes: '',
+    racialTraits: [
+      {
+        id: 'dwarven-resilience',
+        title: 'RESISTENCIA ENANA',
+        description: 'Ventaja contra veneno. Soporta on-call, incidencias y sistemas legacy sin caer.',
+        icon: GiPoisonBottle,
+      },
+      {
+        id: 'darkvision',
+        title: 'VISIÓN EN LA OSCURIDAD',
+        description: 'Ver logs en la oscuridad de la noche. Detecta errores incluso durante las guardias más largas.',
+        icon: GiMagnifyingGlass,
+      },
+      {
+        id: 'dwarven-craftsmanship',
+        title: 'MAESTRÍA EN INFRAESTRUCTURA',
+        description: 'Entiende la estructura interna de los sistemas y construye automatizaciones resistentes.',
+        icon: GiStoneAxe,
+      },
+    ],
+    proficiencies: '',
+    equipment: '',
+    notes: ''
   },
 };
 
@@ -445,23 +849,11 @@ const dataPreset: PresetConfig = {
       { id: 'percepcion', name: 'Percepción', ability: 'SAB', baseModifier: 2, proficient: false, expertise: false },
     ],
     conditions: createDefaultConditions('Data/ML'),
-    classFeatures: `📖 LIBRO DE HECHIZOS
-Grimorio con todos los modelos y algoritmos aprendidos.
-
-🔮 RECUPERAR ARCANA
-Recuperar slots de hechizo (GPU time) tras descanso corto.
-
-✨ ESCUELA DE MAGIA: Adivinación
-Especialista en predecir el futuro con datos.`,
-    racialTraits: `🌍 VERSATILIDAD HUMANA
-+1 a todas las características.
-
-📚 CURIOSIDAD INNATA
-Siempre buscando patrones en los datos.`,
-    proficiencies: `Data: Python, SQL, pandas, scikit-learn, TensorFlow/PyTorch.
-Herramientas: Jupyter, notebooks, pipelines de datos.`,
-    equipment: `Grimorio de notebooks, dataset de entrenamiento, GPU portátil.`,
-    notes: '',
+    classFeatures: [],
+    racialTraits: [],
+    proficiencies: '',
+    equipment: '',
+    notes: ''
   },
 };
 
@@ -490,23 +882,11 @@ const productPreset: PresetConfig = {
       { id: 'historia', name: 'Historia', ability: 'INT', baseModifier: 2, proficient: true, expertise: false },
     ],
     conditions: createDefaultConditions('Product'),
-    classFeatures: `🎵 INSPIRACIÓN BÁRDICA
-Dar dados de inspiración al equipo.
-
-🎭 JACK OF ALL TRADES
-Añadir mitad del bonus de competencia a skills sin proficiencia.
-
-🗣️ CANCIÓN DE DESCANSO
-Ayudar al equipo a recuperarse en retros.`,
-    racialTraits: `🌟 ASCENDENCIA FEÉRICA
-Inmune a Charm, resistente a manipulación.
-
-💫 VERSATILIDAD SEMIELFA
-+2 competencias adicionales.`,
-    proficiencies: `Product: roadmapping, user stories, métricas, stakeholder management.
-Herramientas: Jira, Notion, analytics, presentaciones.`,
-    equipment: `Roadmap enrollado, backlog infinito, post-its mágicos.`,
-    notes: '',
+    classFeatures: [],
+    racialTraits: [],
+    proficiencies: '',
+    equipment: '',
+    notes: ''
   },
 };
 
@@ -535,23 +915,11 @@ const engManagerPreset: PresetConfig = {
       { id: 'medicina', name: 'Medicina', ability: 'SAB', baseModifier: 0, proficient: true, expertise: false },
     ],
     conditions: createDefaultConditions('Eng. Manager'),
-    classFeatures: `⚔️ ESTILO DE COMBATE: Defensa
-+1 CA cuando lleva armadura. Protege al equipo.
-
-🩹 IMPOSICIÓN DE MANOS
-Pool de curación = nivel × 5. Resolver conflictos y burnout.
-
-🛡️ SENTIDO DIVINO
-Detectar problemas en el equipo antes de que escalen.`,
-    racialTraits: `🌍 VERSATILIDAD HUMANA
-+1 a todas las características.
-
-💪 LIDERAZGO NATURAL
-Inspira confianza en momentos difíciles.`,
-    proficiencies: `Management: 1:1s, feedback, roadmapping técnico, hiring.
-Herramientas: calendarios, documentación, métricas de equipo.`,
-    equipment: `Escudo con el logo del equipo, espada de ceremonias, handbook del manager.`,
-    notes: '',
+    classFeatures: [],
+    racialTraits: [],
+    proficiencies: '',
+    equipment: '',
+    notes: ''
   },
 };
 
@@ -561,6 +929,7 @@ export const PRESETS: PresetConfig[] = [
   pixariaPreset,
   stackiaPreset,
   bugariaPreset,
+  appliaPreset,
   devopsPreset,
   dataPreset,
   productPreset,
@@ -592,8 +961,8 @@ export const getEmptyCharacter = (): Character & { role: string; imageDataUrl?: 
   speed: 30,
   abilities: createAbilities(10, 10, 10, 10, 10, 10),
   skills: [],
-  classFeatures: '',
-  racialTraits: '',
+  classFeatures: [],
+  racialTraits: [],
   proficiencies: '',
   equipment: '',
   conditions: [
@@ -674,11 +1043,50 @@ export const generateCharacter = (
     speed: race.speed,
     abilities,
     skills,
-    classFeatures: exactPreset?.classFeatures ?? '',
-    racialTraits: exactPreset?.racialTraits ?? race.trait,
+    classFeatures: exactPreset?.classFeatures ?? [],
+    racialTraits: exactPreset?.racialTraits ?? [
+      {
+        id: 'racial-trait',
+        title: 'RASGO RACIAL',
+        description: race.trait,
+        icon: GiMapleLeaf,
+      },
+    ],
     proficiencies: exactPreset?.proficiencies ?? '',
     equipment: exactPreset?.equipment ?? '',
     conditions: exactPreset?.conditions ?? createDefaultConditions(role?.label ?? cls.label),
     notes: '',
   };
 };
+
+export const getDefaultFrontella = (): Character => ({
+  name: "Frontella Brillopíxel",
+  ...frontellaPreset.preset,
+});
+
+export const getDefaultBitgrun = (): Character => ({
+  name: "Bitgrun MartilloAPI",
+  ...bitgrunPreset.preset,
+});
+
+export const getDefaultPixaria = (): Character => ({
+  name: "Pixaria Interfacea",
+  ...pixariaPreset.preset,
+});
+
+export const getDefaultStackia = (): Character => ({
+  name: "Stackia Caminacódigo",
+  ...stackiaPreset.preset,
+});
+
+export const getDefaultBugaria = (): Character => ({
+  name: "Bugaria OjoFino",
+  ...bugariaPreset.preset,
+});
+
+export const getDefaultApplia = (): Character => ({
+  name: "Applia Pantallatáctil",
+  ...appliaPreset.preset,
+});
+
+export const getDefaultCharacter = getDefaultFrontella;

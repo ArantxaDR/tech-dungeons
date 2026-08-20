@@ -1,5 +1,6 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
-import { Character, getDefaultBugaria } from '@/types/character';
+import { Character } from '@/types/character';
+import { getDefaultBugaria } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import bugariaAvatar from '@/assets/avatars/qa.webp';
 

@@ -1,5 +1,6 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
-import { Character, getDefaultPixaria } from '@/types/character';
+import { Character } from '@/types/character';
+import { getDefaultPixaria } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import pixariaAvatar from '@/assets/avatars/uxui.webp';
 
