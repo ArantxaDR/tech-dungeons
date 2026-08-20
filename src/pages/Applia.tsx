@@ -1,7 +1,7 @@
 import { useLocalStorageState } from '@/hooks/useLocalStorageState';
 import { Character, getDefaultApplia } from '@/types/character';
 import { CharacterSheet } from '@/components/CharacterSheet';
-import appliaAvatar from '@/assets/applia-avatar.png';
+import appliaAvatar from '@/assets/avatars/mobile.webp';
 
 const Applia = () => {
   const [character, setCharacter] = useLocalStorageState<Character>(

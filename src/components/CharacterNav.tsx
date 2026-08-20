@@ -1,13 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import { FiHome as Home } from 'react-icons/fi';
+import { GiCastle  as Home } from 'react-icons/gi';
 
 const characters = [
-  { path: '/frontella', name: 'Frontella', icon: '🧝‍♀️', subtitle: 'Frontend' },
-  { path: '/bitgrun', name: 'Bitgrun', icon: '⛏️', subtitle: 'Backend' },
-  { path: '/pixaria', name: 'Pixaria', icon: '✨', subtitle: 'UX/UI' },
-  { path: '/stackia', name: 'Stackia', icon: '🏹', subtitle: 'Full-Stack' },
-  { path: '/bugaria', name: 'Bugaria', icon: '🔍', subtitle: 'QA' },
-  { path: '/applia', name: 'Applia', icon: '📱', subtitle: 'Mobile' },
+  { path: '/frontella', name: 'Frontella', subtitle: 'Frontend' },
+  { path: '/bitgrun', name: 'Bitgrun', subtitle: 'Backend' },
+  { path: '/pixaria', name: 'Pixaria',  subtitle: 'UX/UI' },
+  { path: '/stackia', name: 'Stackia',  subtitle: 'Full-Stack' },
+  { path: '/bugaria', name: 'Bugaria',  subtitle: 'QA' },
+  { path: '/applia', name: 'Applia',  subtitle: 'Mobile' },
 ];
 
 export const CharacterNav = () => {
@@ -40,7 +40,6 @@ export const CharacterNav = () => {
             aria-label={`${char.name} — ${char.subtitle}`}
             aria-current={isActive ? 'page' : undefined}
           >
-            <span className="text-base sm:text-lg" aria-hidden="true">{char.icon}</span>
             <div className="text-left hidden sm:block">
               <div className="font-bold text-xs">{char.name}</div>
               <div className="text-xs opacity-70">{char.subtitle}</div>

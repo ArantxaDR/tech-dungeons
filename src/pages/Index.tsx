@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { GiCapeArmor as Users, GiAncientSword as PlusCircle, GiTrashCan as Trash2, GiBookCover as BookOpen, GiScrollUnfurled as Scroll, GiDiceTwentyFacesOne as Sparkles, GiSparkles, GiPerson, GiBattleAxe, GiHeavyArrow, GiMagnifyingGlass, GiSmartphone } from 'react-icons/gi';
+import { GiCapeArmor as Users, GiAncientSword as PlusCircle, GiTrashCan as Trash2, GiBookCover as BookOpen, GiScrollUnfurled as Scroll, GiDiceTwentyFacesOne as Sparkles, GiSparkles, GiPerson, GiBattleAxe, GiHeavyArrow, GiMagnifyingGlass, GiSmartphone, GiHearts, GiCoffeeMug } from 'react-icons/gi';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { BorderDivider } from '@/components/BorderDivider';
@@ -13,83 +13,7 @@ import loversImg from '@/assets/lovers.webp';
 import dragonImg from '@/assets/dragon.webp';
 import unicornImg from '@/assets/unicorn.webp';
 import demonImg from '@/assets/demon.webp';
-
-// Import avatars
-import frontellaAvatar from '@/assets/frontella-avatar.png';
-import bitgrunAvatar from '@/assets/bitgrun-avatar.png';
-import pixariaAvatar from '@/assets/pixaria-avatar.png';
-import stackiaAvatar from '@/assets/stackia-avatar.png';
-import bugariaAvatar from '@/assets/bugaria-avatar.png';
-import appliaAvatar from '@/assets/applia-avatar.png';
-
-const characters = [
-  {
-    path: '/frontella',
-    name: 'Frontella Brillopíxel',
-    icon: <GiPerson className="fill-primary" />,
-    avatar: frontellaAvatar,
-    role: 'Frontend Developer',
-    class: 'Pícara (Rogue)',
-    description: 'Experta en interfaces y experiencias de usuario. Sigilosa con el CSS y letal con JavaScript.',
-    accentColor: 'from-emerald-500/20 to-teal-500/20',
-    borderColor: 'hover:border-emerald-500'
-  },
-  {
-    path: '/bitgrun',
-    name: 'Bitgrun MartilloAPI',
-    icon: <GiBattleAxe className="fill-secondary"/>,
-    avatar: bitgrunAvatar,
-    role: 'Backend Developer',
-    class: 'Bárbara',
-    description: 'Forjadora de APIs robustas y bases de datos inquebrantables. Su furia escala con los requests.',
-    accentColor: 'from-orange-500/20 to-red-500/20',
-    borderColor: 'hover:border-orange-500'
-  },
-  {
-    path: '/pixaria',
-    name: 'Pixaria Interfacea',
-    icon: <GiSparkles className="fill-accent" />,
-    avatar: pixariaAvatar,
-    role: 'UX/UI Designer',
-    class: 'Hechicera (Sorcerer)',
-    description: 'Maestra del prototipado y la usabilidad. Convierte ideas en interfaces mágicas.',
-    accentColor: 'from-purple-500/20 to-pink-500/20',
-    borderColor: 'hover:border-purple-500'
-  },
-  {
-    path: '/stackia',
-    name: 'Stackia Caminacódigo',
-    icon: <GiHeavyArrow className="fill-surface" />,
-    avatar: stackiaAvatar,
-    role: 'Full-Stack Developer',
-    class: 'Exploradora (Ranger)',
-    description: 'Navegante del stack completo. Rastrea bugs desde la UI hasta la base de datos.',
-    accentColor: 'from-blue-500/20 to-cyan-500/20',
-    borderColor: 'hover:border-blue-500'
-  },
-  {
-    path: '/bugaria',
-    name: 'Bugaria OjoFino',
-    icon: <GiMagnifyingGlass className="fill-primary" />,
-    avatar: bugariaAvatar,
-    role: 'QA / Test Engineer',
-    class: 'Monja (Monk)',
-    description: 'Guardiana de la calidad. Encuentra bugs con precisión monástica y disciplina inquebrantable.',
-    accentColor: 'from-amber-500/20 to-yellow-500/20',
-    borderColor: 'hover:border-amber-500'
-  },
-  {
-    path: '/applia',
-    name: 'Applia Pantallatáctil',
-    icon: <GiSmartphone className="fill-secondary" />,
-    avatar: appliaAvatar,
-    role: 'Mobile Developer',
-    class: 'Exploradora (Ranger)',
-    description: 'Exploradora de ecosistemas móviles. Domina iOS, Android y frameworks cross-platform.',
-    accentColor: 'from-lime-500/20 to-green-500/20',
-    borderColor: 'hover:border-lime-500'
-  },
-];
+import { characters } from '@/data/defaultCharacters';
 
 const Index = () => {
   const [customCharacters, setCustomCharacters] = useState(() => getCustomCharacters());
@@ -208,9 +132,6 @@ const Index = () => {
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
-                    <span className="absolute -bottom-2 -right-2 text-3xl drop-shadow-lg" aria-hidden="true">
-                      {char.icon}
-                    </span>
                   </div>
                 </div>
 
@@ -324,11 +245,11 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-8 text-center">
-        <p className="text-sm text-muted-foreground mb-2">
-          Hecho con 💜 y mucho café ☕
+        <p className="text-md  mb-2 flex items-center justify-center gap-1">
+          Hecho con <GiHearts className="fill-secondary w-5 h-5" /> y mucho café <GiCoffeeMug className="fill-secondary w-5 h-5" />
         </p>
-        <p className="text-xs text-muted-foreground/60">
-          Tech & Dungeons © 2024 - Porque el código también es magia
+        <p className="text-sm ">
+          Tech & Dungeons © {new Date().getFullYear()} - Porque el código también es magia
         </p>
       </footer>
     </PageMargins>

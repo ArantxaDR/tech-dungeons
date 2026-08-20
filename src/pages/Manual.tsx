@@ -13,6 +13,7 @@ import { BorderDivider } from '@/components/BorderDivider';
 import { PageMargins } from '@/components/PageMargins';
 import { ROLES, CLASSES, RACES } from '@/data/characterPresets';
 import { AbilityName } from '@/types/character';
+import { GiBookshelf, GiArrowCursor, GiChest, GiBroadsword, GiElfEar } from 'react-icons/gi';
 
 const formatBonus = (bonus: Partial<Record<AbilityName, number>>) =>
   Object.entries(bonus)
@@ -26,14 +27,14 @@ const Manual = () => {
         <div className="max-w-5xl mx-auto">
           <Button variant="ghost" size="sm" asChild className="mb-4">
             <Link to="/">
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <GiArrowCursor className="w-4 h-4 mr-2" />
               Volver
             </Link>
           </Button>
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-primary text-glow-primary">
-            📖 Manual del Códice
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-primary text-glow-primary flex items-center gap-2">
+            <GiBookshelf /> Manual del Códice
           </h1>
-          <p className="text-muted-foreground mt-2">
+          <p className="mt-2">
             Cómo razas, clases y roles tech dan forma a los stats de tu personaje.
           </p>
         </div>
@@ -44,7 +45,7 @@ const Manual = () => {
       <main className="max-w-5xl mx-auto py-8 px-4 space-y-8">
         {/* Roles */}
         <div className="rpg-card overflow-x-auto">
-          <h2 className="section-title">💼 Roles Tech</h2>
+          <h2 className="section-title flex items-center gap-2"><GiChest /> Roles Tech</h2>
           <p className="text-sm text-muted-foreground mb-4">
             El rol no da bonos propios: marca qué clase encaja mejor y qué habilidades suele priorizar.
           </p>
@@ -73,7 +74,7 @@ const Manual = () => {
 
         {/* Classes */}
         <div className="rpg-card overflow-x-auto">
-          <h2 className="section-title">⚔️ Clases</h2>
+          <h2 className="section-title flex items-center gap-2"><GiBroadsword  /> Clases</h2>
           <p className="text-sm text-muted-foreground mb-4">
             Dado de golpe, característica primaria y salvaciones — igual que produce "Autocompletar Stats".
           </p>
@@ -105,7 +106,7 @@ const Manual = () => {
 
         {/* Races */}
         <div className="rpg-card overflow-x-auto">
-          <h2 className="section-title">🧝 Razas</h2>
+          <h2 className="section-title flex items-center gap-2"><GiElfEar /> Razas</h2>
           <p className="text-sm text-muted-foreground mb-4">
             Bono de característica, velocidad y un rasgo racial destacado.
           </p>
@@ -140,8 +141,8 @@ const Manual = () => {
 
       <BorderDivider variant="vine" className="max-w-2xl mx-auto" />
 
-      <footer className="py-6 text-center text-sm text-muted-foreground">
-        <p>Los bonos de raza son una guía de referencia — el creador aplica los stats ya calculados de cada preset.</p>
+      <footer className="py-6 text-center text-sm">
+        <p>Los bonos de raza son una guía de referencia — la app aplica los stats ya calculados de cada preset.</p>
       </footer>
     </PageMargins>
   );
