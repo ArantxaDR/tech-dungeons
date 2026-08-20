@@ -51,8 +51,8 @@ export interface Character {
   skills: Skill[];
   classFeatures: CharacterFeature[];
   racialTraits: CharacterFeature[];
-  proficiencies: string;
-  equipment: string;
+  proficiencies: CharacterFeature[];
+  equipment: CharacterFeature[];
   conditions: Condition[];
   notes: string;
 }
