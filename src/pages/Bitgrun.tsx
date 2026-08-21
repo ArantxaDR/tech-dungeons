@@ -1,14 +1,12 @@
-import { useLocalStorageState } from '@/hooks/useLocalStorageState';
+
+import { useState } from 'react';
 import { Character } from '@/types/character';
 import { getDefaultBitgrun } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import bitgrunAvatar from '@/assets/avatars/back.webp';
 
 const Bitgrun = () => {
-  const [character, setCharacter] = useLocalStorageState<Character>(
-    'bitgrun-character',
-    getDefaultBitgrun()
-  );
+  const [character, setCharacter] = useState<Character>(getDefaultBitgrun());
 
   return (
     <CharacterSheet

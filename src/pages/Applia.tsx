@@ -1,14 +1,11 @@
-import { useLocalStorageState } from '@/hooks/useLocalStorageState';
+import { useState } from 'react';
 import { Character } from '@/types/character';
 import { getDefaultApplia } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import appliaAvatar from '@/assets/avatars/mobile.webp';
 
 const Applia = () => {
-  const [character, setCharacter] = useLocalStorageState<Character>(
-    'applia-character',
-    getDefaultApplia()
-  );
+  const [character, setCharacter] = useState<Character>(getDefaultApplia());
 
   return (
     <CharacterSheet 
