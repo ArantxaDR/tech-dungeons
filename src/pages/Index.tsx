@@ -121,22 +121,19 @@ const Index = () => {
               {/* Gradient overlay */}
               <div className={`absolute inset-0 bg-gradient-to-br ${char.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-              <div className="relative p-6">
+              <div className="relative">
                 {/* Avatar */}
-                <div className="flex justify-center mb-4">
-                  <div className="relative">
-                    <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary/50 group-hover:border-primary transition-colors duration-300 shadow-lg group-hover:shadow-primary/30">
-                      <img
-                        src={char.avatar}
-                        alt={char.name}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                  </div>
+                <div className="relative aspect-[16/9] w-full overflow-hidden border-b-2 border-primary/40 bg-muted">
+                  <img
+                    src={char.avatar}
+                    alt={`Retrato de ${char.name}`}
+                    className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" aria-hidden="true" />
                 </div>
 
                 {/* Content */}
-                <div className="text-center">
+                <div className="p-6 text-center">
                   <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors duration-300 mb-1">
                     {char.name}
                   </h3>
