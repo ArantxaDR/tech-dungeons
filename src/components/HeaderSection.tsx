@@ -13,24 +13,28 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc, readOnly }: 
   };
 
   return (
-    <div className="rpg-card overflow-hidden">
+    <section className="rpg-card overflow-hidden p-0 md:p-0" aria-labelledby="character-name">
+      <div className="relative aspect-video w-full overflow-hidden border-b-2 border-primary/60 bg-muted sm:aspect-[5/2]">
+        {avatarSrc ? (
+          <img
+            src={avatarSrc}
+            alt={`Retrato de ${character.name}`}
+            className="h-full w-full object-cover object-center"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-muted/50 text-5xl" role="img" aria-label="Personaje sin retrato">
+            🧙
+          </div>
+        )}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card/70 via-transparent to-transparent" aria-hidden="true" />
+      </div>
+
+      <div className="p-4 sm:p-6 md:p-8">
       {/* Masthead: avatar + name + vitals, always visible first */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-        <div className="flex items-center gap-4 flex-1 min-w-0">
-          <div className="avatar-frame w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-            {avatarSrc ? (
-              <img
-                src={avatarSrc}
-                alt={character.name}
-                className="w-full h-full object-cover rounded-sm"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-2xl sm:text-3xl bg-muted/50 rounded-sm">
-                🧙
-              </div>
-            )}
-          </div>
+        <div className="flex flex-1 min-w-0">
           <input
+            id="character-name"
             type="text"
             value={character.name}
             onChange={readOnly ? undefined : (e) => updateField('name', e.target.value)}
@@ -157,6 +161,7 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc, readOnly }: 
           />
         </div>
       </div>
-    </div>
+      </div>
+    </section>
   );
 };
