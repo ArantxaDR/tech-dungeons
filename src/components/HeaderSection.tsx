@@ -161,6 +161,7 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc, readOnly }: 
           />
         </div>
       </div>
+      </div>
     </section>
   );
 };
