@@ -8,8 +8,8 @@ import appliaAvatar from '@/assets/avatars/mobile.webp';
 
 export const characters = [
   {
-    path: '/frontella',
-    name: 'Frontella Brillopíxel',
+    path: '/Flexbela',
+    name: 'Flexbela Sigilopíxel',
     avatar: frontellaAvatar,
     role: 'Frontend Developer',
     class: 'Pícara (Rogue)',
@@ -18,8 +18,8 @@ export const characters = [
     borderColor: 'hover:border-emerald-500'
   },
   {
-    path: '/bitgrun',
-    name: 'Bitgrun MartilloAPI',
+    path: '/Query',
+    name: 'Query Forjaendpoints',
     avatar: bitgrunAvatar,
     role: 'Backend Developer',
     class: 'Bárbara',
@@ -28,8 +28,8 @@ export const characters = [
     borderColor: 'hover:border-orange-500'
   },
   {
-    path: '/pixaria',
-    name: 'Pixaria Interfacea',
+    path: '/Usabella',
+    name: 'Usabella Encantaflujos',
     avatar: pixariaAvatar,
     role: 'UX/UI Designer',
     class: 'Hechicera (Sorcerer)',
@@ -38,8 +38,8 @@ export const characters = [
     borderColor: 'hover:border-purple-500'
   },
   {
-    path: '/stackia',
-    name: 'Stackia Caminacódigo',
+    path: '/Stackia',
+    name: 'Stackia Rastreacódigo',
     avatar: stackiaAvatar,
     role: 'Full-Stack Developer',
     class: 'Exploradora (Ranger)',
@@ -48,8 +48,8 @@ export const characters = [
     borderColor: 'hover:border-blue-500'
   },
   {
-    path: '/bugaria',
-    name: 'Bugaria OjoFino',
+    path: '/Testina',
+    name: 'Testina OjoFino',
     avatar: bugariaAvatar,
     role: 'QA / Test Engineer',
     class: 'Monja (Monk)',
@@ -58,8 +58,8 @@ export const characters = [
     borderColor: 'hover:border-amber-500'
   },
   {
-    path: '/applia',
-    name: 'Applia Pantallatáctil',
+    path: '/Applia',
+    name: 'Applia Toquesuave',
     avatar: appliaAvatar,
     role: 'Mobile Developer',
     class: 'Exploradora (Ranger)',

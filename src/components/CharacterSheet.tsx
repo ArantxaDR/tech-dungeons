@@ -125,9 +125,6 @@ export const CharacterSheet = ({
     }));
   };
 
-  const questSubtitle = character.className.toLowerCase().includes('bárbar')
-    ? 'Backend Developer Quest'
-    : 'Frontend Developer Quest';
 
   const visibleDetails = DETAIL_BLOCKS.filter((block) =>
     hasDetailContent(character[block.field])
@@ -143,7 +140,7 @@ export const CharacterSheet = ({
             HOJA DE PERSONAJE
           </h1>
 
-          {/* <p className="text-secondary">{questSubtitle}</p> */}
+          <p className="text-secondary">Developer Quest</p>
         </header>
 
         <BorderDivider variant="interlace" className="mb-2" />
