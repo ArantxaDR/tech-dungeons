@@ -5,11 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
-import Frontella from "./pages/Frontella";
-import Bitgrun from "./pages/Bitgrun";
-import Pixaria from "./pages/Pixaria";
+import Flexbela from "./pages/Flexbela";
+import Query from "./pages/Query";
+import Usabella from "./pages/Usabella";
 import Stackia from "./pages/Stackia";
-import Bugaria from "./pages/Bugaria";
+import Testina from "./pages/Testina";
 import Applia from "./pages/Applia";
 import CharacterCreator from "./pages/CharacterCreator";
 import Manual from "./pages/Manual";
@@ -26,12 +26,12 @@ const App = () => (
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
-          <Route path="/frontella" element={<Frontella />} />
-          <Route path="/bitgrun" element={<Bitgrun />} />
-          <Route path="/pixaria" element={<Pixaria />} />
-          <Route path="/stackia" element={<Stackia />} />
-          <Route path="/bugaria" element={<Bugaria />} />
-          <Route path="/applia" element={<Applia />} />
+          <Route path="/Flexbela" element={<Flexbela />} />
+          <Route path="/Query" element={<Query />} />
+          <Route path="/Usabella" element={<Usabella />} />
+          <Route path="/Stackia" element={<Stackia />} />
+          <Route path="/Testina" element={<Testina />} />
+          <Route path="/Applia" element={<Applia />} />
           <Route path="/crear-personaje" element={<CharacterCreator />} />
           <Route path="/manual" element={<Manual />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

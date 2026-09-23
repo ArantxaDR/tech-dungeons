@@ -1795,11 +1795,11 @@ const engManagerPreset: PresetConfig = {
 };
 
 export const PRESETS: PresetConfig[] = [
-  frontellaPreset,
-  bitgrunPreset,
-  pixariaPreset,
+  flexbelaPreset,
+  queryPreset,
+  usabellaPreset,
   stackiaPreset,
-  bugariaPreset,
+  testinaPreset,
   appliaPreset,
   devopsPreset,
   dataPreset,
@@ -1967,19 +1967,19 @@ export const generateCharacter = (
   };
 };
 
-export const getDefaultFrontella = (): Character => ({
-  name: "Frontella Brillopíxel",
-  ...frontellaPreset.preset,
+export const getDefaultFlexbela = (): Character => ({
+  name: "Flexbela Brillopíxel",
+  ...flexbelaPreset.preset,
 });
 
-export const getDefaultBitgrun = (): Character => ({
-  name: "Bitgrun MartilloAPI",
-  ...bitgrunPreset.preset,
+export const getDefaultQuery = (): Character => ({
+  name: "Query Forjaenpoints",
+  ...queryPreset.preset,
 });
 
-export const getDefaultPixaria = (): Character => ({
-  name: "Pixaria Interfacea",
-  ...pixariaPreset.preset,
+export const getDefaultUsabella = (): Character => ({
+  name: "Usabella Encantaflujos",
+  ...usabellaPreset.preset,
 });
 
 export const getDefaultStackia = (): Character => ({
@@ -1987,9 +1987,9 @@ export const getDefaultStackia = (): Character => ({
   ...stackiaPreset.preset,
 });
 
-export const getDefaultBugaria = (): Character => ({
-  name: "Bugaria OjoFino",
-  ...bugariaPreset.preset,
+export const getDefaultTestina = (): Character => ({
+  name: "Testina OjoFino",
+  ...testinaPreset.preset,
 });
 
 export const getDefaultApplia = (): Character => ({
@@ -1997,4 +1997,4 @@ export const getDefaultApplia = (): Character => ({
   ...appliaPreset.preset,
 });
 
-export const getDefaultCharacter = getDefaultFrontella;
+export const getDefaultCharacter = getDefaultFlexbela;

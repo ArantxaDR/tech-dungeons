@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Character } from "@/types/character";
-import { getDefaultFrontella } from "@/data/characterPresets";
+import { getDefaultFlexbela } from "@/data/characterPresets";
 import { CharacterSheet } from "@/components/CharacterSheet";
 import frontellaAvatar from "@/assets/avatars/front.webp";
 
-const Frontella = () => {
-  const [character, setCharacter] = useState<Character>(getDefaultFrontella());
+const Flexbela = () => {
+  const [character, setCharacter] = useState<Character>(getDefaultFlexbela());
 
   return (
     <CharacterSheet
@@ -16,4 +16,4 @@ const Frontella = () => {
   );
 };
 
-export default Frontella;
+export default Flexbela;
