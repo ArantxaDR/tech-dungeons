@@ -39,6 +39,7 @@ import {
 export type RoleName =
   | "frontend"
   | "backend"
+  | "mobile"
   | "full-stack"
   | "ux-ui"
   | "qa"
@@ -93,6 +94,11 @@ export const ROLES: {
   {
     value: "frontend",
     label: "Frontend Developer",
+    focusSkills: ["Percepción", "Destreza manual", "Sigilo"],
+  },
+  {
+    value: "mobile",
+    label: "Mobile Developer",
     focusSkills: ["Percepción", "Destreza manual", "Sigilo"],
   },
   {
