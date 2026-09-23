@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -16,7 +17,7 @@ export default {
       fontFamily: {
         display: ['"Libre Caslon Text"', 'serif'],
         serif: ['"Libre Caslon Text"', 'serif'],
-        sans: ['"Geist"', 'system-ui', 'sans-serif'],
+        sans: ['"Atkinson Hyperlegible"', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -89,5 +90,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;
