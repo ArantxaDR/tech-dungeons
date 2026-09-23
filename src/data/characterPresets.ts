@@ -355,7 +355,7 @@ const createDefaultConditions = (role: string): Condition[] => [
 ];
 
 // Frontend - Elfa Pícara
-const frontellaPreset: PresetConfig = {
+const flexbelaPreset: PresetConfig = {
   race: "Elfa",
   className: "Pícara",
   preset: {
@@ -555,7 +555,7 @@ const frontellaPreset: PresetConfig = {
 };
 
 // Backend - Enana Bárbara
-const bitgrunPreset: PresetConfig = {
+const queryPreset: PresetConfig = {
   race: "Enana",
   className: "Bárbara",
   preset: {
@@ -737,7 +737,7 @@ const bitgrunPreset: PresetConfig = {
 };
 
 // UX/UI - Semielfa Hechicera
-const pixariaPreset: PresetConfig = {
+const usabellaPreset: PresetConfig = {
   race: "Semielfa",
   className: "Hechicera",
   preset: {
@@ -1103,7 +1103,7 @@ const stackiaPreset: PresetConfig = {
 };
 
 // QA - Humana Monja
-const bugariaPreset: PresetConfig = {
+const testinaPreset: PresetConfig = {
   race: "Humana",
   className: "Monja",
   preset: {
@@ -1795,7 +1795,7 @@ const engManagerPreset: PresetConfig = {
 };
 
 export const PRESETS: PresetConfig[] = [
-  flexbelaPreset,
+ flexbelaPreset,
   queryPreset,
   usabellaPreset,
   stackiaPreset,

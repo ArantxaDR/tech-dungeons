@@ -2,12 +2,12 @@ import { Link, useLocation } from 'react-router-dom';
 import { GiCastle  as Home } from 'react-icons/gi';
 
 const characters = [
-  { path: '/frontella', name: 'Frontella', subtitle: 'Frontend' },
-  { path: '/bitgrun', name: 'Bitgrun', subtitle: 'Backend' },
-  { path: '/pixaria', name: 'Pixaria',  subtitle: 'UX/UI' },
-  { path: '/stackia', name: 'Stackia',  subtitle: 'Full-Stack' },
-  { path: '/bugaria', name: 'Bugaria',  subtitle: 'QA' },
-  { path: '/applia', name: 'Applia',  subtitle: 'Mobile' },
+  { path: '/Flexbela', name: 'Flexbela', subtitle: 'Frontend' },
+  { path: '/Query', name: 'Query', subtitle: 'Backend' },
+  { path: '/Usabella', name: 'Usabella',  subtitle: 'UX/UI' },
+  { path: '/Stackia', name: 'Stackia',  subtitle: 'Full-Stack' },
+  { path: '/Testina', name: 'Testina',  subtitle: 'QA' },
+  { path: '/Applia', name: 'Applia',  subtitle: 'Mobile' },
 ];
 
 export const CharacterNav = () => {
