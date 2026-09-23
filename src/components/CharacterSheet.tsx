@@ -143,7 +143,7 @@ export const CharacterSheet = ({
             HOJA DE PERSONAJE
           </h1>
 
-          <p className="text-secondary">{questSubtitle}</p>
+          {/* <p className="text-secondary">{questSubtitle}</p> */}
         </header>
 
         <BorderDivider variant="interlace" className="mb-2" />
