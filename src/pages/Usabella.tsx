@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Character } from "@/types/character";
-import { getDefaultPixaria } from "@/data/characterPresets";
+import { getDefaultUsabella } from "@/data/characterPresets";
 import { CharacterSheet } from "@/components/CharacterSheet";
 import pixariaAvatar from "@/assets/avatars/uxui.webp";
 
-const Pixaria = () => {
-  const [character, setCharacter] = useState<Character>(getDefaultPixaria());
+const Usabella = () => {
+  const [character, setCharacter] = useState<Character>(getDefaultUsabella());
 
   return (
     <CharacterSheet
@@ -16,4 +16,4 @@ const Pixaria = () => {
   );
 };
 
-export default Pixaria;
+export default Usabella;

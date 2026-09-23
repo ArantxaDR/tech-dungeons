@@ -1,12 +1,12 @@
 
 import { useState } from 'react';
 import { Character } from '@/types/character';
-import { getDefaultBitgrun } from '@/data/characterPresets';
+import { getDefaultQuery } from '@/data/characterPresets';
 import { CharacterSheet } from '@/components/CharacterSheet';
 import bitgrunAvatar from '@/assets/avatars/back.webp';
 
-const Bitgrun = () => {
-  const [character, setCharacter] = useState<Character>(getDefaultBitgrun());
+const Query = () => {
+  const [character, setCharacter] = useState<Character>(getDefaultQuery());
 
   return (
     <CharacterSheet
@@ -17,4 +17,4 @@ const Bitgrun = () => {
   );
 };
 
-export default Bitgrun;
+export default Query;

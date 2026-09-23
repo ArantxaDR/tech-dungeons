@@ -6,14 +6,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Index from "./pages/Index";
 import Flexbela from "./pages/Flexbela";
-import Query from "./pages/Query";
-import Usabella from "./pages/Usabella";
-import Stackia from "./pages/Stackia";
-import Testina from "./pages/Testina";
 import Applia from "./pages/Applia";
 import CharacterCreator from "./pages/CharacterCreator";
 import Manual from "./pages/Manual";
 import NotFound from "./pages/NotFound";
+import Query from "./pages/Query";
+import Usabella from "./pages/Usabella";
+import Stackia from "./pages/Stackia";
+import Testina from "./pages/Testina";
 
 const queryClient = new QueryClient();
 
