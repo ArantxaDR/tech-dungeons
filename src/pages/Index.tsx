@@ -96,17 +96,18 @@ const Index = () => {
 
       {/* Characters Grid */}
       <main className="max-w-7xl mx-auto py-16 px-4">
-        <div className="text-center mb-12">
+        <div className="mb-12 flex w-full items-center gap-3 border-y border-primary/40 py-4 sm:gap-5 sm:py-5">
           <img
             src={loversImg}
             alt=""
             aria-hidden="true"
-            className="w-28 md:w-36 mx-auto mb-4 rounded-lg object-cover border-2 border-primary/40"
+            className="aspect-square w-16 flex-none border-2 border-primary/40 object-cover sm:w-20 md:w-24"
           />
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="min-w-0 flex-none text-xl font-bold text-foreground sm:text-2xl md:text-3xl">
             Elige tu personaje
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto">
+          <span className="hidden h-px min-w-4 flex-1 bg-primary/40 sm:block" aria-hidden="true" />
+          <p className="min-w-0 text-sm leading-relaxed text-muted-foreground sm:max-w-sm sm:text-base md:max-w-md">
             Cada heroína tiene habilidades únicas adaptadas a su rol en el equipo tech
           </p>
         </div>
