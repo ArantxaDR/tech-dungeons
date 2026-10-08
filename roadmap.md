@@ -1,1 +1,1 @@
-- [ ] Alinear imagen, título y descripción de “Elige tu personaje” en una misma fila adaptable.
+- [x] Alinear imagen, título y descripción de “Elige tu personaje” en una misma fila adaptable.
