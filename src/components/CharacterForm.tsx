@@ -102,6 +102,15 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
       role: prev.role,
       imageDataUrl: prev.imageDataUrl,
     }));
+
+    // En móvil, baja hasta los stats para que se vean rellenados.
+    window.setTimeout(() => {
+      const stats = document.getElementById('stats-section');
+      if (stats) {
+        stats.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        stats.focus({ preventScroll: true });
+      }
+    }, 150);
   };
 
   const handleReset = () => {

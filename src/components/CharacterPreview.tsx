@@ -174,7 +174,12 @@ export const CharacterPreview = ({
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-4 gap-2 sm:gap-3">
+        <div
+          id="stats-section"
+          tabIndex={-1}
+          aria-label="Estadísticas del personaje"
+          className="mt-6 grid scroll-mt-4 grid-cols-4 gap-2 sm:gap-3 focus:outline-none"
+        >
           <div className="stat-box min-w-0">
             <span className="mb-1 text-[10px] uppercase text-muted-foreground sm:text-xs">
               HP
