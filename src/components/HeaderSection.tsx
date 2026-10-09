@@ -1,4 +1,5 @@
 import { Character } from '@/types/character';
+import { StatTooltip } from '@/components/StatTooltip';
 
 interface HeaderSectionProps {
   character: Character;
@@ -47,7 +48,7 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc, readOnly }: 
         {/* Combat Stats — vitals, visible without scrolling past the identity form */}
         <div className="grid grid-cols-4 gap-2 sm:gap-3 flex-shrink-0">
           <div className="stat-box min-w-0">
-            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">HP</span>
+            <StatTooltip stat="HP" className="mb-1 text-[10px] sm:text-xs" />
             <input
               type="number"
               min={0}
@@ -60,7 +61,7 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc, readOnly }: 
             <span className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">{character.hitDie}</span>
           </div>
           <div className="stat-box min-w-0">
-            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">CA</span>
+            <StatTooltip stat="CA" className="mb-1 text-[10px] sm:text-xs" />
             <input
               type="number"
               min={0}
@@ -72,11 +73,11 @@ export const HeaderSection = ({ character, setCharacter, avatarSrc, readOnly }: 
             />
           </div>
           <div className="stat-box min-w-0">
-            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">Inic.</span>
+            <StatTooltip stat="INIC" className="mb-1 text-[10px] sm:text-xs" />
             <span className="stat-modifier stat-modifier-positive text-sm sm:text-xl">+{character.initiative}</span>
           </div>
           <div className="stat-box min-w-0">
-            <span className="text-[10px] sm:text-xs text-muted-foreground uppercase mb-1">Vel.</span>
+            <StatTooltip stat="VEL" className="mb-1 text-[10px] sm:text-xs" />
             <span className="stat-value text-sm sm:text-lg">{character.speed}</span>
             <span className="text-[10px] sm:text-xs text-muted-foreground hidden sm:block">pies</span>
           </div>

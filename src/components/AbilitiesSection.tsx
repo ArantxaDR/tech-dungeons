@@ -1,20 +1,13 @@
 import { Character, Ability, calculateModifier } from '@/types/character';
 import { GiRoundStar as Star } from 'react-icons/gi';
+import { StatTooltip } from '@/components/StatTooltip';
+import { ABILITY_LABELS } from '@/data/statGlossary';
 
 interface AbilitiesSectionProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   readOnly?: boolean;
 }
-
-const ABILITY_NAMES: Record<string, string> = {
-  FUE: 'Fuerza',
-  DES: 'Destreza',
-  CON: 'Constitución',
-  INT: 'Inteligencia',
-  SAB: 'Sabiduría',
-  CAR: 'Carisma',
-};
 
 export const AbilitiesSection = ({ character, setCharacter, readOnly }: AbilitiesSectionProps) => {
   const updateAbility = (index: number, updates: Partial<Ability>) => {
@@ -59,14 +52,14 @@ export const AbilitiesSection = ({ character, setCharacter, readOnly }: Abilitie
       
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
         {character.abilities.map((ability, index) => (
-          <div key={ability.name} className="stat-box relative" title={ABILITY_NAMES[ability.name]}>
+          <div key={ability.name} className="stat-box relative">
             {/* Saving Throw Indicator */}
             <button
               onClick={() => updateAbility(index, { savingThrowProficient: !ability.savingThrowProficient })}
               disabled={readOnly}
               className="absolute top-0 right-0 p-1.5 disabled:cursor-default"
               title="Competencia en tirada de salvación"
-              aria-label={`Competencia en tirada de salvación de ${ABILITY_NAMES[ability.name]}`}
+              aria-label={`Competencia en tirada de salvación de ${ABILITY_LABELS[ability.name]}`}
               aria-pressed={ability.savingThrowProficient}
             >
               <Star
@@ -74,9 +67,7 @@ export const AbilitiesSection = ({ character, setCharacter, readOnly }: Abilitie
               />
             </button>
 
-            <span className="text-xs text-muted-foreground font-bold mb-2">
-              {ability.name}
-            </span>
+            <StatTooltip stat={ability.name} className="mb-2" />
 
             <span className={`stat-modifier ${getModifierClass(ability.modifier)}`}>
               {formatModifier(ability.modifier)}

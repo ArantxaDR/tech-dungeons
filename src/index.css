@@ -183,6 +183,26 @@
   .stat-modifier-negative { color: hsl(var(--stat-negative)); }
   .stat-modifier-neutral  { color: hsl(var(--stat-neutral)); }
 
+  /* Cryptic stat abbreviations: affordance for the accessible tooltip/popover */
+  .stat-tooltip-trigger {
+    @apply inline-flex items-center justify-center px-1 font-bold uppercase text-muted-foreground;
+    border-bottom: 1px dashed hsl(var(--primary) / 0.45);
+    cursor: help;
+    min-height: 1.5rem;
+    transition: color 120ms ease, border-color 120ms ease;
+  }
+
+  .stat-tooltip-trigger:hover {
+    color: hsl(var(--foreground));
+    border-bottom-color: hsl(var(--primary));
+  }
+
+  .stat-tooltip-trigger:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+    color: hsl(var(--foreground));
+  }
+
   /* =========================================================
      LABELS / TITLES
      ========================================================= */
