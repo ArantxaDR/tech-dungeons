@@ -96,18 +96,20 @@ const Index = () => {
 
       {/* Characters Grid */}
       <main className="max-w-7xl mx-auto py-16 px-4">
-        <div className="mb-12 flex w-full items-center gap-3 border-y border-primary/40 py-4 sm:gap-5 sm:py-5">
-          <img
-            src={loversImg}
-            alt=""
-            aria-hidden="true"
-            className="aspect-square w-16 flex-none border-2 border-primary/40 object-cover sm:w-20 md:w-24"
-          />
-          <h2 className="min-w-0 flex-none text-xl font-bold text-foreground sm:text-2xl md:text-3xl">
-            Elige tu personaje
-          </h2>
-          <span className="hidden h-px min-w-4 flex-1 bg-primary/40 sm:block" aria-hidden="true" />
-          <p className="min-w-0 text-sm leading-relaxed text-muted-foreground sm:max-w-sm sm:text-base md:max-w-md">
+        <div className="mb-12 w-full border-y border-primary/40 py-5 sm:py-6">
+          <div className="flex w-full items-center gap-3 sm:gap-5">
+            <img
+              src={loversImg}
+              alt=""
+              aria-hidden="true"
+              className="aspect-square w-14 flex-none border-2 border-primary/40 object-cover sm:w-20 md:w-24"
+            />
+            <h2 className="min-w-0 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
+              Elige tu personaje
+            </h2>
+            <span className="hidden h-px min-w-4 flex-1 bg-primary/40 sm:block" aria-hidden="true" />
+          </div>
+          <p className="mt-3 max-w-2xl text-base leading-relaxed text-foreground/90 sm:text-lg">
             Cada heroína tiene habilidades únicas adaptadas a su rol en el equipo tech
           </p>
         </div>
@@ -138,13 +140,11 @@ const Index = () => {
                   <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors duration-300 mb-1">
                     {char.name}
                   </h3>
-                  <p className="text-sm text-primary font-bold uppercase tracking-wide">
+                  <p className="text-sm font-bold uppercase tracking-wide text-primary">
                     {char.role}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1 mb-4">
-                    {char.class}
-                  </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="mt-1 text-sm text-foreground/75">{char.class}</p>
+                  <p className="mt-3 text-[15px] leading-relaxed text-foreground/90">
                     {char.description}
                   </p>
 
@@ -199,10 +199,10 @@ const Index = () => {
                         <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors duration-300 mb-1">
                           {char.name || 'Sin nombre'}
                         </h3>
-                        <p className="text-sm text-primary font-bold uppercase tracking-wide">
+                        <p className="text-sm font-bold uppercase tracking-wide text-primary">
                           {roleLabel || 'Sin rol'}
                         </p>
-                        <p className="text-xs text-muted-foreground mt-1 mb-4">
+                        <p className="mt-1 text-sm text-foreground/75">
                           {char.className || 'Sin clase'} · Nivel {char.level}
                         </p>
                         <div className="flex items-center justify-center gap-2 text-primary font-bold opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
