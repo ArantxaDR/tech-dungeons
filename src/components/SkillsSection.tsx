@@ -1,5 +1,7 @@
 import { Character, Skill, calculateSkillTotal } from '@/types/character';
 import { ALL_SKILLS } from '@/data/characterPresets';
+import { StatTooltip } from '@/components/StatTooltip';
+import { ABILITY_LABELS } from '@/data/statGlossary';
 import { GiSparkles as Sparkles, GiRoundStar as Star, GiCrossedBones as X} from 'react-icons/gi';
 import {
   Select,
@@ -65,10 +67,13 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
   const renderColumn = (rows: typeof indexed) => (
     <div className="space-y-1 overflow-x-hidden">
       <div className="flex items-center gap-2 sm:gap-3 py-2 px-2 sm:px-3 text-xs text-muted-foreground uppercase border-b border-border/50">
-        <span className="w-6 flex-shrink-0">P</span>
-        <span className="w-6 flex-shrink-0">E</span>
+        <StatTooltip stat="P" className="w-6 flex-shrink-0 text-[10px] sm:text-xs" />
+        <StatTooltip stat="E" className="w-6 flex-shrink-0 text-[10px] sm:text-xs" />
         <span className="flex-1 min-w-0 truncate">Habilidad</span>
-        <span className="w-8 sm:w-12 text-center flex-shrink-0 hidden sm:block">Atr</span>
+        <StatTooltip
+          stat="ATR"
+          className="w-8 sm:w-12 justify-center flex-shrink-0 hidden sm:inline-flex text-[10px] sm:text-xs"
+        />
         <span className="w-12 sm:w-16 text-center flex-shrink-0">Total</span>
         {allowManualSkills && <span className="w-5 flex-shrink-0" />}
       </div>
@@ -126,10 +131,14 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
             {/* Skill Name */}
             <span className="flex-1 min-w-0 truncate text-foreground text-sm sm:text-base">
               {skill.name}
+              <span className="sr-only"> ({ABILITY_LABELS[skill.ability]})</span>
             </span>
 
             {/* Ability - hidden on mobile */}
-            <span className="w-8 sm:w-12 text-center text-muted-foreground text-sm flex-shrink-0 hidden sm:block">
+            <span
+              aria-hidden="true"
+              className="w-8 sm:w-12 text-center text-muted-foreground text-sm flex-shrink-0 hidden sm:block"
+            >
               {skill.ability}
             </span>
 

@@ -2,6 +2,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import type { IconType } from 'react-icons';
 
 import { Badge } from '@/components/ui/badge';
+import { StatTooltip } from '@/components/StatTooltip';
 import {
   Accordion,
   AccordionContent,
@@ -181,9 +182,7 @@ export const CharacterPreview = ({
           className="mt-6 grid scroll-mt-4 grid-cols-4 gap-2 sm:gap-3 focus:outline-none"
         >
           <div className="stat-box min-w-0">
-            <span className="mb-1 text-[10px] uppercase text-muted-foreground sm:text-xs">
-              HP
-            </span>
+            <StatTooltip stat="HP" className="mb-1 text-[10px] sm:text-xs" />
 
             <input
               type="number"
@@ -198,9 +197,7 @@ export const CharacterPreview = ({
           </div>
 
           <div className="stat-box min-w-0">
-            <span className="mb-1 text-[10px] uppercase text-muted-foreground sm:text-xs">
-              CA
-            </span>
+            <StatTooltip stat="CA" className="mb-1 text-[10px] sm:text-xs" />
 
             <input
               type="number"
@@ -215,9 +212,7 @@ export const CharacterPreview = ({
           </div>
 
           <div className="stat-box min-w-0">
-            <span className="mb-1 text-[10px] uppercase text-muted-foreground sm:text-xs">
-              Inic.
-            </span>
+            <StatTooltip stat="INIC" className="mb-1 text-[10px] sm:text-xs" />
 
             <span className="stat-modifier stat-modifier-positive text-sm sm:text-xl">
               {character.initiative >= 0 ? '+' : ''}
@@ -226,9 +221,7 @@ export const CharacterPreview = ({
           </div>
 
           <div className="stat-box min-w-0">
-            <span className="mb-1 text-[10px] uppercase text-muted-foreground sm:text-xs">
-              Vel.
-            </span>
+            <StatTooltip stat="VEL" className="mb-1 text-[10px] sm:text-xs" />
 
             <input
               type="number"
