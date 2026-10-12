@@ -244,7 +244,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="py-8 text-center">
         <p className="text-md  mb-2 flex items-center justify-center gap-1">
-          Hecho con <GiHearts className="fill-secondary w-5 h-5" /> y mucho café <GiCoffeeMug className="fill-secondary w-5 h-5" />
+          Hecho con <GiHearts className="fill-primay w-4 h-5" /> y mucho café <GiCoffeeMug className="fill-primay w-5 h-5" />
         </p>
         <p className="text-sm ">
           Tech & Dungeons © {new Date().getFullYear()} - Porque el código también es magia
