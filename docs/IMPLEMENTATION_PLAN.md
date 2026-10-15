@@ -8,14 +8,14 @@ Estructura real (no por features — app pequeña, sin necesidad de esa capa):
 
 ```
 src/
-├── pages/        # una página por ruta (App.tsx). Frontella/Bitgrun/Pixaria/Stackia/Bugaria/Applia = personajes fijos; CharacterCreator = creador; Index, NotFound
-├── components/    # componentes de feature (CharacterSheet, CharacterForm, AbilitiesSection, ...) + components/ui (shadcn, generado)
+├── pages/        # App.tsx + CharacterCreator, Manual, NotFound; personajes fijos se generan en src/App.tsx via createRolePage
+├── components/    # componentes de feature (CharacterSheet, CharacterForm, AbilitiesSection, ...) + components/ui (shadcn, generado, podado)
 ├── data/          # characterPresets.ts: ROLES, CLASSES, RACES, PRESETS del creador
-├── hooks/         # useLocalStorageState + hooks generados (use-toast, use-mobile)
+├── hooks/         # useLocalStorageState (único hook de app)
 ├── types/         # character.ts: tipo Character, calculateModifier, calculateSkillTotal, getDefaultFrontella() etc.
 ├── test/          # setup de vitest
 ├── lib/           # utils puras (cn, etc.)
-├── App.tsx        # QueryClientProvider + BrowserRouter + rutas
+├── App.tsx        # BrowserRouter + rutas (role pages via createRolePage)
 └── main.tsx
 ```
 
@@ -34,7 +34,7 @@ No hay base de datos ni API: todo vive en el tipo `Character` (`src/types/charac
 ## Capa de datos y estado
 
 - **`localStorage`** vía `useLocalStorageState` (`src/hooks/useLocalStorageState.ts`) — cada página/creador usa su propia clave (`'frontella-character'`, etc.). No hay estado de servidor real.
-- `QueryClientProvider`/`@tanstack/react-query` está cableado en `App.tsx` porque viene del scaffold de Lovable, pero **no se usa** para nada hoy (no hay red). No añadir `useQuery`/`useMutation` a menos que una spec introduzca de verdad una llamada de red; si eso no ocurre, se puede evaluar quitar la dependencia en vez de arrastrarla sin uso.
+- `@tanstack/react-query` fue retirado (no había uso real). No añadir `useQuery`/`useMutation` a menos que una spec introduzca de verdad una llamada de red.
 - Estado local (`useState`) por defecto para todo lo demás. Nada de Context/Zustand salvo que una spec concreta lo justifique explícitamente.
 
 ## Testing
@@ -62,4 +62,4 @@ Gestionado por Lovable (lovable.dev): los cambios en este repo se sincronizan co
 
 ## Requisitos transversales
 
-Mobile-first y responsive; accesibilidad no negociable (elementos semánticos, labels, foco gestionado, navegación por teclado) — reforzado por los skills `react-component-patterns` y `testing-react`. UI en español (idioma de la app), igual que el resto del código y specs.
+Mobile-first y responsive; accesibilidad no negociable (elementos semánticos, labels, foco gestionado, navegación por teclado). UI en español (idioma de la app), igual que el resto del código.
