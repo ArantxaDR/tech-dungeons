@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* =====================================================================
    TECHNOLOGICAL CODEX — Design System
@@ -110,6 +110,12 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  /* Global, always-visible keyboard focus (beats Tailwind Preflight's transparent outline) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring)) !important;
+    outline-offset: 2px !important;
   }
 
   body {

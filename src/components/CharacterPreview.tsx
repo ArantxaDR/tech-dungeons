@@ -12,8 +12,10 @@ import {
 import { AbilitiesSection } from '@/components/AbilitiesSection';
 import { SkillsSection } from '@/components/SkillsSection';
 import { ConditionsSection } from '@/components/ConditionsSection';
+import { FeatureList } from '@/components/FeatureList';
+import { hasDetailContent, type DetailBlock } from '@/lib/characterDetails';
 
-import type { Character, CharacterFeature } from '@/types/character';
+import type { Character } from '@/types/character';
 import type { DraftCharacter } from '@/data/customCharacters';
 import { ROLES } from '@/data/characterPresets';
 import demonImg from '@/assets/demon.webp';
@@ -28,18 +30,6 @@ import {
 interface CharacterPreviewProps {
   character: DraftCharacter;
   setCharacter: Dispatch<SetStateAction<DraftCharacter>>;
-}
-
-type DetailField =
-  | 'classFeatures'
-  | 'racialTraits'
-  | 'proficiencies'
-  | 'equipment';
-
-interface DetailBlock {
-  field: DetailField;
-  icon: IconType;
-  title: string;
 }
 
 const DETAIL_BLOCKS: DetailBlock[] = [
@@ -65,46 +55,6 @@ const DETAIL_BLOCKS: DetailBlock[] = [
   },
 ];
 
-const hasContent = (
-  value: CharacterFeature[] | string | undefined
-): boolean => {
-  if (Array.isArray(value)) {
-    return value.length > 0;
-  }
-
-  return Boolean(value?.trim());
-};
-
-const FeatureList = ({ features }: { features: CharacterFeature[] }) => {
-  return (
-    <div className="space-y-4">
-      {features.map((feature) => {
-        const FeatureIcon = feature.icon;
-
-        return (
-          <article
-            key={feature.id}
-            className="flex gap-3 rounded-lg border border-border bg-muted p-4"
-          >
-            <FeatureIcon
-              aria-hidden="true"
-              className="mt-0.5 size-5 shrink-0 fill-primary text-primary"
-            />
-
-            <div>
-              <h3 className="font-bold text-foreground">{feature.title}</h3>
-
-              <p className="mt-1 text-sm text-muted-foreground">
-                {feature.description}
-              </p>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  );
-};
-
 export const CharacterPreview = ({
   character,
   setCharacter,
@@ -128,7 +78,7 @@ export const CharacterPreview = ({
   };
 
   const visibleDetails = DETAIL_BLOCKS.filter((block) =>
-    hasContent(getDetailValue(block.field))
+    hasDetailContent(getDetailValue(block.field))
   );
 
   return (
@@ -257,7 +207,7 @@ export const CharacterPreview = ({
         <div className="rpg-card">
           <h2 className="section-title">Detalles</h2>
 
-          <Accordion type="multiple">
+          <Accordion type="multiple" defaultValue={['classFeatures']}>
             {visibleDetails.map((block) => {
               const BlockIcon = block.icon;
               const content = getDetailValue(block.field);

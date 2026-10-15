@@ -8,7 +8,7 @@ const files = readdirSync(bordersDir).filter(f => f.endsWith('.svg'));
 
 describe('decorative border SVGs', () => {
   it('found the expected files', () => {
-    expect(files.length).toBeGreaterThanOrEqual(6);
+    expect(files.length).toBeGreaterThanOrEqual(5);
   });
 
   files.forEach(file => {

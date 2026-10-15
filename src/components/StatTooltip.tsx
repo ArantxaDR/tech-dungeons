@@ -59,7 +59,8 @@ export const StatTooltip = ({ stat, side = 'top', className }: StatTooltipProps)
     <button
       type="button"
       aria-describedby={descriptionId}
-      className={cn('stat-tooltip-trigger', className)}
+      title={`${definition.label}: ${definition.description}`}
+    className={cn('stat-tooltip-trigger', className)}
     >
       {definition.abbr}
     </button>

@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import type { IconType } from 'react-icons';
 
-import type { Character, CharacterFeature } from '@/types/character';
+import type { Character } from '@/types/character';
 
 import { HeaderSection } from './HeaderSection';
 import { AbilitiesSection } from './AbilitiesSection';
@@ -11,6 +11,8 @@ import { TextBlock } from './TextBlock';
 import { CharacterNav } from './CharacterNav';
 import { BorderDivider } from './BorderDivider';
 import { PageMargins } from './PageMargins';
+import { FeatureList } from './FeatureList';
+import { hasDetailContent, type DetailBlock } from '@/lib/characterDetails';
 
 import {
   Accordion,
@@ -26,19 +28,6 @@ import {
   GiSparkles,
   GiWizardStaff,
 } from 'react-icons/gi';
-
-type DetailField =
-  | 'classFeatures'
-  | 'racialTraits'
-  | 'proficiencies'
-  | 'equipment';
-
-interface DetailBlock {
-  field: DetailField;
-  icon: IconType;
-  title: string;
-  placeholder: string;
-}
 
 const DETAIL_BLOCKS: DetailBlock[] = [
   {
@@ -72,46 +61,6 @@ interface CharacterSheetProps {
   setCharacter: Dispatch<SetStateAction<Character>>;
   avatarSrc?: string;
 }
-
-const hasDetailContent = (
-  value: CharacterFeature[] | string | undefined
-): boolean => {
-  if (Array.isArray(value)) {
-    return value.length > 0;
-  }
-
-  return Boolean(value?.trim());
-};
-
-const FeatureList = ({ features }: { features: CharacterFeature[] }) => {
-  return (
-    <div className="space-y-4">
-      {features.map((feature) => {
-        const FeatureIcon = feature.icon;
-
-        return (
-          <article
-            key={feature.id}
-            className="flex gap-3 rounded-lg border border-border bg-muted p-4"
-          >
-            <FeatureIcon
-              aria-hidden="true"
-              className="mt-0.5 size-5 shrink-0 fill-primary text-primary"
-            />
-
-            <div>
-              <h3 className="font-bold text-foreground">{feature.title}</h3>
-
-              <p className="mt-1 whitespace-pre-wrap text-sm text-muted-foreground">
-                {feature.description}
-              </p>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  );
-};
 
 export const CharacterSheet = ({
   character,

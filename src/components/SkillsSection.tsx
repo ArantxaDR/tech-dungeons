@@ -134,12 +134,9 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
               <span className="sr-only"> ({ABILITY_LABELS[skill.ability]})</span>
             </span>
 
-            {/* Ability - hidden on mobile */}
-            <span
-              aria-hidden="true"
-              className="w-8 sm:w-12 text-center text-muted-foreground text-sm flex-shrink-0 hidden sm:block"
-            >
-              {skill.ability}
+            {/* Ability - tooltip on desktop, hidden on mobile */}
+            <span className="w-8 sm:w-12 flex-shrink-0 hidden sm:flex sm:items-center sm:justify-center">
+              <StatTooltip stat={skill.ability} className="text-[10px] sm:text-xs" />
             </span>
 
             {/* Total */}

@@ -41,12 +41,12 @@ describe('generateCharacter', () => {
 
   it('borrows flavor text from the matching named preset when the pairing is canonical', () => {
     const character = generateCharacter('Elfa', 'Pícara');
-    expect(character.classFeatures).toContain('SNEAK ATTACK');
+    expect(character.classFeatures.map((f) => f.title)).toContain('SNEAK ATTACK (1d6)');
   });
 
   it('leaves flavor text blank for a race+class combo with no canonical preset', () => {
     const character = generateCharacter('Enana', 'Pícara');
-    expect(character.classFeatures).toBe('');
-    expect(character.racialTraits).not.toBe('');
+    expect(character.classFeatures).toEqual([]);
+    expect(character.racialTraits).not.toEqual([]);
   });
 });
