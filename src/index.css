@@ -112,10 +112,12 @@
     scroll-behavior: smooth;
   }
 
-  /* Global, always-visible keyboard focus (beats Tailwind Preflight's transparent outline) */
+  /* Global, always-visible keyboard focus (beats Tailwind Preflight's transparent outline).
+     Slightly thicker + soft glow so it stays obvious on busy parchment surfaces. */
   :focus-visible {
-    outline: 2px solid hsl(var(--ring)) !important;
-    outline-offset: 2px !important;
+    outline: 3px solid hsl(var(--ring)) !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 0 4px hsl(var(--ring) / 0.25) !important;
   }
 
   body {
