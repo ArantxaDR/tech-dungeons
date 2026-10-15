@@ -1,2 +1,0 @@
-- [x] Alinear imagen, título y descripción de “Elige tu personaje” en una misma fila adaptable.
-- [x] Poner imagen y título en una línea con la frase descriptiva debajo, y subir tamaño/contraste del texto de cada heroína.
