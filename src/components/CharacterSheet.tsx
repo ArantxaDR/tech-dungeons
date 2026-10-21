@@ -81,7 +81,7 @@ export const CharacterSheet = ({
 
   return (
     <PageMargins>
-      <div className="mx-auto w-full max-w-6xl space-y-4 overflow-x-hidden p-2 sm:space-y-6 sm:p-4">
+      <div className="mx-auto w-full max-w-6xl space-y-4 overflow-x-clip p-2 sm:space-y-6 sm:p-4">
         <CharacterNav />
 
         <header className="py-4 text-center">

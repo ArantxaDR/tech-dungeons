@@ -1,6 +1,14 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { FieldError } from '@/components/FieldError';
+import { cn } from '@/lib/utils';
+import {
+  AVATAR_ACCEPT_ATTRIBUTE,
+  encodeAvatar,
+  getAvatarFileError,
+} from '@/lib/avatarImage';
+import type { ValidationErrors, ValidationField } from '@/lib/characterValidation';
 import {
   Select,
   SelectContent,
@@ -28,10 +36,31 @@ interface CharacterFormProps {
   setCharacter: React.Dispatch<React.SetStateAction<DraftCharacter>>;
   onReset: () => void;
   onSave: () => void;
+  /** Validation messages of the fields this form owns. */
+  errors?: ValidationErrors;
+  /** Called when the player leaves a field, so it can show its error. */
+  markTouched?: (field: ValidationField) => void;
+  /** True when the form is editing a character that is already saved. */
+  isEditing?: boolean;
 }
 
-export const CharacterForm = ({ character, setCharacter, onReset, onSave }: CharacterFormProps) => {
+export const CharacterForm = ({
+  character,
+  setCharacter,
+  onReset,
+  onSave,
+  errors = {},
+  markTouched,
+  isEditing = false,
+}: CharacterFormProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const nameError = errors.name;
+  const [avatarError, setAvatarError] = useState<string | undefined>(undefined);
+
+  const handleNameBlur = () => {
+    setCharacter(prev => ({ ...prev, name: prev.name.trim() }));
+    markTouched?.('name');
+  };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCharacter(prev => ({ ...prev, name: e.target.value }));
@@ -64,29 +93,45 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Downscale + re-encode: an unresized phone photo (several MB as base64)
-    // blows the localStorage quota. Capping at 256px keeps it under ~30KB.
-    const MAX_DIMENSION = 256;
+    // Reject the file before reading it: a wrong type or a huge file would
+    // either fail later in a confusing way or be loaded whole into memory.
+    const fileError = getAvatarFileError(file);
+    if (fileError) {
+      setAvatarError(fileError);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
+    setAvatarError(undefined);
+
     const reader = new FileReader();
     reader.onloadend = () => {
       const img = new Image();
       img.onload = () => {
-        const scale = Math.min(1, MAX_DIMENSION / Math.max(img.width, img.height));
-        const canvas = document.createElement('canvas');
-        canvas.width = Math.round(img.width * scale);
-        canvas.height = Math.round(img.height * scale);
-        const ctx = canvas.getContext('2d');
-        if (!ctx) return;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        setCharacter(prev => ({ ...prev, imageDataUrl: canvas.toDataURL('image/jpeg', 0.82) }));
+        try {
+          // Square crop + re-encode: an unresized phone photo (several MB as
+          // base64) blows the localStorage quota. 256px keeps it under ~30KB.
+          setCharacter(prev => ({ ...prev, imageDataUrl: encodeAvatar(img) }));
+        } catch {
+          setAvatarError('No se pudo procesar la imagen. Prueba con otro archivo.');
+        }
+        // Allow picking the same file again.
+        if (fileInputRef.current) fileInputRef.current.value = '';
+      };
+      img.onerror = () => {
+        setAvatarError('No se pudo leer esa imagen. Prueba con otro archivo.');
+        if (fileInputRef.current) fileInputRef.current.value = '';
       };
       img.src = reader.result as string;
+    };
+    reader.onerror = () => {
+      setAvatarError('No se pudo leer ese archivo. Prueba con otro.');
     };
     reader.readAsDataURL(file);
   };
 
   const handleRemoveImage = () => {
     setCharacter(prev => ({ ...prev, imageDataUrl: undefined }));
+    setAvatarError(undefined);
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
@@ -114,7 +159,10 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
   };
 
   const handleReset = () => {
-    if (window.confirm('¿Reiniciar? Perderás los cambios del borrador actual.')) {
+    const question = isEditing
+      ? '¿Descartar los cambios? Volverás a la última versión guardada.'
+      : '¿Reiniciar? Perderás los cambios del borrador actual.';
+    if (window.confirm(question)) {
       onReset();
     }
   };
@@ -142,8 +190,12 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
             placeholder="Nombre de tu personaje..."
             value={character.name}
             onChange={handleNameChange}
-            className="field-input"
+            onBlur={handleNameBlur}
+            aria-invalid={nameError ? true : undefined}
+            aria-describedby={nameError ? 'name-error' : undefined}
+            className={cn('field-input', nameError && 'border-b-destructive')}
           />
+          <FieldError id="name-error" message={nameError} />
         </div>
 
         {/* Role */}
@@ -204,7 +256,7 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept={AVATAR_ACCEPT_ATTRIBUTE}
               onChange={handleImageUpload}
               className="hidden"
               aria-label="Subir imagen de avatar"
@@ -213,11 +265,13 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
               variant="outline"
               onClick={() => fileInputRef.current?.click()}
               className="flex-1"
+              aria-describedby={avatarError ? 'avatar-error' : undefined}
             >
               <Upload className="w-4 h-4 mr-2" />
               {character.imageDataUrl ? 'Cambiar imagen' : 'Subir imagen'}
             </Button>
           </div>
+          <FieldError id="avatar-error" message={avatarError} />
           {character.imageDataUrl && (
             <div className="mt-2 flex items-center gap-3">
               <img
@@ -259,7 +313,7 @@ export const CharacterForm = ({ character, setCharacter, onReset, onSave }: Char
             className="w-full"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
-            Reiniciar
+            {isEditing ? 'Descartar cambios' : 'Reiniciar'}
           </Button>
         </div>
       </div>

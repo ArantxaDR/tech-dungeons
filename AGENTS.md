@@ -15,16 +15,17 @@ D&D-themed character sheet app (Spanish UI): tech roles as classes/races. React 
 
 ## Architecture
 
-- Entrypoints: `src/main.tsx` → `src/App.tsx` (`BrowserRouter` + routes).
+- Entrypoints: `src/main.tsx` → `src/App.tsx` (data router: `createBrowserRouter` + `RouterProvider` — needed by `useBlocker`, the unsaved-changes guard).
 - Routes: Index, Flexbela, Query, Usabella, Stackia, Testina, Applia, `/crear-personaje` (CharacterCreator), `/manual`, NotFound.
 - Fixed roles: role pages are generated in `src/App.tsx` via `createRolePage(getDefault*, avatar)` (`src/pages/createRolePage.tsx`), calling `getDefault*()` from `src/data/characterPresets.ts` and rendering shared `src/components/CharacterSheet.tsx` via local `useState` (no persistence).
-- Creator (`/crear-personaje`): `CharacterForm` + `CharacterPreview`; draft in `localStorage` key `character-creator`; saved characters in key `custom-characters` (`src/data/customCharacters.ts`).
+- Creator (`/crear-personaje`): `CharacterForm` + `CharacterPreview`; each character keeps its own draft (`character-creator` for a new one, `character-creator:<id>` when editing) — see `src/hooks/useCharacterDraft.ts` and `src/lib/characterDraft.ts`; saved characters in key `custom-characters` (`src/data/customCharacters.ts`).
+- Creator validation: rules in `src/lib/characterValidation.ts` (pure), state in `src/hooks/useCharacterValidation.ts`, errors rendered by `src/components/FieldError.tsx`.
 - Domain model `Character` (+ `calculateModifier`, `calculateSkillTotal`) in `src/types/character.ts`. No DB/API; no migrations.
 - `src/components/ui/*` are generated shadcn primitives (see `components.json`, slate base). Edit only when necessary — Lovable syncs this repo.
 - Path alias `@/*` → `src/*` (vite, vitest, tsconfig).
 - Icons come from `react-icons`, not lucide (removed). Alias imports to keep call sites, e.g. `import { FiTrash2 as Trash2 } from 'react-icons/fi'`. Prefer `react-icons/fi`; verify the export name exists (TS may not catch a wrong name; `pnpm build` does).
 - No React Query: `@tanstack/react-query` was removed. Do not add `useQuery`/`useMutation` unless a spec introduces real network.
-- Uploaded avatars are downscaled to 256px in `CharacterForm` to stay under the `localStorage` quota (~30KB).
+- Uploaded avatars are validated (type, max 10 MB) and cropped to a centred 256×256 JPEG to stay under the `localStorage` quota (~30KB). Rules live in `src/lib/avatarImage.ts`.
 - Ask before introducing `src/features/`, Context/Zustand, or global state — none exist today (app stays flat: pages/components/hooks/types/data/lib).
 
 ## Conventions

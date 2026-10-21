@@ -15,10 +15,16 @@ import type { AbilityName } from '@/types/character';
 import { StatTooltip } from '@/components/StatTooltip';
 import { GiBookshelf, GiArrowCursor, GiChest, GiBroadsword, GiElfEar } from 'react-icons/gi';
 
-const formatBonus = (bonus: Partial<Record<AbilityName, number>>) =>
-  Object.entries(bonus)
-    .map(([ability, value]) => `+${value} ${ability}`)
-    .join(', ');
+const renderBonus = (bonus: Partial<Record<AbilityName, number>>) => {
+  const entries = Object.entries(bonus) as [AbilityName, number][];
+  return entries.map(([ability, value], index) => (
+    <span key={ability}>
+      {index > 0 ? ', ' : ''}
+      +{value}{' '}
+      <StatTooltip stat={ability} className="text-[10px] sm:text-xs text-stat-positive" />
+    </span>
+  ));
+};
 
 const Manual = () => {
   return (
@@ -70,7 +76,7 @@ const Manual = () => {
             })}
           </div>
 
-          <div className="hidden md:block overflow-x-auto">
+          <div className="hidden md:block overflow-x-auto p-1">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -134,7 +140,7 @@ const Manual = () => {
             ))}
           </div>
 
-          <div className="hidden md:block overflow-x-auto">
+          <div className="hidden md:block overflow-x-auto p-1">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -186,7 +192,7 @@ const Manual = () => {
               >
                 <h3 className="font-bold text-foreground">{race.label}</h3>
                 <p className="text-sm text-stat-positive font-medium break-words">
-                  {formatBonus(race.abilityBonus)}
+                  {renderBonus(race.abilityBonus)}
                 </p>
                 <p className="text-sm text-muted-foreground">
                   <span className="font-medium text-foreground">Velocidad:</span> {race.speed} pies
@@ -198,7 +204,7 @@ const Manual = () => {
             ))}
           </div>
 
-          <div className="hidden md:block overflow-x-auto">
+          <div className="hidden md:block overflow-x-auto p-1">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -212,7 +218,7 @@ const Manual = () => {
                 {RACES.map(race => (
                   <TableRow key={race.value}>
                     <TableCell className="font-medium whitespace-nowrap">{race.label}</TableCell>
-                    <TableCell className="text-stat-positive font-medium whitespace-nowrap">{formatBonus(race.abilityBonus)}</TableCell>
+                    <TableCell className="text-stat-positive font-medium whitespace-nowrap">{renderBonus(race.abilityBonus)}</TableCell>
                     <TableCell className="text-center text-muted-foreground whitespace-nowrap">{race.speed} pies</TableCell>
                     <TableCell className="text-muted-foreground">{race.trait}</TableCell>
                   </TableRow>
@@ -231,8 +237,10 @@ const Manual = () => {
 
       <BorderDivider variant="vine" className="max-w-2xl mx-auto" />
 
-      <footer className="py-6 px-4 text-center text-sm">
-        <p>Los bonos de raza son una guía de referencia — la app aplica los stats ya calculados de cada preset.</p>
+      <footer className="py-6 px-4 text-center">
+        <p className="mx-auto max-w-2xl rounded-md border border-border bg-card/90 px-4 py-3 text-sm font-medium text-foreground">
+          Los bonos de raza son una guía de referencia — la app aplica los stats ya calculados de cada preset.
+        </p>
       </footer>
     </PageMargins>
   );

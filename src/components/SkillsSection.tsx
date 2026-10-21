@@ -65,7 +65,7 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
     : [indexed.slice(0, Math.ceil(indexed.length / 2)), indexed.slice(Math.ceil(indexed.length / 2))];
 
   const renderColumn = (rows: typeof indexed) => (
-    <div className="space-y-1 overflow-x-hidden">
+    <div className="space-y-1 overflow-x-clip">
       <div className="flex items-center gap-2 sm:gap-3 py-2 px-2 sm:px-3 text-xs text-muted-foreground uppercase border-b border-border/50">
         <StatTooltip stat="P" className="w-6 flex-shrink-0 text-[10px] sm:text-xs" />
         <StatTooltip stat="E" className="w-6 flex-shrink-0 text-[10px] sm:text-xs" />
@@ -149,7 +149,7 @@ export const SkillsSection = ({ character, setCharacter, allowManualSkills, read
             {allowManualSkills && (
               <button
                 onClick={() => removeSkill(index)}
-                className="w-5 h-5 flex-shrink-0 flex items-center justify-center text-muted-foreground hover:text-destructive"
+                className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-muted-foreground hover:text-destructive"
                 title="Quitar habilidad"
                 aria-label={`Quitar ${skill.name}`}
               >

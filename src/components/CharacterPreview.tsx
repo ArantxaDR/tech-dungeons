@@ -1,8 +1,11 @@
+import { useMemo } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import type { IconType } from 'react-icons';
 
 import { Badge } from '@/components/ui/badge';
 import { StatTooltip } from '@/components/StatTooltip';
+import { FieldError } from '@/components/FieldError';
+import { cn } from '@/lib/utils';
 import {
   Accordion,
   AccordionContent,
@@ -14,8 +17,9 @@ import { SkillsSection } from '@/components/SkillsSection';
 import { ConditionsSection } from '@/components/ConditionsSection';
 import { FeatureList } from '@/components/FeatureList';
 import { hasDetailContent, type DetailBlock } from '@/lib/characterDetails';
+import type { ValidationErrors, ValidationField } from '@/lib/characterValidation';
 
-import type { Character } from '@/types/character';
+import type { Ability, Character } from '@/types/character';
 import type { DraftCharacter } from '@/data/customCharacters';
 import { ROLES } from '@/data/characterPresets';
 import demonImg from '@/assets/demon.webp';
@@ -30,6 +34,10 @@ import {
 interface CharacterPreviewProps {
   character: DraftCharacter;
   setCharacter: Dispatch<SetStateAction<DraftCharacter>>;
+  /** Validation messages of the fields this preview owns. */
+  errors?: ValidationErrors;
+  /** Called when the player leaves a field, so it can show its error. */
+  markTouched?: (field: ValidationField) => void;
 }
 
 const DETAIL_BLOCKS: DetailBlock[] = [
@@ -58,10 +66,22 @@ const DETAIL_BLOCKS: DetailBlock[] = [
 export const CharacterPreview = ({
   character,
   setCharacter,
+  errors = {},
+  markTouched,
 }: CharacterPreviewProps) => {
   const roleLabel =
     ROLES.find((role) => role.value === character.role)?.label ||
     character.role;
+
+  const abilityErrors = useMemo(() => {
+    const result: Partial<Record<Ability['name'], string>> = {};
+    (Object.keys(errors) as ValidationField[]).forEach((field) => {
+      if (!field.startsWith('ability:')) return;
+      const message = errors[field];
+      if (message) result[field.slice('ability:'.length) as Ability['name']] = message;
+    });
+    return result;
+  }, [errors]);
 
   const updateField = <K extends keyof Character>(
     field: K,
@@ -135,30 +155,46 @@ export const CharacterPreview = ({
             <StatTooltip stat="HP" className="mb-1 text-[10px] sm:text-xs" />
 
             <input
+              id="hp"
               type="number"
-              min={0}
+              min={1}
               value={character.hp}
               onChange={(event) =>
                 updateField('hp', Number(event.target.value) || 0)
               }
-              className="stat-value w-full border-none bg-transparent text-center text-sm focus:outline-none sm:text-lg"
+              onBlur={() => markTouched?.('hp')}
+              aria-invalid={errors.hp ? true : undefined}
+              aria-describedby={errors.hp ? 'hp-error' : undefined}
+              className={cn(
+                'stat-value w-full border-none bg-transparent text-center text-sm focus:outline-none sm:text-lg',
+                errors.hp && 'text-destructive',
+              )}
               aria-label="Puntos de golpe"
             />
+            <FieldError id="hp-error" message={errors.hp} />
           </div>
 
           <div className="stat-box min-w-0">
             <StatTooltip stat="CA" className="mb-1 text-[10px] sm:text-xs" />
 
             <input
+              id="armorClass"
               type="number"
-              min={0}
+              min={1}
               value={character.armorClass}
               onChange={(event) =>
                 updateField('armorClass', Number(event.target.value) || 0)
               }
-              className="stat-value w-full border-none bg-transparent text-center text-sm focus:outline-none sm:text-lg"
+              onBlur={() => markTouched?.('armorClass')}
+              aria-invalid={errors.armorClass ? true : undefined}
+              aria-describedby={errors.armorClass ? 'armorClass-error' : undefined}
+              className={cn(
+                'stat-value w-full border-none bg-transparent text-center text-sm focus:outline-none sm:text-lg',
+                errors.armorClass && 'text-destructive',
+              )}
               aria-label="Clase de armadura"
             />
+            <FieldError id="armorClass-error" message={errors.armorClass} />
           </div>
 
           <div className="stat-box min-w-0">
@@ -174,15 +210,23 @@ export const CharacterPreview = ({
             <StatTooltip stat="VEL" className="mb-1 text-[10px] sm:text-xs" />
 
             <input
+              id="speed"
               type="number"
               min={0}
               value={character.speed}
               onChange={(event) =>
                 updateField('speed', Number(event.target.value) || 0)
               }
-              className="stat-value w-full border-none bg-transparent text-center text-sm focus:outline-none sm:text-lg"
+              onBlur={() => markTouched?.('speed')}
+              aria-invalid={errors.speed ? true : undefined}
+              aria-describedby={errors.speed ? 'speed-error' : undefined}
+              className={cn(
+                'stat-value w-full border-none bg-transparent text-center text-sm focus:outline-none sm:text-lg',
+                errors.speed && 'text-destructive',
+              )}
               aria-label="Velocidad"
             />
+            <FieldError id="speed-error" message={errors.speed} />
           </div>
         </div>
       </div>
@@ -190,6 +234,8 @@ export const CharacterPreview = ({
       <AbilitiesSection
         character={character}
         setCharacter={setCharacter}
+        errors={abilityErrors}
+        markTouched={markTouched}
       />
 
       <SkillsSection

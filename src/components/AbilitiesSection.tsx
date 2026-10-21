@@ -1,15 +1,28 @@
-import { Character, Ability, calculateModifier } from '@/types/character';
+import { Character, Ability, AbilityName, calculateModifier } from '@/types/character';
 import { GiRoundStar as Star } from 'react-icons/gi';
 import { StatTooltip } from '@/components/StatTooltip';
+import { FieldError } from '@/components/FieldError';
+import { cn } from '@/lib/utils';
 import { ABILITY_LABELS } from '@/data/statGlossary';
+import type { ValidationField } from '@/lib/characterValidation';
 
 interface AbilitiesSectionProps {
   character: Character;
   setCharacter: React.Dispatch<React.SetStateAction<Character>>;
   readOnly?: boolean;
+  /** Validation message per ability score. */
+  errors?: Partial<Record<AbilityName, string>>;
+  /** Called when the player leaves a score, so it can show its error. */
+  markTouched?: (field: ValidationField) => void;
 }
 
-export const AbilitiesSection = ({ character, setCharacter, readOnly }: AbilitiesSectionProps) => {
+export const AbilitiesSection = ({
+  character,
+  setCharacter,
+  readOnly,
+  errors = {},
+  markTouched,
+}: AbilitiesSectionProps) => {
   const updateAbility = (index: number, updates: Partial<Ability>) => {
     setCharacter(prev => {
       const newAbilities = [...prev.abilities];
@@ -74,13 +87,26 @@ export const AbilitiesSection = ({ character, setCharacter, readOnly }: Abilitie
             </span>
             
             <input
+              id={`ability-${ability.name}`}
               type="number"
               min={1}
               max={30}
               value={ability.score}
               onChange={readOnly ? undefined : (e) => updateAbility(index, { score: parseInt(e.target.value) || 10 })}
+              onBlur={readOnly ? undefined : () => markTouched?.(`ability:${ability.name}`)}
               readOnly={readOnly}
-              className="w-12 bg-muted/50 border border-border rounded text-center text-sm mt-2 focus:outline-none focus:border-secondary"
+              aria-label={`${ABILITY_LABELS[ability.name] ?? ability.name} (${ability.name})`}
+              aria-invalid={errors[ability.name] ? true : undefined}
+              aria-describedby={errors[ability.name] ? `ability-${ability.name}-error` : undefined}
+              className={cn(
+                'w-12 bg-muted/50 border border-border rounded text-center text-sm mt-2 focus:outline-none focus:border-secondary',
+                errors[ability.name] && 'border-destructive',
+              )}
+            />
+
+            <FieldError
+              id={`ability-${ability.name}-error`}
+              message={errors[ability.name]}
             />
             
             {ability.savingThrowProficient && (
