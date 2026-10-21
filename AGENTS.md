@@ -20,6 +20,7 @@ D&D-themed character sheet app (Spanish UI): tech roles as classes/races. React 
 - Fixed roles: role pages are generated in `src/App.tsx` via `createRolePage(getDefault*, avatar)` (`src/pages/createRolePage.tsx`), calling `getDefault*()` from `src/data/characterPresets.ts` and rendering shared `src/components/CharacterSheet.tsx` via local `useState` (no persistence).
 - Creator (`/crear-personaje`): `CharacterForm` + `CharacterPreview`; each character keeps its own draft (`character-creator` for a new one, `character-creator:<id>` when editing) — see `src/hooks/useCharacterDraft.ts` and `src/lib/characterDraft.ts`; saved characters in key `custom-characters` (`src/data/customCharacters.ts`).
 - Creator validation: rules in `src/lib/characterValidation.ts` (pure), state in `src/hooks/useCharacterValidation.ts`, errors rendered by `src/components/FieldError.tsx`.
+- Export: `src/lib/characterPdf.ts` draws the A4 sheet with **jspdf** (lazy-loaded, own chunk), `src/lib/characterExport.ts` builds the JSON backup, `src/hooks/useCharacterExport.ts` wires both to the UI.
 - Domain model `Character` (+ `calculateModifier`, `calculateSkillTotal`) in `src/types/character.ts`. No DB/API; no migrations.
 - `src/components/ui/*` are generated shadcn primitives (see `components.json`, slate base). Edit only when necessary — Lovable syncs this repo.
 - Path alias `@/*` → `src/*` (vite, vitest, tsconfig).

@@ -5,10 +5,12 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { CharacterForm } from '@/components/CharacterForm';
 import { CharacterPreview } from '@/components/CharacterPreview';
+import { ExportButtons } from '@/components/ExportButtons';
 import { FieldError } from '@/components/FieldError';
 import { BorderDivider } from '@/components/BorderDivider';
 import { PageMargins } from '@/components/PageMargins';
 import { useCharacterDraft } from '@/hooks/useCharacterDraft';
+import { useCharacterExport } from '@/hooks/useCharacterExport';
 import { useCharacterValidation } from '@/hooks/useCharacterValidation';
 import { useUnsavedChangesGuard } from '@/hooks/useUnsavedChangesGuard';
 import { isCharacterDirty } from '@/lib/characterDraft';
@@ -21,6 +23,7 @@ const CharacterCreator = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const characterId = searchParams.get('id') ?? undefined;
   const { character, setCharacter, releaseNewCharacterSlot } = useCharacterDraft(characterId);
+  const { isExporting, downloadPdf, downloadJson } = useCharacterExport();
   const [savedVersion, setSavedVersion] = useState(0);
 
   // The version of the character that is already in the list, if any.
@@ -156,6 +159,15 @@ const CharacterCreator = () => {
                 markTouched={markTouched}
                 isEditing={Boolean(characterId)}
               />
+
+              <div className="mt-6">
+                <ExportButtons
+                  character={character}
+                  onDownloadPdf={downloadPdf}
+                  onDownloadJson={downloadJson}
+                  isExporting={isExporting}
+                />
+              </div>
             </div>
 
             {/* Preview */}

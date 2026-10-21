@@ -31,6 +31,15 @@ const renderCreator = (initialEntries: string[] = ['/crear-personaje']) => {
 
 const saveButton = () => screen.getByRole('button', { name: /Guardar Personaje/i });
 
+/** jsdom's Blob has no text() yet. */
+const readBlob = (blob: Blob): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(String(reader.result));
+    reader.onerror = reject;
+    reader.readAsText(blob);
+  });
+
 describe('character creator guard', () => {
   beforeEach(() => {
     localStorage.clear();
@@ -124,6 +133,48 @@ describe('avatar upload validation', () => {
     });
 
     expect(screen.getByText(/La imagen pesa 11 MB y el máximo es 10 MB/)).toBeInTheDocument();
+  });
+});
+
+describe('character export', () => {
+  const createObjectURL = vi.fn(() => 'blob:mock');
+  const revokeObjectURL = vi.fn();
+
+  beforeAll(() => {
+    Object.defineProperty(window.URL, 'createObjectURL', { writable: true, value: createObjectURL });
+    Object.defineProperty(window.URL, 'revokeObjectURL', { writable: true, value: revokeObjectURL });
+  });
+
+  beforeEach(() => {
+    localStorage.clear();
+    createObjectURL.mockClear();
+  });
+
+  it('downloads the sheet as a PDF file', async () => {
+    renderCreator();
+
+    fireEvent.change(screen.getByLabelText('Nombre'), { target: { value: 'Aria' } });
+    fireEvent.click(screen.getByRole('button', { name: /Descargar PDF/i }));
+
+    await waitFor(() => expect(createObjectURL).toHaveBeenCalled());
+    const blob = createObjectURL.mock.calls[0][0] as Blob;
+    expect(blob.type).toBe('application/pdf');
+    expect(blob.size).toBeGreaterThan(1000);
+  });
+
+  it('downloads the character as a JSON file', async () => {
+    renderCreator();
+
+    fireEvent.change(screen.getByLabelText('Nombre'), { target: { value: 'Aria' } });
+    fireEvent.click(screen.getByRole('button', { name: /Descargar JSON/i }));
+
+    await waitFor(() => expect(createObjectURL).toHaveBeenCalled());
+    const blob = createObjectURL.mock.calls[0][0] as Blob;
+    expect(blob.type).toBe('application/json');
+
+    const payload = JSON.parse(await readBlob(blob));
+    expect(payload.format).toBe('dungeons-and-tech-character');
+    expect(payload.character.name).toBe('Aria');
   });
 });
 

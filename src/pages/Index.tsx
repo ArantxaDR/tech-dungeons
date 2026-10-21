@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { GiCapeArmor as Users, GiAncientSword as PlusCircle, GiTrashCan as Trash2, GiBookCover as BookOpen, GiScrollUnfurled as Scroll, GiDiceTwentyFacesOne as Sparkles, GiSparkles, GiPerson, GiBattleAxe, GiHeavyArrow, GiMagnifyingGlass, GiSmartphone, GiHearts, GiCoffeeMug } from 'react-icons/gi';
+import { FiDownload as Download, FiFileText as FileText } from 'react-icons/fi';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { BorderDivider } from '@/components/BorderDivider';
@@ -8,6 +9,7 @@ import { BorderWatermark } from '@/components/BorderWatermark';
 import { getCustomCharacters, deleteCustomCharacter } from '@/data/customCharacters';
 import { ROLES } from '@/data/characterPresets';
 import { PageMargins } from '@/components/PageMargins';
+import { useCharacterExport } from '@/hooks/useCharacterExport';
 import arcasilKnightImg from '@/assets/arcasil-knight.webp';
 import loversImg from '@/assets/lovers.webp';
 import dragonImg from '@/assets/dragon.webp';
@@ -17,6 +19,7 @@ import { characters } from '@/data/defaultCharacters';
 
 const Index = () => {
   const [customCharacters, setCustomCharacters] = useState(() => getCustomCharacters());
+  const { downloadPdf, downloadJson } = useCharacterExport();
 
   const handleDelete = (id: string, name: string) => {
     if (!window.confirm(`¿Borrar a ${name}? No se puede deshacer.`)) return;
@@ -174,17 +177,45 @@ const Index = () => {
                     to={`/crear-personaje?id=${char.id}`}
                     className="group relative block overflow-hidden rounded-xl border-2 border-muted bg-card transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/20 hover:border-primary"
                   >
-                    <button
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleDelete(char.id, char.name || 'este personaje');
-                      }}
-                      aria-label={`Borrar a ${char.name || 'este personaje'}`}
-                      className="absolute top-3 right-3 z-10 p-2 rounded-full bg-card/80 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="absolute top-3 right-3 z-10 flex gap-1">
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          downloadJson(char);
+                        }}
+                        aria-label={`Descargar los datos de ${char.name || 'este personaje'}`}
+                        title="Descargar JSON"
+                        className="p-2 rounded-full bg-card/80 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                      >
+                        <FileText className="w-4 h-4" />
+                      </button>
+
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          downloadPdf(char);
+                        }}
+                        aria-label={`Descargar la ficha de ${char.name || 'este personaje'}`}
+                        title="Descargar PDF"
+                        className="p-2 rounded-full bg-card/80 text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
+                      >
+                        <Download className="w-4 h-4" />
+                      </button>
+
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleDelete(char.id, char.name || 'este personaje');
+                        }}
+                        aria-label={`Borrar a ${char.name || 'este personaje'}`}
+                        className="p-2 rounded-full bg-card/80 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
 
                     <div className="p-6">
                       <div className="flex justify-center mb-4">

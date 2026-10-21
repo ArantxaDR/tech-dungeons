@@ -1,3 +1,5 @@
 allowBuilds:
   '@swc/core': true
+  # Pulled in by jspdf. Its postinstall only prints a funding banner.
+  core-js: false
   esbuild: true
